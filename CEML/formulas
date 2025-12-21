@@ -1,111 +1,72 @@
-# CEML : Formules Mathématiques Unifiées
-**Version:** 2.0 (Standard V2.1)
-**Scope:** Toutes les équations canoniques de la Loi de Minimisation de l'Entropie Cognitive.
-
-Ce document sert de référence immuable. En cas de perte des autres documents, ces formules permettent de reconstruire la logique du système.
+# CEML : Mathematical Index
+**Version:** 2.1 (Standardized)
+**Scope:** Canonical equations for Cognitive Entropy Minimization.
 
 ---
 
-## 1. L'Équation Maîtresse (The Master Equation)
+## 1. The Master Equation
+The fundamental fitness score for information selection.
 
-La formule fondamentale qui détermine le score de viabilité d'une structure d'information.
-
-### 📐 Représentation LaTeX (Publication)
+### 📐 LaTeX
 $$
 J(s) = \frac{\mathfrak{C}(s|\Omega)}{S(s) + \epsilon}
 $$
 
-### 💻 Représentation Code (Python/Unicode)
+### 💻 Python
 ```python
-# J = Coherence / (Entropy + epsilon)
-J_score = C_val / (S_val + 1e-6)
-
+# CEML Score Calculation
+J = coherence / (entropy + epsilon)
 ```
 
-### 🤖 Représentation MathJSON (Parsing IA)
-
-```json
-[
-  "Divide",
-  ["C", "s", "Omega"],
-  ["Add", ["S", "s"], "epsilon"]
-]
-
-```
-
-**Définitions des Variables :**
-
-*  : Score de Fitness Cognitif.
-*  : Cohérence Contextuelle (Anciennement ).
-*  : Entropie de Shannon (Anciennement ).
-*  : Constante de régularisation ().
+**Variables:**
+* $\mathfrak{C}$: Contextual Coherence (Semantic Alignment).
+* $S$: Entropic Cost (Shannon Entropy).
+* $\epsilon$: Regularization constant ($10^{-6}$).
 
 ---
 
-## 2. Cohérence Contextuelle (Contextual Coherence)
+## 2. Contextual Coherence ($\mathfrak{C}$)
+Calculated via Cosine Similarity in vector space.
 
-Comment calculer  dans un espace vectoriel.
+### 📐 LaTeX
+$$
+\mathfrak{C}(s|\Omega) = \frac{\vec{v}_{\Omega} \cdot \vec{v}_s}{\|\vec{v}_{\Omega}\| \|\vec{v}_s\|}
+$$
 
-### 📐 Représentation LaTeX
-
-### 💻 Représentation Code (NumPy)
-
+### 💻 Python
 ```python
 # Cosine Similarity
-coherence = np.dot(v_context, v_candidate) / (np.linalg.norm(v_context) * np.linalg.norm(v_candidate))
-
+C = np.dot(v_ctx, v_s) / (np.linalg.norm(v_ctx) * np.linalg.norm(v_s))
 ```
 
 ---
 
-## 3. Coût Entropique (Entropic Cost)
+## 3. Entropic Cost ($S$)
+Calculated via Shannon Entropy.
 
-Comment calculer  pour une distribution de probabilité (ou séquence de tokens).
+### 📐 LaTeX
+$$
+S(s) = -\sum_{i} p_i \log_2 p_i
+$$
 
-### 📐 Représentation LaTeX
-
-### 💻 Représentation Code (Python)
-
+### 💻 Python
 ```python
 # Shannon Entropy
-entropy = -sum(p * math.log2(p) for p in probs if p > 0)
-
+S = -sum(p * math.log2(p) for p in probs if p > 0)
 ```
 
 ---
 
-## 4. Seuil de Résonance (Resonance Threshold)
+## 4. Resonance Threshold ($\tau$)
+The acceptance limit based on the Golden Ratio.
 
-La limite mathématique pour l'acceptation automatique (basée sur ).
+### 📐 LaTeX
+$$
+\tau \geq \varphi = \frac{1 + \sqrt{5}}{2} \approx 1.618
+$$
 
-### 📐 Représentation LaTeX
-
-### 💻 Représentation Code
-
+### 💻 Python
 ```python
-PHI = 1.61803398875
-is_resonant = J_score >= PHI
-
-```
-
----
-
-## 5. Formule Fractale Régularisée (Avancé)
-
-Pour les systèmes multi-échelles nécessitant des pondérations ().
-
-### 📐 Représentation LaTeX
-
-**Définitions :**
-
-*  : Sensibilité au contexte (Facteur de focus).
-*  : Pression de compression (Facteur d'économie d'énergie).
-
----
-
-*Généré par Lichen Collective - Architecte: Bryan Ouellette*
-*Sauvegarde Autonome de Type FC-496*
-
-```
-
+# Resonance Check
+is_resonant = J_score >= 1.61803398875
 ```
