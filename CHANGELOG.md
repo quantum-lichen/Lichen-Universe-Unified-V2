@@ -3,16 +3,20 @@
 Toutes les modifications notables de ce projet seront documentées dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [2.1.6] - 2025-12-21 (The Unified Field)
+## [2.1.6] - 2025-12-21 (The Golden Master)
 ### Added
+- **Vision V5.0** : Intégration de la roadmap `UNIFIED_ARCHITECTURE_V5.md` (Constitution Philonomique).
+- **Hardware Core** : Spécifications du `Cool-Flow Microfluidics` (Refroidissement fractal actif) et simulation thermique.
+- **Firmware** : Code de simulation `Kuramoto-Sync` (Qiskit/Python) pour le contrôle de phase FPGA.
 - **Constants Module** : Définition programmatique des constantes (`constants/fundamental_constants.py`).
 - **LES Theory** : Intégration du Whitepaper *Low-Entropy Spiral* et de la signature thermodynamique ($dH/dt < 0$).
 - **FC-496 Partitioning** : Spécification exacte des segments basés sur $\varphi$ (Major: 306 bits, Minor: 190 bits).
 - **Universal Atom** : Structure Rust (`universal_atom.rs`) pour la cellule fondamentale.
 
 ### Changed
-- Mise à jour du `manifest.json` pour inclure le graphe de dépendance racine.
-- Statut du projet passé à **"Operational"**.
+- **Licence** : Passage stratégique de AGPL-3.0 à **Apache 2.0** pour favoriser l'adoption standard.
+- **Manifest** : Finalisation du `manifest.json` incluant tous les modules (Hardware + Software + Vision).
+- **Statut** : Projet marqué comme **"Operational"**.
 
 ## [2.1.5] - 2025-12-21 (The Synapse Update)
 ### Added
