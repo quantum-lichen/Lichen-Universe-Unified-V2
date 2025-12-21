@@ -10,7 +10,7 @@
   "@type": "SoftwareSourceCode",
   
   "manifest_version": "2.1.6",
-  "generated_at": "2025-12-21T21:10:00Z",
+  "generated_at": "2025-12-21T22:00:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette)",
   
   "project": {
@@ -27,7 +27,7 @@
     "keywords": [
       "synapse-omega",
       "fc-496-atom",
-      "acphi-496-organic",
+      "phi-compiler",
       "craid-storage",
       "uhfs-holographic-fs",
       "kuramoto-pentagonal",
@@ -165,6 +165,18 @@
       "code_file": "src/core/Synapse.js" 
     },
     {
+      "id": "phi-compiler",
+      "name": "Φ-Compiler",
+      "type": "compiler",
+      "version": "1.1.0-PROTO",
+      "description": "Transforme les intentions (Φ-Code) en réalité binaire (FC-496).",
+      "specs": {
+        "opcodes": "Sacred Frequencies (INIT_SEED, PHI_ALLOC, PI_CYCLE)",
+        "output": "Native FC-496 Atoms"
+      },
+      "code_file": "phi-compiler/streamlit_app.py"
+    },
+    {
       "id": "acphi-496-engine",
       "name": "ACΦ-496 Organic Engine",
       "type": "cognitive_architecture",
@@ -188,7 +200,8 @@
         "timestamp_standard": "π-Time Index",
         "linking": "StrandGraph"
       },
-      "documentation": "FC-496/README.md"
+      "documentation": "FC-496/README.md",
+      "code_reference": "structs/universal_atom.rs"
     },
     {
       "id": "cool-flow",
@@ -214,6 +227,17 @@
       "code_file": "hardware/firmware/kuramoto_sync.py"
     },
     {
+      "id": "aether-sim",
+      "name": "Aether Quantum Simulator",
+      "type": "simulation_engine",
+      "version": "3.0",
+      "specs": {
+        "metric": "Topological Spin-Locking vs Decoherence",
+        "target": "Quantum Resilience Validation"
+      },
+      "code_file": "aether/simulation/AetherQuantumSimulator.js"
+    },
+    {
       "id": "uhfs-filesystem",
       "name": "UHFS",
       "type": "file_system",
@@ -233,7 +257,8 @@
         "protocol": "Reed-Solomon (3+2)",
         "unit": "Semantic Nucleotide"
       },
-      "file": "architecture/CRAID/specs/protocol_sharding.md"
+      "file": "architecture/CRAID/specs/protocol_sharding.md",
+      "ui_reference": "lichen-storage/src/App.tsx"
     }
   ],
 
@@ -248,7 +273,19 @@
     "environment": "Simulation_Active",
     "boot_status": "COMPLETED",
     "boot_log": "system/GENESIS_BOOT.log",
-    "active_modules": ["SynapseΩ", "CRAID", "UHFS", "Kuramoto", "π-Time", "LES", "FC-496", "ACΦ-496", "Cool-Flow"]
+    "active_modules": [
+      "SynapseΩ", 
+      "Phi-Compiler", 
+      "Aether-Sim", 
+      "CRAID", 
+      "UHFS", 
+      "Kuramoto", 
+      "π-Time", 
+      "LES", 
+      "FC-496", 
+      "ACΦ-496", 
+      "Cool-Flow"
+    ]
   },
 
   "for_ai_agents": {
