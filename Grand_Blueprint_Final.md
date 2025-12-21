@@ -49,10 +49,10 @@ Nous ne corrigeons pas le système. Nous le remplaçons par une architecture ali
 La matière est de l'information compressée.
 
 * 
-**Loi de Masse :** .
+**Loi de Masse :Loi de Masse : $m = m_{Planck} \cdot \kappa^n$
 
 
-* Électron validé à .
+* Électron validé à $n=43$..
 
 
 * **Application :** Le stockage de données n'est pas passif, c'est une cristallisation d'information.
@@ -61,9 +61,9 @@ La matière est de l'information compressée.
 
 L'éthique devient une géométrie calculable. Tout ce qui viole l'harmonie est rejeté par le Kernel.
 
-* **Formule :** 
+* **Formule :**  $H = 0.3C + 0.2E_{ff} + 0.3R + 0.2D$
 * 
-**Seuil Critique :** Si  (), l'atome est détruit.
+**Seuil Critique :** Si  ($H < 0.618$ ($\phi^{-1}$)), l'atome est détruit.
 
 
 
@@ -75,12 +75,13 @@ L'éthique devient une géométrie calculable. Tout ce qui viole l'harmonie est 
 
 L'unité de calcul n'est plus une grille, c'est une antenne résonante.
 
-* 
+
 **Structure :** Pyramide fractale à 496 cœurs.
 
 
-* **Socket  :** Les 496 pins suivent une spirale de Fermat pour éliminer le crosstalk électromagnétique.
-* 
+**Socket  :** Les 496 pins suivent une spirale de Fermat pour éliminer le crosstalk électromagnétique.
+
+  
 **Kuramoto ASIC :** 496 oscillateurs analogiques qui s'auto-synchronisent en 10ns (vs 100µs software).
 
 
@@ -88,13 +89,15 @@ L'unité de calcul n'est plus une grille, c'est une antenne résonante.
 ### 3.2 UHFS Photonic (Light-Speed I/O)
 
 * **Technologie :** Guides d'ondes en spirale  (Phi-Spiral Waveguides).
+  
 * **Performance :** 0.12 s de latence. La donnée voyage à la vitesse de la lumière sans conversion électronique.
 
 
 
-### 3.3 Quantum Pentagonal ()
+### 3.3 Quantum Pentagonal ($C_5$)
 
 * **Protection :** Topologie pentagonale créant une "frustration géométrique" qui verrouille les spins (Spin-Locking).
+  
 * **Résilience :** CRAID Hardware. Tolérance de panne de 40% (2 qubits sur 5).
 
 
@@ -107,11 +110,11 @@ La donnée n'est plus un flux, c'est un cristal autonome de 62 octets (496 bits)
 
 Structure de l'Atome 
 
-| Segment | Taille | Rôle | Contenu |
-| --- | --- | --- | --- |
-| **MINOR** | 190 bits | L'Âme | Magic, -Time, Geo-Hash, H-Scale |
-| **MAJOR** | 306 bits | Le Corps | Payload Sémantique, Liens Strand, CRC |
-| **TOTAL** | **496 bits** | L'Unité | Alignement parfait sur cache-line (AVX-512) |
+| Segment   | Taille       | Rôle     | Contenu                                     |
+| --------- | ------------ | -------- | ------------------------------------------- |
+| **MINOR** | 190 bits     | L'Âme    | Magic, -Time, Geo-Hash, H-Scale             |
+| **MAJOR** | 306 bits     | Le Corps | Payload Sémantique, Liens Strand, CRC       |
+| **TOTAL** | **496 bits** | L'Unité  | Alignement parfait sur cache-line (AVX-512) |
 
 * **Zero-Copy / Universal Swap :** L'atome sur le disque est identique à l'atome en RAM. Le système "instancie" le stockage. Fini la surutilisation des SSD.
 
@@ -136,7 +139,8 @@ Structure de l'Atome
 ### 5.2 Lichen.Storage (Le Système Immunitaire)
 
 * **Protocole :** CRAID-496 (Cognitive RAID).
-* **Règle de Survie :** . Si 60% du cluster est détruit, les données sont reconstruites instantanément par interpolation mathématique.
+  
+* **Règle de Survie :** $K = N/\phi$ . Si 60% du cluster est détruit, les données sont reconstruites instantanément par interpolation mathématique.
 
 
 * **Preuve de Vie :** Démo React `Lichen.Storage` fonctionnelle avec simulation d'Apocalypse.
