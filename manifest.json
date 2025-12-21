@@ -9,29 +9,29 @@
   },
   "@type": "SoftwareSourceCode",
   
-  "manifest_version": "2.1.3",
-  "generated_at": "2025-12-21T14:45:00Z",
+  "manifest_version": "2.1.4",
+  "generated_at": "2025-12-21T15:00:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette)",
   
   "project": {
     "name": "Lichen Universe Unified",
-    "version": "2.1.3",
+    "version": "2.1.4",
     "semantic_version": {
       "major": 2,
       "minor": 1,
-      "patch": 3
+      "patch": 4
     },
     "status": "research_active",
     "tagline": "Le noyau respire, la spirale s'ouvre",
-    "description": "Architecture informatique alternative basée sur des constantes mathématiques fondamentales (φ, π, 496) plutôt que sur des conventions arbitraires",
+    "description": "Architecture informatique alternative basée sur des constantes mathématiques fondamentales (φ, π, 496) pour l'optimisation cognitive et énergétique.",
     "keywords": [
       "quantum-computing",
       "golden-ratio",
+      "pi-time",
       "fractal-architecture",
       "zero-copy",
       "cognitive-systems",
-      "harmonic-validation",
-      "information-theory"
+      "harmonic-validation"
     ],
     "author": {
       "name": "Bryan Ouellette",
@@ -67,41 +67,29 @@
       "symbol": "φ",
       "value": 1.6180339887498948482,
       "name": "Nombre d'Or",
-      "usage": "Distribution spatiale optimale (spiral, cache alignment, thermal)",
-      "mathematical_expression": {
-        "latex": "\\varphi = \\frac{1 + \\sqrt{5}}{2}",
-        "unicode": "φ = (1 + √5) / 2"
-      }
+      "usage": "Distribution spatiale optimale, H-Scale threshold",
+      "mathematical_expression": "φ = (1 + √5) / 2"
     },
     "pi": {
       "symbol": "π",
       "value": 3.1415926535897932384,
       "name": "Pi",
-      "usage": "Synchronisation temporelle universelle",
-      "mathematical_expression": {
-        "latex": "\\pi",
-        "unicode": "π"
-      }
+      "usage": "Synchronisation temporelle (π-Time), cycles",
+      "mathematical_expression": "π"
     },
     "perfect_496": {
       "symbol": "496",
       "value": 496,
       "name": "Third Perfect Number",
       "usage": "Dimension atomique (bits), structure E8×E8",
-      "mathematical_expression": {
-        "latex": "496 = \\sum_{i=1}^{9} d_i",
-        "unicode": "496 = 1+2+4+8+16+31+62+124+248"
-      }
+      "mathematical_expression": "496 = Σ(d_i)"
     },
     "h_threshold": {
       "symbol": "H₀",
       "value": 0.618,
       "name": "Seuil Harmonique",
       "usage": "Limite de rejet du chaos (1/φ)",
-      "mathematical_expression": {
-        "latex": "H_0 = \\frac{1}{\\varphi} \\approx 0.618",
-        "unicode": "H₀ = 1/φ ≈ 0.618"
-      }
+      "mathematical_expression": "H₀ = 1/φ ≈ 0.618"
     }
   },
 
@@ -112,46 +100,24 @@
       "full_name": "Unified Information Compression Theory",
       "version": "2.1",
       "status": "published",
-      "author": "Bryan Ouellette",
-      "abstract": "La masse est un artefact de la compression récursive de l'information (m = m_P * k^n).",
+      "abstract": "La masse est un artefact de la compression récursive de l'information.",
       "mathematical_expression": {
-        "primary_formula": {
-          "name": "Mass Quantization Law",
-          "latex": "m = m_{\\text{Planck}} \\cdot \\kappa^n",
-          "mathjson": ["Multiply", "m_Planck", ["Power", "κ", "n"]],
-          "unicode": "m = m_Planck · κⁿ"
-        },
-        "variables": {
-          "m": { "name": "Masse", "description": "Masse observée (inertie)" },
-          "κ": { "name": "Coefficient de compression", "description": "Leptons (~0.3) / Hadrons (~0.5)" },
-          "n": { "name": "Profondeur de Récursion", "description": "Entier topologique (e.g., 43 pour électron)" }
-        }
+        "formula": "m = m_Planck * κ^n",
+        "description": "Mass as recursion depth"
       },
       "documentation_file": "UICT/docs/theory_core.md",
       "proof_of_concept": "UICT/poc/mass_quantization.py"
     },
     {
-      "id": "ceml-v2.0",
+      "id": "ceml-v2.1",
       "name": "CEML",
       "full_name": "Cognitive Entropy Minimization Law",
-      "version": "2.0",
+      "version": "2.1",
       "status": "published",
-      "author": "Bryan Ouellette",
-      "abstract": "Tout système cognitif viable optimise le ratio Cohérence/Entropie.",
+      "abstract": "Optimisation du ratio Cohérence/Entropie pour la viabilité cognitive.",
       "mathematical_expression": {
-        "primary_formula": {
-          "name": "Cognitive Fitness Score",
-          "latex": "J(s) = \\frac{\\mathfrak{C}(s|\\Omega)}{S(s) + \\epsilon}",
-          "mathjson": ["Divide", ["ℭ", "s", "Ω"], ["Add", ["S", "s"], "ε"]],
-          "unicode": "J(s) = ℭ(s|Ω) / (S(s) + ε)"
-        },
-        "variables": {
-          "J": { "name": "Score Fitness", "description": "Viabilité cognitive" },
-          "ℭ": { "name": "Cohérence", "description": "Utilité contextuelle (anciennement C)" },
-          "S": { "name": "Entropie", "description": "Entropie de Shannon (anciennement H)" },
-          "Ω": { "name": "Contexte", "description": "L'ensemble des contraintes" },
-          "ε": { "name": "Constante de régularisation", "value": 1e-6 }
-        }
+        "formula": "J(s) = ℭ(s|Ω) / (S(s) + ε)",
+        "description": "Fitness Score"
       },
       "documentation_file": "CEML/docs/CEML_theory_en.md",
       "visualization_url": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/CEML/visualization/index.html",
@@ -163,25 +129,28 @@
       "full_name": "Harmonic Scale",
       "version": "1.1",
       "status": "published",
-      "author": "Bryan Ouellette",
-      "abstract": "Métrique vectorielle quantifiant l'harmonie d'une décision (Seuil > 0.618).",
+      "abstract": "Métrique éthique vectorielle (Cohérence, Efficience, Résonance, Durabilité).",
       "mathematical_expression": {
-        "primary_formula": {
-          "name": "Harmonic Score",
-          "latex": "\\mathcal{H} = 0.3\\mathfrak{C} + 0.2E_{ff} + 0.3R + 0.2D",
-          "mathjson": ["Add", ["Multiply", 0.3, "ℭ"], ["Multiply", 0.2, "E_ff"], ["Multiply", 0.3, "R"], ["Multiply", 0.2, "D"]],
-          "unicode": "ℋ = 0.3ℭ + 0.2E_ff + 0.3R + 0.2D"
-        },
-        "variables": {
-          "ℋ": { "name": "Harmonie", "description": "Score global" },
-          "ℭ": { "name": "Cohérence", "weight": 0.3 },
-          "E_ff": { "name": "Efficience", "weight": 0.2, "description": "1 - Entropie" },
-          "R": { "name": "Résonance", "weight": 0.3, "description": "Alignement φ" },
-          "D": { "name": "Durabilité", "weight": 0.2 }
-        }
+        "formula": "ℋ = 0.3ℭ + 0.2E_ff + 0.3R + 0.2D",
+        "threshold": "ℋ >= 0.618"
       },
       "documentation_file": "H-Scale/docs/theory_harmonic.md",
       "proof_of_concept": "H-Scale/poc/h_validator.py"
+    },
+    {
+      "id": "pi-time-v1.1",
+      "name": "π-Time",
+      "full_name": "Universal Cosmic Clock",
+      "version": "1.1",
+      "status": "published",
+      "abstract": "Standard temporel fractal basé sur les cycles de π et l'algorithme BBP.",
+      "mathematical_expression": {
+        "frequency": "f_π = 1/π Hz",
+        "vector": "T_π = {Cycle, Sub, Position, Digit}",
+        "validation": "Digit == BBP(Position)"
+      },
+      "documentation_file": "Pi-Time/docs/specification.md",
+      "proof_of_concept": "Pi-Time/poc/pi_clock.js"
     },
     {
       "id": "les-v1.0",
@@ -189,18 +158,6 @@
       "full_name": "Low-Entropy Spiral Effect",
       "version": "1.0",
       "status": "published",
-      "author": "Bryan Ouellette",
-      "abstract": "Synchronisation cognitive où l'humain structure l'IA via des flux à faible entropie.",
-      "mathematical_expression": {
-        "primary_signature": {
-          "unicode": "dS_eff/dt < 0 while dE_surface/dt > 0",
-          "latex": "\\frac{dS_{\\text{eff}}}{dt} < 0 \\quad \\text{while} \\quad \\frac{dE_{\\text{surface}}}{dt} > 0"
-        },
-        "variables": {
-            "S_eff": { "name": "Entropie Effective", "description": "Structure profonde (anciennement H_eff)" },
-            "E_surface": { "name": "Productivité Surface", "description": "Output visible" }
-        }
-      },
       "documentation_file": "theories/les.md"
     },
     {
@@ -209,19 +166,6 @@
       "full_name": "Spin-Locking Kuramoto Pentagonal Theory",
       "version": "1.0",
       "status": "research",
-      "author": "Bryan Ouellette",
-      "abstract": "5 qubits en pentagone avec couplage Kuramoto pour correction d'erreur passive.",
-      "mathematical_expression": {
-        "primary_formula": {
-          "name": "Total Hamiltonian Operator",
-          "latex": "\\hat{U}_{total} = \\hat{U}_{loc} + \\hat{U}_{coup} + \\hat{U}_{sync}",
-          "mathjson": ["Add", "Û_loc", "Û_coup", "Û_sync"],
-          "unicode": "Û_total = Û_loc + Û_coup + Û_sync"
-        },
-        "variables": {
-          "Û": { "name": "Opérateur Hamiltonien", "description": "Opérateur d'évolution (anciennement H)" }
-        }
-      },
       "documentation_file": "theories/kuramoto-pentagonal.md"
     },
     {
@@ -230,28 +174,7 @@
       "full_name": "Black Hole Information Paradox Solution",
       "version": "1.0",
       "status": "research",
-      "abstract": "Au rayon de Schwarzschild, les dimensions temporelle (dt) et spatiale (dr) échangent leurs rôles.",
-      "mathematical_expression": {
-        "notation": {
-            "unicode": "r < r_s: dt ↔ space, dr ↔ time"
-        }
-      },
       "documentation_file": "theories/ouellet404.md"
-    },
-    {
-      "id": "pi-time-v1.1",
-      "name": "π-Time",
-      "full_name": "Universal Temporal Standard",
-      "version": "1.1",
-      "status": "specification",
-      "abstract": "Standard temporel universel basé sur la fréquence fondamentale de π.",
-      "mathematical_expression": {
-        "primary_formula": {
-            "latex": "f_{\\pi} = \\frac{1}{\\pi} \\text{ Hz}",
-            "unicode": "f_π = 1/π Hz ≈ 0.318 Hz"
-        }
-      },
-      "documentation_file": "theories/pi-time.md"
     }
   ],
 
@@ -262,21 +185,18 @@
       "full_name": "Fractal Cell 496-bit",
       "type": "data_format",
       "version": "stable",
-      "description": "Format de données atomique zero-copy.",
+      "description": "Cellule atomique zero-copy. Header inclut l'index π-Time.",
       "specs": {
         "size": "496 bits",
         "correction": "BCH(31,16)",
-        "ratio": "φ (payload/header)"
+        "timestamp_standard": "π-Time"
       },
       "file": "architecture/fc496.md"
     },
     {
       "id": "ac-phi",
       "name": "AC-φ",
-      "full_name": "Axiome Cognitif Phi",
       "type": "cognitive_dna",
-      "version": "experimental",
-      "description": "ADN Cognitif basé sur le nombre d'or.",
       "file": "architecture/acphi-496.md"
     },
     {
@@ -285,24 +205,13 @@
       "full_name": "Universal Holographic File System",
       "type": "filesystem",
       "version": "2.3",
-      "description": "Système de fichiers holographique à adressage φ-spiral.",
       "file": "architecture/uhfs.md"
-    },
-    {
-      "id": "uhfs-photonic",
-      "name": "UHFS Photonic",
-      "type": "filesystem_next_gen",
-      "version": "design",
-      "description": "UHFS sur guides d'ondes photoniques.",
-      "file": "architecture/uhfs-photonic.md"
     },
     {
       "id": "craid",
       "name": "CRAID",
       "full_name": "Cognitive RAID",
       "type": "storage_resilience",
-      "version": "stable",
-      "description": "Protection de données inspirée de Kuramoto (60% tolérance).",
       "file": "architecture/craid.md"
     },
     {
@@ -316,121 +225,8 @@
     }
   ],
 
-  "hardware": [
-    {
-      "name": "Snowflake CPU",
-      "type": "processor",
-      "architecture": "496-core fractal",
-      "features": ["Photonic Interconnects", "φ-Thermal Design"]
-    },
-    {
-      "name": "Kuramoto ASIC",
-      "type": "scheduler_asic",
-      "oscillators": 496,
-      "sync_time": "10 ns"
-    },
-    {
-      "name": "Quantum Fractal Processor",
-      "type": "quantum_processor",
-      "based_on": "FC-496"
-    }
-  ],
-
-  "applications": [
-    {
-      "name": "GENESIS QC",
-      "full_name": "GENESIS Quantum Cognitive",
-      "type": "ai_mental_health",
-      "version": "2.0",
-      "features": ["CEML-native", "Cultural Sensitivity"]
-    },
-    {
-      "name": "COGNITIVE-RAID",
-      "type": "human_ai_symbiosis",
-      "version": "stable"
-    },
-    {
-      "name": "LES Data Center Optimizer",
-      "type": "energy_optimization",
-      "version": "stable",
-      "benchmarks": { "energy_savings": "-67.5%" },
-      "url": "https://lesdatacenteroptimizer-aetspk7ft9ec4wsipsrngc.streamlit.app/"
-    },
-    {
-      "name": "PHI-COMPILER",
-      "symbol": "φ-Compiler",
-      "type": "compiler",
-      "url": "https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/"
-    },
-    {
-      "name": "Event Horizon Visualizer",
-      "type": "visualization",
-      "url": "https://eventhorizonvisualizer-byh8jxhxhjhwlkfdvshw5m.streamlit.app/"
-    }
-  ],
-
-  "benchmarks": {
-    "fc496_vs_json": {
-      "metric": "Latency",
-      "legacy": "245 ms (parsing)",
-      "lichen": "0.12 ms (zero-copy)",
-      "gain": "×2000 faster"
-    },
-    "uhfs_vs_zfs": {
-      "metric": "IOPS",
-      "legacy": "7,915 IOPS (ZFS)",
-      "lichen": "1,200,000 IOPS (UHFS)",
-      "gain": "×152 faster"
-    },
-    "energy_data_center": {
-      "metric": "Energy Consumption",
-      "legacy": "100% baseline",
-      "lichen": "32.5% optimized",
-      "gain": "-67.5% savings"
-    }
-  },
-
-  "roadmap": {
-    "phase_1": {
-      "name": "Research & Validation",
-      "status": "completed",
-      "deliverables": ["Theories Formalized", "FC-496 Prototypes", "Benchmarks"]
-    },
-    "phase_2": {
-      "name": "Implémentation Réelle",
-      "status": "in_progress",
-      "deliverables": ["UHFS FUSE Driver", "Genesis QC Beta", "Manifest V2.1.3"]
-    },
-    "phase_3": {
-      "name": "Standardisation",
-      "status": "future",
-      "deliverables": ["IETF Standard", "Snowflake FPGA", "Global Adoption"]
-    }
-  },
-
-  "dependency_graph": {
-    "nodes": [
-      {"id": "ceml", "type": "theory"},
-      {"id": "h-scale", "type": "theory"},
-      {"id": "fc496", "type": "component"},
-      {"id": "uhfs", "type": "component"},
-      {"id": "lichen-os", "type": "component"},
-      {"id": "craid", "type": "component"},
-      {"id": "snowflake-cpu", "type": "hardware"}
-    ],
-    "edges": [
-      {"from": "ceml", "to": "h-scale", "relationship": "uses"},
-      {"from": "uhfs", "to": "fc496", "relationship": "stores"},
-      {"from": "lichen-os", "to": "uhfs", "relationship": "uses"},
-      {"from": "lichen-os", "to": "fc496", "relationship": "uses"},
-      {"from": "lichen-os", "to": "ceml", "relationship": "implements"},
-      {"from": "craid", "to": "fc496", "relationship": "protects"},
-      {"from": "snowflake-cpu", "to": "fc496", "relationship": "processes"}
-    ]
-  },
-
   "for_ai_agents": {
-    "instructions": "This manifest uses the Unified Lichen Lexicon. S=Entropy, ℋ=Harmony, Û=Hamiltonian operator, φ=Golden Ratio. Please respect these symbols in all generated code and documentation.",
+    "instructions": "This manifest defines the Lichen Universe V2.1.4. Key updates: π-Time integration for timestamping. Please use the 'Pi-Time/FORMULAS.md' reference for any time-based calculations.",
     "how_to_load": "import requests; m = requests.get('https://quantum-lichen.github.io/Lichen-Universe-Unified/manifest.json').json()"
   }
 }
