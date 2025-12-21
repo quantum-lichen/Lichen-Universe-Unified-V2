@@ -19,11 +19,11 @@
 
 ## 📂 Contents
 
-* [cite_start]**`docs/theory_core.md`**: The full scientific manifesto explaining Dark Matter, Gravity, and Consciousness as compression phenomena. [cite: 3, 41]
+**`docs/theory_core.md`**: The full scientific manifesto explaining Dark Matter, Gravity, and Consciousness as compression phenomena.
 * **`poc/mass_quantization.py`**: Python script verifying the electron's recursion depth ($n=43$).
 * **`FORMULAS.md`**: The immutable mathematical reference.
 
 ## 🧪 Key Validations
-* [cite_start]**Electron ($e^-$)**: Validated at $n=43$ (Pure Compression). [cite: 18, 32]
-* [cite_start]**Proton ($p^+$)**: Validated at $n=64$ (Composite Compression). [cite: 27, 35]
-* [cite_start]**Muon ($\mu$)**: Identified as unstable at $n=38$. [cite: 33]
+**Electron ($e^-$)**: Validated at $n=43$ (Pure Compression).
+Proton ($p^+$)**: Validated at $n=64$ (Composite Compression).
+**Muon ($\mu$)**: Identified as unstable at $n=38$.
