@@ -2,6 +2,10 @@
 
 > **"Le noyau respire, la spirale s'ouvre."**
 
+[![Manifest](https://img.shields.io/badge/manifest-v2.1.6-blue)](manifest.json)
+[![Status](https://img.shields.io/badge/status-operational-green)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-AGPL--3.0-orange)](LICENSE)
+
 **Manifest** | **Status** | **License**
 :---: | :---: | :---:
 [V2.1.6](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/manifest.json) | Research Active | AGPL-3.0
