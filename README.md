@@ -43,6 +43,16 @@ Ce fichier JSON contient :
 
 Le système est construit comme une pile fractale, où chaque couche respecte les mêmes proportions géométriques.
 
+```mermaid
+graph TD
+    A[GENESIS QC / APPS] -->|LES Energy| B(COGNITIVE LAYER)
+    B -->|CEML & H-Scale| C{SYNAPSE Ω KERNEL}
+    C -->|Liquid Neural IPC| D[UHFS FILESYSTEM]
+    D -->|Holographic Addressing| E[CRAID STORAGE]
+    E -->|FC-496 Atoms| F[HARDWARE / SNOWFLAKE]
+
+```
+
 ---
 
 ## 🗂️ Navigation des Modules
