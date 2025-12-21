@@ -10,7 +10,7 @@
   "@type": "SoftwareSourceCode",
   
   "manifest_version": "2.1.6",
-  "generated_at": "2025-12-21T20:00:00Z",
+  "generated_at": "2025-12-21T21:00:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette)",
   
   "project": {
@@ -27,6 +27,7 @@
     "keywords": [
       "synapse-omega",
       "fc-496-atom",
+      "acphi-496-organic",
       "craid-storage",
       "uhfs-holographic-fs",
       "kuramoto-pentagonal",
@@ -64,7 +65,7 @@
       "phi": {
         "symbol": "φ",
         "value": 1.61803398875,
-        "usage": "Data Partitioning (Major/Minor), UHFS Addressing",
+        "usage": "Data Partitioning (Major/Minor), UHFS Addressing, DNA Geometry",
         "role": "Spatial Distribution"
       },
       "pi": {
@@ -163,6 +164,19 @@
       "file": "architecture/lichen-os.md"
     },
     {
+      "id": "acphi-496-engine",
+      "name": "ACΦ-496 Organic Engine",
+      "type": "cognitive_architecture",
+      "version": "2.2-ORGANIC",
+      "specs": {
+        "logic": "Quaternary Rotational (Base-4)",
+        "security": "Artificial Immune System (Negative Selection)",
+        "topology": "E8 Lattice Alignment",
+        "format": ".GENOME"
+      },
+      "documentation": "architecture/ACPHI/README.md"
+    },
+    {
       "id": "fc496-atom",
       "name": "FC-496 Atom",
       "type": "atomic_unit",
@@ -233,7 +247,7 @@
     "environment": "Simulation_Active",
     "boot_status": "COMPLETED",
     "boot_log": "system/GENESIS_BOOT.log",
-    "active_modules": ["SynapseΩ", "CRAID", "UHFS", "Kuramoto", "π-Time", "LES", "FC-496", "Cool-Flow"]
+    "active_modules": ["SynapseΩ", "CRAID", "UHFS", "Kuramoto", "π-Time", "LES", "FC-496", "ACΦ-496", "Cool-Flow"]
   },
 
   "for_ai_agents": {
