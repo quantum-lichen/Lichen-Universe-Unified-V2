@@ -1,0 +1,111 @@
+# CEML : Formules Mathématiques Unifiées
+**Version:** 2.0 (Standard V2.1)
+**Scope:** Toutes les équations canoniques de la Loi de Minimisation de l'Entropie Cognitive.
+
+Ce document sert de référence immuable. En cas de perte des autres documents, ces formules permettent de reconstruire la logique du système.
+
+---
+
+## 1. L'Équation Maîtresse (The Master Equation)
+
+La formule fondamentale qui détermine le score de viabilité d'une structure d'information.
+
+### 📐 Représentation LaTeX (Publication)
+$$
+J(s) = \frac{\mathfrak{C}(s|\Omega)}{S(s) + \epsilon}
+$$
+
+### 💻 Représentation Code (Python/Unicode)
+```python
+# J = Coherence / (Entropy + epsilon)
+J_score = C_val / (S_val + 1e-6)
+
+```
+
+### 🤖 Représentation MathJSON (Parsing IA)
+
+```json
+[
+  "Divide",
+  ["C", "s", "Omega"],
+  ["Add", ["S", "s"], "epsilon"]
+]
+
+```
+
+**Définitions des Variables :**
+
+*  : Score de Fitness Cognitif.
+*  : Cohérence Contextuelle (Anciennement ).
+*  : Entropie de Shannon (Anciennement ).
+*  : Constante de régularisation ().
+
+---
+
+## 2. Cohérence Contextuelle (Contextual Coherence)
+
+Comment calculer  dans un espace vectoriel.
+
+### 📐 Représentation LaTeX
+
+### 💻 Représentation Code (NumPy)
+
+```python
+# Cosine Similarity
+coherence = np.dot(v_context, v_candidate) / (np.linalg.norm(v_context) * np.linalg.norm(v_candidate))
+
+```
+
+---
+
+## 3. Coût Entropique (Entropic Cost)
+
+Comment calculer  pour une distribution de probabilité (ou séquence de tokens).
+
+### 📐 Représentation LaTeX
+
+### 💻 Représentation Code (Python)
+
+```python
+# Shannon Entropy
+entropy = -sum(p * math.log2(p) for p in probs if p > 0)
+
+```
+
+---
+
+## 4. Seuil de Résonance (Resonance Threshold)
+
+La limite mathématique pour l'acceptation automatique (basée sur ).
+
+### 📐 Représentation LaTeX
+
+### 💻 Représentation Code
+
+```python
+PHI = 1.61803398875
+is_resonant = J_score >= PHI
+
+```
+
+---
+
+## 5. Formule Fractale Régularisée (Avancé)
+
+Pour les systèmes multi-échelles nécessitant des pondérations ().
+
+### 📐 Représentation LaTeX
+
+**Définitions :**
+
+*  : Sensibilité au contexte (Facteur de focus).
+*  : Pression de compression (Facteur d'économie d'énergie).
+
+---
+
+*Généré par Lichen Collective - Architecte: Bryan Ouellette*
+*Sauvegarde Autonome de Type FC-496*
+
+```
+
+```
