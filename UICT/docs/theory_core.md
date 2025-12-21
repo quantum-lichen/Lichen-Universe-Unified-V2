@@ -70,3 +70,4 @@ Dark Matter is interpreted as information in an **intermediate compression state
 
 **The universe is a calculation. Mass is its memory.**
 UICT unifies thermodynamics, quantum mechanics, and information theory under a single generative principle: the minimization of informational entropy.
+---
