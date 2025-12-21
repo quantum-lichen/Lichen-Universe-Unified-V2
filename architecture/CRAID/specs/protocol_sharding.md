@@ -1,16 +1,28 @@
-# Protocole de Sharding & Reconstruction
+# CRAID Protocol: Sharding & Resilience
+**Version:** 1.0
+**Scope:** Distributed Semantic Storage
 
-## 1. L'Approche "Structure > Vecteur"
-Contrairement aux RAG classiques qui se basent sur une similarité vectorielle floue, CRAID force une structure.
-* **Entrée** : Hypergraphe de connaissances.
-* **Traitement** : Le monde n'est pas binaire. CRAID gère les relations complexes (ex: Alice envoie un mail à Bob à propos du Projet X).
+---
 
-## 2. Mutabilité & Édition (Le Défi LSM)
-Avec Reed-Solomon, on ne peut pas modifier un bit sans tout recalculer.
-* **Solution** : Architecture **LSM (Log-Structured Merge-tree)**.
-* Les nouvelles informations s'empilent ("Log") par-dessus les anciennes.
-* Un processus de fond ("Compaction") fusionne périodiquement les logs pour mettre à jour les shards "froids" de manière asynchrone.
+## 1. The Semantic Nucleotide
+Unlike standard RAID which stripes bits, CRAID stripes **Semantic Nucleotides**.
+Each shard contains a piece of the knowledge graph, ensuring that even a partial reconstruction yields usable meaning.
 
-## 3. Topologie de Réseau
-* **Nœuds** : Chaque Agent (instance de SynapseΩ) agit comme un nœud de stockage potentiel.
-* **Protocole** : Communication via vecteurs d'états (State Vectors) pour vérifier l'intégrité des shards voisins.
+## 2. Erasure Coding (Reed-Solomon)
+We use an $(N, M)$ scheme where:
+* $N$ = Data Shards (Content)
+* $M$ = Parity Shards (Redundancy)
+* **Total Shards** = $N + M$
+* **Reconstruction Requirement** = Any $N$ shards.
+
+**Standard Configuration:** $(3, 2)$
+* Splits data into 3 parts.
+* Adds 2 parity blocks.
+* Distributes across 5 Agents.
+* *Result:* Can lose any 2 agents and still recover 100% of the memory.
+
+## 3. The LSM Tree (Mutability)
+To handle the "Write Once" nature of Reed-Solomon:
+1.  **MemTable**: New memories enter a RAM buffer (Hot).
+2.  **Immutable SSTables**: When full, buffer is flushed to disk as sharded SSTables (Cold).
+3.  **Compaction**: Background process merges old tables and discards obsolete facts.
