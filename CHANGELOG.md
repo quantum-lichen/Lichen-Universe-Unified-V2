@@ -31,3 +31,24 @@ Le format est basé sur [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 - Création initiale des concepts UICT, CEML et FC-496.
 - Phase d'exploration et de prototypage rapide.
+# CHANGELOG
+
+## [2.1.4] - 2025-12-21
+### Added
+- π-Time vectorial structure (Cycle, Sub, Position, Digit)
+- PoC links for UICT, CEML, H-Scale
+- FC-496 π-Time timestamp integration
+
+### Changed
+- Streamlined collective (7 → 4 core AIs)
+- Repository moved to Lichen-Universe-Unified-V2
+
+### Removed
+- Redundant metadata (kept lean)
+
+## [2.0.0] - 2025-12-21
+### Added
+- MathJSON formula standardization
+- Dependency graph
+- JSON Schema validation
+- JSON-LD semantic markup
