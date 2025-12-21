@@ -82,7 +82,7 @@ Les composants sont organisés par dossiers locaux. Cliquez pour explorer.
 | Dossier | Description | Statut | Lien |
 |---------|-------------|--------|------|
 | [system/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/system) | Boot & Logs - Séquences de démarrage et preuves de vie. | 🟢 Live | [GENESIS_BOOT.log](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/system/GENESIS_BOOT.log) |
-| [hardware/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/hardware) | Snowflake CPU - Spécifications du processeur fractal. | 🔵 Specs |  |
+| [hardware/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/hardware) | Snowflake CPU - Spécifications du processeur fractal. | 🔵 Specs |  | [GENESIS_BOOT.log](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/hardware/snowflake-cpu.md)
 | [applications/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/applications) | Genesis QC - Applications natives (IA Santé Mentale). | 🟡 Alpha | [genesis-qc.md](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/applications/genesis-qc.md) |
 | [scripts/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/scripts) | Tools - Utilitaires de validation et maintenance. | 🟢 Tools | [validate_lexicon.py](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/scripts/validate_lexicon.py) |
 
