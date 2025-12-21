@@ -22,7 +22,7 @@ $$
 ```python
 import math
 FREQ_PI = 1.0 / math.pi
-
+```
 
 2. The Timestamp Vector ($T_{\pi}$)
 The structured representation of an instant.
