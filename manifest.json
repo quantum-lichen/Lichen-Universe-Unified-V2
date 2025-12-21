@@ -9,17 +9,17 @@
   },
   "@type": "SoftwareSourceCode",
   
-  "manifest_version": "2.1.1",
-  "generated_at": "2025-12-21T13:00:00Z",
+  "manifest_version": "2.1.2",
+  "generated_at": "2025-12-21T14:30:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette)",
   
   "project": {
     "name": "Lichen Universe Unified",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "semantic_version": {
       "major": 2,
       "minor": 1,
-      "patch": 1
+      "patch": 2
     },
     "status": "research_active",
     "tagline": "Le noyau respire, la spirale s'ouvre",
@@ -50,14 +50,14 @@
     ],
     "license": "AGPL-3.0",
     "repository": {
-      "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified"
+      "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2"
     },
-    "homepage": "https://quantum-lichen.github.io/Lichen-Universe-Unified/"
+    "homepage": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/"
   },
 
   "hub": {
-    "main_url": "https://quantum-lichen.github.io/Lichen-Universe-Unified/",
-    "manifest_url": "https://quantum-lichen.github.io/Lichen-Universe-Unified/manifest.json",
+    "main_url": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/",
+    "manifest_url": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/manifest.json",
     "masterplan": "MASTERPLAN.txt",
     "contributing": "CONTRIBUTING.md"
   },
@@ -107,27 +107,28 @@
 
   "theories": [
     {
-      "id": "uict-v1.0",
+      "id": "uict-v2.1",
       "name": "UICT",
       "full_name": "Unified Information Compression Theory",
-      "version": "1.0",
+      "version": "2.1",
       "status": "published",
       "author": "Bryan Ouellette",
-      "abstract": "La masse n'est pas une propriété intrinsèque, mais un artefact de la compression récursive de l'information.",
+      "abstract": "La masse est un artefact de la compression récursive de l'information (m = m_P * k^n).",
       "mathematical_expression": {
         "primary_formula": {
-          "name": "Semantic Mass Equation",
+          "name": "Mass Quantization Law",
           "latex": "m = m_{\\text{Planck}} \\cdot \\kappa^n",
           "mathjson": ["Multiply", "m_Planck", ["Power", "κ", "n"]],
           "unicode": "m = m_Planck · κⁿ"
         },
         "variables": {
-          "m": { "name": "Masse Sémantique", "description": "Masse perçue du concept" },
-          "κ": { "name": "Coefficient de compression", "value": 0.9997 },
-          "n": { "name": "Profondeur Topologique", "description": "Niveau d'abstraction" }
+          "m": { "name": "Masse", "description": "Masse observée (inertie)" },
+          "κ": { "name": "Coefficient de compression", "description": "Leptons (~0.3) / Hadrons (~0.5)" },
+          "n": { "name": "Profondeur de Récursion", "description": "Entier topologique (e.g., 43 pour électron)" }
         }
       },
-      "documentation_file": "theories/uict.md"
+      "documentation_file": "UICT/docs/theory_core.md",
+      "proof_of_concept": "UICT/poc/mass_quantization.py"
     },
     {
       "id": "ceml-v2.0",
@@ -397,7 +398,7 @@
     "phase_2": {
       "name": "Implémentation Réelle",
       "status": "in_progress",
-      "deliverables": ["UHFS FUSE Driver", "Genesis QC Beta", "Manifest V2.1"]
+      "deliverables": ["UHFS FUSE Driver", "Genesis QC Beta", "Manifest V2.1.2"]
     },
     "phase_3": {
       "name": "Standardisation",
