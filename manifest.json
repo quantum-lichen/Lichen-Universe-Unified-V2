@@ -9,17 +9,17 @@
   },
   "@type": "SoftwareSourceCode",
   
-  "manifest_version": "2.1.2",
-  "generated_at": "2025-12-21T14:30:00Z",
+  "manifest_version": "2.1.3",
+  "generated_at": "2025-12-21T14:45:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette)",
   
   "project": {
     "name": "Lichen Universe Unified",
-    "version": "2.1.2",
+    "version": "2.1.3",
     "semantic_version": {
       "major": 2,
       "minor": 1,
-      "patch": 2
+      "patch": 3
     },
     "status": "research_active",
     "tagline": "Le noyau respire, la spirale s'ouvre",
@@ -158,29 +158,30 @@
       "proof_of_concept": "CEML/poc/demo.py"
     },
     {
-      "id": "h-scale-v1.0",
+      "id": "h-scale-v1.1",
       "name": "H-Scale",
       "full_name": "Harmonic Scale",
-      "version": "1.0",
+      "version": "1.1",
       "status": "published",
       "author": "Bryan Ouellette",
-      "abstract": "Métrique vectorielle quantifiant l'harmonie d'une décision.",
+      "abstract": "Métrique vectorielle quantifiant l'harmonie d'une décision (Seuil > 0.618).",
       "mathematical_expression": {
         "primary_formula": {
-          "name": "Harmony Score",
+          "name": "Harmonic Score",
           "latex": "\\mathcal{H} = 0.3\\mathfrak{C} + 0.2E_{ff} + 0.3R + 0.2D",
           "mathjson": ["Add", ["Multiply", 0.3, "ℭ"], ["Multiply", 0.2, "E_ff"], ["Multiply", 0.3, "R"], ["Multiply", 0.2, "D"]],
           "unicode": "ℋ = 0.3ℭ + 0.2E_ff + 0.3R + 0.2D"
         },
         "variables": {
-          "ℋ": { "name": "Harmonie", "description": "Score global (anciennement H)" },
+          "ℋ": { "name": "Harmonie", "description": "Score global" },
           "ℭ": { "name": "Cohérence", "weight": 0.3 },
-          "E_ff": { "name": "Efficience", "weight": 0.2, "description": "Ratio coût/bénéfice (anciennement E)" },
-          "R": { "name": "Résonance", "weight": 0.3, "description": "Alignement avec φ/π/496" },
+          "E_ff": { "name": "Efficience", "weight": 0.2, "description": "1 - Entropie" },
+          "R": { "name": "Résonance", "weight": 0.3, "description": "Alignement φ" },
           "D": { "name": "Durabilité", "weight": 0.2 }
         }
       },
-      "documentation_file": "theories/h-scale.md"
+      "documentation_file": "H-Scale/docs/theory_harmonic.md",
+      "proof_of_concept": "H-Scale/poc/h_validator.py"
     },
     {
       "id": "les-v1.0",
@@ -398,7 +399,7 @@
     "phase_2": {
       "name": "Implémentation Réelle",
       "status": "in_progress",
-      "deliverables": ["UHFS FUSE Driver", "Genesis QC Beta", "Manifest V2.1.2"]
+      "deliverables": ["UHFS FUSE Driver", "Genesis QC Beta", "Manifest V2.1.3"]
     },
     "phase_3": {
       "name": "Standardisation",
