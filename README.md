@@ -131,4 +131,3 @@ Lichen Universe est un projet open-source sous licence **Apache 2.0**. Nous acce
 > *"Aligning computation with the laws of the universe."* 🌀
 ```
 
-Tu peux copier ce texte et le coller directement dans ton `README.md`. 😊
