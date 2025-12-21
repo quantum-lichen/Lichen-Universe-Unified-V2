@@ -10,7 +10,7 @@
   "@type": "SoftwareSourceCode",
   
   "manifest_version": "2.1.6",
-  "generated_at": "2025-12-21T19:30:00Z",
+  "generated_at": "2025-12-21T20:00:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette)",
   
   "project": {
@@ -31,7 +31,7 @@
       "uhfs-holographic-fs",
       "kuramoto-pentagonal",
       "pi-time",
-      "strand-graph",
+      "microfluidic-cooling",
       "liquid-neural-networks",
       "les-entropy-spiral"
     ],
@@ -176,6 +176,29 @@
       "documentation": "FC-496/README.md"
     },
     {
+      "id": "cool-flow",
+      "name": "Cool-Flow Microfluidics",
+      "type": "hardware_subsystem",
+      "version": "1.0",
+      "specs": {
+        "method": "Active Peristaltic PZT",
+        "fluid": "Novec 7100",
+        "topology": "Fractal Murray Law"
+      },
+      "documentation": "hardware/cooling/cool_flow_specs.md"
+    },
+    {
+      "id": "kuramoto-firmware",
+      "name": "Kuramoto-Sync Firmware",
+      "type": "embedded_software",
+      "version": "1.0-SIM",
+      "specs": {
+        "algorithm": "Phase-Locking Loop",
+        "target": "FPGA Layer 2"
+      },
+      "code_file": "hardware/firmware/kuramoto_sync.py"
+    },
+    {
       "id": "uhfs-filesystem",
       "name": "UHFS",
       "type": "file_system",
@@ -210,7 +233,7 @@
     "environment": "Simulation_Active",
     "boot_status": "COMPLETED",
     "boot_log": "system/GENESIS_BOOT.log",
-    "active_modules": ["SynapseΩ", "CRAID", "UHFS", "Kuramoto", "π-Time", "LES", "FC-496"]
+    "active_modules": ["SynapseΩ", "CRAID", "UHFS", "Kuramoto", "π-Time", "LES", "FC-496", "Cool-Flow"]
   },
 
   "for_ai_agents": {
