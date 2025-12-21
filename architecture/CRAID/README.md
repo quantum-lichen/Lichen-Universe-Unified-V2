@@ -1,20 +1,27 @@
 # CRAID : Cognitive RAID Architecture
 ## La Mémoire "Self-Healing" pour Agents Autonomes
 
-> **"Le mariage du Hard Engineering (RAID, Reed-Solomon) et de la Soft AI (Embeddings, Sémantique)."**
+[![Status](https://img.shields.io/badge/status-active_development-orange)](specs/protocol_sharding.md)
+[![Version](https://img.shields.io/badge/version-1.0-green)](specs/protocol_sharding.md)
+[![Resilience](https://img.shields.io/badge/fault_tolerance-60%25-blue)](FORMULAS.md)
 
-### 🎯 Le Problème
-Dans les systèmes IA actuels, la mémoire est fragile. Si on perd l'instance d'un agent ou son index vectoriel (`index.faiss`), l'IA devient amnésique.
+> **"Memory is not a file. It is a reconstruction."**
 
-### 💡 La Solution CRAID
-CRAID applique la logique du stockage distribué (RAID 5/6) à la sémantique.
-Au lieu de stocker un fichier complet à un endroit, nous décomposons l'information en **"Shards Sémantiques"** distribués à travers le réseau d'agents (via FC-496).
+**CRAID** (Cognitive Redundant Array of Independent Datasets) applies distributed storage logic to semantic memory. It ensures that the knowledge graph survives even if individual agents (nodes) go offline.
 
-### 🔥 Les 3 Piliers du Système
-1.  **Résilience (Self-Healing)** : Si un agent meurt, les autres détiennent assez de fragments (parity shards) pour reconstruire mathématiquement l'information manquante sans perte de sens.
-2.  **Atomicité (FC-496)** : L'unité de base n'est pas le bit, mais le [Nucléotide Sémantique] (Sujet -> Prédicat -> Objet + Embedding).
-3.  **Hybridité (Hot/Cold)** :
-    * **Hot Memory (Cache)** : Répliquée pour la vitesse (<100ms).
-    * **Cold Storage (CRAID)** : Shardée et encodée pour l'immortalité et la densité.
+## 🛡️ Core Pillars
 
----
+1.  **Structure > Vector**: Uses "Semantic Nucleotides" (Subject-Predicate-Object) wrapped in embeddings, rather than vague vectors.
+2.  **Self-Healing**: Implements Reed-Solomon erasure coding. Data is sharded; if a node dies, the math rebuilds the missing context.
+3.  **Hybrid Tiering**:
+    * **Hot Memory**: Replicated for speed (<100ms).
+    * **Cold Storage**: Sharded for density and immortality.
+
+## 📂 Contents
+
+* **`specs/protocol_sharding.md`**: The distributed storage protocol and Reed-Solomon specs.
+* **`concepts/semantic_polymerase.md`**: The ingestion pipeline (Helicase -> Nucleotides).
+* **`FORMULAS.md`**: The mathematical rules for parity and reconstruction.
+
+## 🚀 Key Metric
+**60% Fault Tolerance**: With a (3+2) encoding scheme, the system survives the loss of 2 out of 5 agents.
