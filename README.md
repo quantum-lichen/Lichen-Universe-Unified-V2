@@ -91,23 +91,27 @@ Les composants sont organisés par dossiers locaux. Cliquez pour explorer.
 
 Tout code ou documentation généré pour Lichen DOIT respecter ces définitions.
 
-| Concept | Symbole | Notation LaTeX | Description |
-|---------|---------|----------------|-------------|
-| Entropie | S | S(s) | Entropie de Shannon (Remplace l'ancien "H"). |
-| Harmonie | ℋ | \\(\\mathcal{H}\\) | Métrique H-Scale. Vecteur d'équilibre. |
-| Hamiltonien | Û | \\(\\hat{U}\\) | Opérateur d'évolution quantique. |
-| Cohérence | ℭ | \\(\\mathfrak{C}\\) | Utilité contextuelle. |
-| Phi | φ | \\(\\varphi\\) | Le nombre d'or (1.618...). |
+| Concept         | Symbole | Notation LaTeX      | Description                                  |
+|-----------------|---------|---------------------|----------------------------------------------|
+| Entropie        | S       | S(s)                | Entropie de Shannon (Remplace l'ancien "H"). |
+| Harmonie        | ℋ      | \\(\\mathcal{H}\\)  | Métrique H-Scale. Vecteur d'équilibre.       |
+| Hamiltonien     | Û       | \\(\\hat{U}\\)      | Opérateur d'évolution quantique.             |
+| Cohérence       | ℭ       | \\(\\mathfrak{C}\\) | Utilité contextuelle.                        |
+| Phi             | φ       | \\(\\varphi\\)      | Le nombre d'or (1.618...).                   |
 
 ---
 
 ## 📊 Benchmarks & Objectifs
 
-| Métrique | Legacy (JSON/Von Neumann) | Lichen (FC-496/Synapse) | Gain |
-|----------|--------------------------|------------------------|------|
-| Latence I/O | 245 ms (Parsing) | 0.12 ms (Zero-Copy) | ×2000 🚀 |
-| Énergie | 100% (Baseline) | 32.5% (LES Optimized) | -60% ⚡ |
-| Résilience | Corruption possible | Indestructible (CRAID) | ∞ 🛡️ |
+| Métrique    | Legacy (JSON/Von Neumann) | Lichen (FC-496/Synapse) | Gain      |
+|-------------|---------------------------|-------------------------|-----------|
+| Latence I/O | 245 ms (Parsing)          | 0.12 ms (Zero-Copy)     | ×2000 🚀 |
+| Énergie     | 100% (Baseline)           | 32.5% (LES Optimized)   | -60% ⚡  |
+| Résilience  | Corruption possible       | Indestructible (CRAID)  | ∞ 🛡️     |
+
+---
+
+Phi-compiler demo here : https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/
 
 ---
 
