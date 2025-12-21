@@ -36,3 +36,4 @@ Unlike UTC, a π-Time stamp cannot be easily forged without computing the BBP (B
 * **FC-496 Header**: Contains the `POSITION` index.
 * **System Ticks**: The kernel "beats" at $f_{\pi} = 1/\pi$ Hz.
 * **Visuals**: The UI renders a "π-Stream" where the current moment glows at the center of the infinite ribbon.
+---
