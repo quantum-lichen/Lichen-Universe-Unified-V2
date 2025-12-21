@@ -1,11 +1,10 @@
 /**
- * Synapse.js (V2.1.6 Refactor)
- * Composant de liaison pour le système nerveux SynapseΩ.
- * Aligné sur les constantes : PHI (Structure) et PI (Temps).
+ * Synapse.js
+ * Composant de liaison pour le système nerveux du projet.
+ * Gère la transmission des signaux, la pondération (Weight) et la synchronisation.
  */
 
-const PHI = 1.61803398875;
-const PI  = 3.14159265359;
+const PHI = 1.61803398875; // La signature du patron ^_-
 
 class Synapse {
     constructor(id, sourceNode, targetNode, weight = 1.0) {
@@ -18,55 +17,51 @@ class Synapse {
     }
 
     /**
-     * Générateur de temps fractal (Pi-Time approximation)
-     * Convertit le temps linéaire en cycles de Pi pour l'indexation.
-     */
-    getPiTime() {
-        const now = Date.now();
-        // Formule simplifiée de l'ancrage temporel V2
-        return (now / 1000) * PI; 
-    }
-
-    /**
-     * Transmet un signal.
-     * @param {any} signal - Idéalement un FC-496 Atom ou un Number
+     * Transmet un signal du noeud source au noeud cible.
+     * Applique une modulation basée sur le poids et potentiellement Phi.
+     * @param {any} signal - La donnée ou l'impulsion à transmettre
      */
     fire(signal) {
         if (!this.active) return null;
 
+        // Si le signal est numérique, on applique une modulation quantique/fractale simple
         let processedSignal = signal;
-        
-        // Modulation Quantique V2
         if (typeof signal === 'number') {
-            // L'amplification respecte la signature harmonique
             processedSignal = signal * this.weight;
         }
 
         const transmission = {
-            // CORRECTION V2 : Utilisation du Pi-Time
-            timestamp: this.getPiTime(), 
-            original_epoch: Date.now(), // On garde la ref pour le debug humain seulement
+            timestamp: Date.now(),
             input: signal,
             output: processedSignal,
-            synapseId: this.id,
-            coherence: PHI // Marqueur de cohérence théorique
+            synapseId: this.id
         };
 
         this.signalHistory.push(transmission);
         
-        // Gestion mémoire "Rolling Wave"
+        // Logique de 'nettoyage' pour ne pas saturer la mémoire (Keep it clean)
         if (this.signalHistory.length > 50) this.signalHistory.shift();
 
         return processedSignal;
     }
 
+    /**
+     * Ajuste le poids de la synapse (Neuroplasticité simulée)
+     * @param {number} delta - Le changement de poids
+     */
     adjustWeight(delta) {
         this.weight += delta;
-        // La borne PHI * 2 est parfaite, on la garde.
+        // On s'assure que le poids reste dans des bornes logiques
         this.weight = Math.max(0, Math.min(this.weight, PHI * 2)); 
     }
-    
-    // ... disable/enable inchangés
+
+    disable() {
+        this.active = false;
+    }
+
+    enable() {
+        this.active = true;
+    }
 }
 
 module.exports = Synapse;
