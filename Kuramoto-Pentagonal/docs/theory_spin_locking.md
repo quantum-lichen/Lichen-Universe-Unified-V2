@@ -39,3 +39,4 @@ This architecture implements **Cognitive RAID (CRAID)** at the quantum level.
 ## 5. Conclusion
 
 By unifying **Topological Quantum Computing** with **Non-Linear Dynamics (Kuramoto)**, we create a substrate that is immune to standard environmental noise. The error does not propagate; it is dampened by the collective inertia of the pentagon.
+---
