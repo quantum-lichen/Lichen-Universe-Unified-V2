@@ -24,3 +24,4 @@
 ## 🧪 Key Validations
 * **Self-Healing**: Simulation shows spins realigning after noise injection.
 * **Fault Tolerance**: Information persists with 2 dead qubits.
+---
