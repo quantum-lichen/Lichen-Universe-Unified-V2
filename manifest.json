@@ -9,17 +9,17 @@
   },
   "@type": "SoftwareSourceCode",
   
-  "manifest_version": "2.1.0",
-  "generated_at": "2025-12-21T12:45:00Z",
+  "manifest_version": "2.1.1",
+  "generated_at": "2025-12-21T13:00:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette)",
   
   "project": {
     "name": "Lichen Universe Unified",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "semantic_version": {
       "major": 2,
       "minor": 1,
-      "patch": 0
+      "patch": 1
     },
     "status": "research_active",
     "tagline": "Le noyau respire, la spirale s'ouvre",
@@ -130,10 +130,10 @@
       "documentation_file": "theories/uict.md"
     },
     {
-      "id": "ceml-v1.0",
+      "id": "ceml-v2.0",
       "name": "CEML",
       "full_name": "Cognitive Entropy Minimization Law",
-      "version": "1.0",
+      "version": "2.0",
       "status": "published",
       "author": "Bryan Ouellette",
       "abstract": "Tout système cognitif viable optimise le ratio Cohérence/Entropie.",
@@ -152,7 +152,9 @@
           "ε": { "name": "Constante de régularisation", "value": 1e-6 }
         }
       },
-      "documentation_file": "theories/ceml.md"
+      "documentation_file": "CEML/docs/CEML_theory_en.md",
+      "visualization_url": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/CEML/visualization/index.html",
+      "proof_of_concept": "CEML/poc/demo.py"
     },
     {
       "id": "h-scale-v1.0",
@@ -395,7 +397,7 @@
     "phase_2": {
       "name": "Implémentation Réelle",
       "status": "in_progress",
-      "deliverables": ["UHFS FUSE Driver", "Genesis QC Beta", "Manifest V2.0"]
+      "deliverables": ["UHFS FUSE Driver", "Genesis QC Beta", "Manifest V2.1"]
     },
     "phase_3": {
       "name": "Standardisation",
