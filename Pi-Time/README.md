@@ -22,3 +22,67 @@ $$\pi[CYCLE].[SUB].[POSITION].[DIGIT]$$
 * **`docs/specification.md`**: Technical specs and BBP algorithm integration.
 * **`poc/pi_clock.js`**: A working JS prototype of the clock and validator.
 * **`FORMULAS.md`**: The mathematical definitions of the π-Cycle.
+
+---
+
+V2.0
+
+# Pi-Time : Mathematical Index
+**Scope:** Temporal Indexing & Spiral Mapping.
+
+---
+
+## 1. The Spiral Projection (Phyllotaxis)
+How we map linear time $t$ into a 2D Holographic Disk.
+
+### 📐 LaTeX
+
+
+$$
+\theta_n = n \times \Psi_{gold} = n \times 2\pi(1 - \frac{1}{\varphi})
+$$
+
+
+
+$$
+r_n = c \sqrt{n}
+$$
+
+
+
+Where:
+* $n$ is the $\pi$-Index (derived from time).
+* $\Psi_{gold}$ is the Golden Angle ($\approx 137.508^\circ$).
+* $c$ is a scaling factor.
+
+---
+
+## 2. The $\pi$-Index Function
+The conversion from linear Unix time to the immutable $\pi$ sequence.
+
+### 📐 LaTeX
+
+
+
+$$
+I_{\pi}(t) = \lfloor t \cdot \pi \cdot 10^k \rfloor \pmod{L_{max}}
+$$
+
+
+
+*(Simplified for simulation. In production, this maps to the exact offset in the Chudnovsky algorithm stream).*
+
+---
+
+## 3. Stability Metric
+Determining if a moment in time is "structurally sound" for write operations.
+
+### 📐 LaTeX
+
+
+
+$$
+S_{tability} = 1 - \left| (r_n \pmod \varphi) - \frac{\varphi}{2} \right|
+$$
+
+
