@@ -29,6 +29,13 @@ python poc/demo.py
 
 Where specific cognitive regimes emerge based on the ratio:
 
+
+
+          $$J(s) = \frac{\mathcal{C}(s \mid \Omega)}{\mathcal{H}(s) + \epsilon}$$
+
+
+     
+
 * **Resonance**: High Coherence / Low Entropy (Target State)
 * **Dissonance**: Low Coherence / Low Entropy
 * **Chaos**: High Entropy
