@@ -1,29 +1,28 @@
-# FC-496 : The Fractal Cell
-## L'Unité Atomique Universelle
+# FC-496 : The Fractal Cell Atom
+## L'Unité Fondamentale de l'Univers Lichen
 
 [![Standard](https://img.shields.io/badge/standard-Universal-purple)](specs/bit_structure.md)
 [![Size](https://img.shields.io/badge/size-496_bits-blue)](FORMULAS.md)
-[![Time](https://img.shields.io/badge/time-%CF%80_Index-green)](../Pi-Time/README.md)
+[![Partition](https://img.shields.io/badge/partition-%CF%86_Split-gold)](FORMULAS.md)
 
 > **"Data is not a stream. Data is a crystal."**
 
-**FC-496** est le format de données fondamental de l'univers Lichen. Contrairement aux formats "mous" (JSON, XML) qui nécessitent un parsing coûteux, FC-496 est une structure "dure", de taille fixe, alignée sur la mémoire et auto-validante.
+**FC-496** est l'atome de donnée du Lichen Universe. C'est une structure de taille fixe (496 bits), géométriquement parfaite, conçue pour l'ère du **Zero-Copy** et de l'**IA Native**.
 
-## ⚛️ Propriétés Physiques
+Contrairement au JSON (mou, variable, coûteux à parser), le FC-496 est "dur" (rigide, aligné mémoire, instantané).
 
-1.  **Atomicité** : Chaque cellule fait exactement **496 bits** (Nombre Parfait).
-2.  **Zero-Copy** : La structure en mémoire est identique à la structure sur disque. Pas de sérialisation.
-3.  **Holographique** : Chaque cellule contient son contexte spatio-temporel ($\pi$-Time + Geo-Hash).
-4.  **Auto-Immunité** : Une cellule corrompue ($\mathcal{H} < 0.618$) est rejetée physiquement par le noyau SynapseΩ avant traitement.
+## ⚛️ Propriétés Unifiées (V2.1.6)
 
-## 🔗 Intégration Système
+1.  **Atomicité (496)** : Correspond à la dimension $E_8 \times E_8$. Taille idéale pour les registres SIMD (512-bit avec padding).
+2.  **Partition Dorée ($\varphi$)** : La cellule est divisée en **Major Segment** (Payload) et **Minor Segment** (Control) selon le Nombre d'Or.
+3.  **Ancrage Spatio-Temporel** : Chaque cellule contient nativement son **$\pi$-Index** (Temps) et son **Geo-Hash** (Espace).
+4.  **Liaison Chimique (StrandGraph)** : Les cellules se lient entre elles non pas par des pointeurs mémoire arbitraires, mais par résonance de contenu (Content-Addressable).
 
-* **Stockage** : Les cellules sont les "nucléotides" du système **CRAID**.
-* **Calcul** : Traitées nativement par **SynapseΩ** et le CPU **Snowflake**.
-* **Temps** : Synchronisées via le **$\pi$-Time Standard**.
+## 🔗 Rôle dans l'Architecture
+* **CRAID** : FC-496 est le "nucléotide" que le RAID cognitif distribue.
+* **SynapseΩ** : Le kernel traite ces cellules comme des neurotransmetteurs.
 
 ## 📂 Contenu
-
-* **`specs/bit_structure.md`** : La cartographie précise des 496 bits.
-* **`FORMULAS.md`** : Les équations de partitionnement et de validité.
-* **`poc/atom_builder.py`** : Générateur de cellules conforme V2.1.6.
+* **`specs/bit_structure.md`** : La carte mémoire précise (Bitwise Map).
+* **`FORMULAS.md`** : Les équations de partitionnement.
+* **`poc/atom_builder.py`** : Script de génération de cellules valides.
