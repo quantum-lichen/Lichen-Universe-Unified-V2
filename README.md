@@ -127,11 +127,15 @@ Tout code ou documentation généré pour Lichen DOIT respecter ces définitions
 🧪 Preuve de Concept (Live Proof)
 Voir l'Auto-Guérison Géométrique en Temps Réel :
 
-Démonstration de l'effet "Time Crystal" et du verrouillage de phase (Spin-Lock) qui rend l'erreur mathématiquement impossible. :  [![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-m98dnd996ujujewhwharot.streamlit.app/)
+Démonstration de l'effet "Time Crystal" et du verrouillage de phase (Spin-Lock) qui rend l'erreur mathématiquement impossible. : 
+
+[![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-m98dnd996ujujewhwharot.streamlit.app/)
 
 ---
 
-Phi-compiler demo here : [![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/)
+Phi-compiler demo here : 
+
+[![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/)
 
 ---
 
