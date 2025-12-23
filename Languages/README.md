@@ -10,19 +10,19 @@
 ---
 
 ## 📐 Core Philosophy
-[cite_start]The architecture is based on the **Lichen Project** axioms[cite: 17, 18]:
-1.  [cite_start]**Iconic Semantics:** Code should look like what it does (Spatial Syntax)[cite: 1].
-2.  [cite_start]**DNA-Native:** Storage is encoded in ATCG (Base-4), compatible with synthetic biology storage[cite: 2, 3].
-3.  [cite_start]**The Double Helix Security:** Code is only valid if the "Sense Strand" (Action) aligns geometrically with the "Anti-Sense Strand" (Verification)[cite: 8, 9].
-4.  [cite_start]**CEML Optimized:** Designed to minimize Cognitive Entropy ($\Delta S \approx -\Phi$)[cite: 30].
+The architecture is based on the **Lichen Project** axioms:
+1.  **Iconic Semantics:** Code should look like what it does (Spatial Syntax).
+2.  **DNA-Native:** Storage is encoded in ATCG (Base-4), compatible with synthetic biology storage.
+3.  **The Double Helix Security:** Code is only valid if the "Sense Strand" (Action) aligns geometrically with the "Anti-Sense Strand" (Verification).
+4.  **CEML Optimized:** Designed to minimize Cognitive Entropy ($\Delta S \approx -\Phi$).
 
 ## 🧬 The 4 Bases (Quaternary Logic)
-| Base | Glyph | Function | Meaning |
-|:---:|:---:|:---|:---|
-| **A** | **⩓** | `INIT` | [cite_start]Intention, Start, Spark [cite: 3] |
-| **C** | **≋** | `FLOW` | [cite_start]Process, Compute, Transform [cite: 4] |
-| **G** | **⬡** | `STRUCT` | [cite_start]Geometry, Data, Container (FC-496) [cite: 5] |
-| **T** | **⩔** | `ANCHOR` | [cite_start]Save, End, Crystallize [cite: 4] |
+| Base | Glyph  | Function | Meaning                            |
+|:-----:|:-----:|:--------:|:-----------------------------------|
+| **A** | **⩓** | `INIT`   | Intention, Start, Spark            |
+| **C** | **≋** | `FLOW`   | Process, Compute, Transform        |
+| **G** | **⬡** | `STRUCT` | Geometry, Data, Container (FC-496) |
+| **T** | **⩔** | `ANCHOR` | Save, End, Crystallize             |
 
 ## 🚀 Quick Start
 
