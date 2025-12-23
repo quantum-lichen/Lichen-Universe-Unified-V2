@@ -97,6 +97,10 @@ Les composants sont organisés par dossiers locaux. Cliquez pour explorer.
 
 ---
 
+Time cristal/spin lock like error auto corecting effect geometricly here : [![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-m98dnd996ujujewhwharot.streamlit.app/)
+
+---
+
 ## 📚 Lexique Unifié (The Law)
 
 Tout code ou documentation généré pour Lichen DOIT respecter ces définitions.
