@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantum-lichen.org/schema/lichen-manifest-1.0.json",
+  "title": "Lichen Universe Unified Manifest Schema",
+  "description": "JSON Schema for validating Lichen V2.x manifest.json files. Defines the structure for the single source of truth for AI agents and researchers.",
+  "type": "object",
+
+  "properties": {
+    "@context": {
+      "type": "object",
+      "description": "JSON-LD context for semantic web integration"
+    },
+    "@type": {
+      "type": "string",
+      "description": "Schema.org type classification"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Version of the manifest schema format",
+      "pattern": "^lichen-manifest-[0-9]+\\.[0-9]+$"
+    },
+    "$id": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URI identifier for this manifest"
+    },
+    "manifest_version": {
+      "type": "string",
+      "description": "Semantic version of this specific manifest instance",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of manifest generation"
+    },
+    "generator": {
+      "type": "string",
+      "description": "Entity or system that generated this manifest"
+    },
+
+    "project": {
+      "type": "object",
+      "description": "Core project metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Official project name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Current project version"
+        },
+        "semantic_version": {
+          "type": "object",
+          "properties": {
+            "major": { "type": "integer", "minimum": 0 },
+            "minor": { "type": "integer", "minimum": 0 },
+            "patch": { "type": "integer", "minimum": 0 }
+          },
+          "required": ["major", "minor", "patch"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["prototype", "alpha", "beta", "operational", "production", "deprecated"]
+        },
+        "tagline": {
+          "type": "string",
+          "description": "Short descriptive tagline"
+        },
+        "description": {
+          "type": "string",
+          "description": "Comprehensive project description"
+        },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Searchable keywords and tags"
+        },
+        "author": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "role": { "type": "string" },
+            "email": {
+              "type": "string",
+              "format": "email"
+            },
+            "social": {
+              "type": "object",
+              "properties": {
+                "bluesky": { "type": "string" },
+                "github": { "type": "string" },
+                "twitter": { "type": "string" },
+                "linkedin": { "type": "string" }
+              }
+            }
+          },
+          "required": ["name"]
+        },
+        "license": {
+          "type": "string",
+          "description": "SPDX license identifier"
+        },
+        "repository": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "type": {
+              "type": "string",
+              "enum": ["git", "svn", "mercurial"]
+            }
+          },
+          "required": ["url"]
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": ["name", "version"]
+    },
+
+    "constants": {
+      "type": "object",
+      "description": "Universal mathematical and physical constants",
+      "properties": {
+        "documentation": { "type": "string" },
+        "code_reference": { "type": "string" },
+        "definitions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "symbol": { "type": "string" },
+              "value": { "type": ["number", "integer"] },
+              "usage": { "type": "string" },
+              "role": { "type": "string" }
+            },
+            "required": ["symbol", "value"]
+          }
+        }
+      }
+    },
+
+    "theories": {
+      "type": "array",
+      "description": "Foundational theories and frameworks",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique theory identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Theory name"
+          },
+          "full_name": {
+            "type": "string",
+            "description": "Complete formal name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Theory version"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["proposed", "draft", "scientific_whitepaper", "validated", "standardized", "implemented", "deprecated", "visionary_roadmap"]
+          },
+          "abstract": {
+            "type": "string",
+            "description": "Brief theoretical summary"
+          },
+          "documentation_file": {
+            "type": "string",
+            "description": "Path to detailed documentation"
+          },
+          "proof_of_concept": {
+            "type": "string",
+            "description": "Path to POC implementation"
+          },
+          "related_languages": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Languages that implement or relate to this theory"
+          }
+        },
+        "required": ["id", "name", "version"]
+      }
+    },
+
+    "core_components": {
+      "type": "array",
+      "description": "Primary system components and modules",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["operating_system", "compiler", "cognitive_architecture", "atomic_unit", "hardware_subsystem", "embedded_software", "simulation_engine", "file_system", "memory_architecture", "language", "protocol"]
+          },
+          "version": { "type": "string" },
+          "description": { "type": "string" },
+          "file": { "type": "string" },
+          "code_file": { "type": "string" },
+          "documentation": { "type": "string" },
+          "code_reference": { "type": "string" },
+          "ui_reference": { "type": "string" },
+          "specs": {
+            "type": "object",
+            "description": "Component-specific specifications"
+          }
+        },
+        "required": ["id", "name", "type", "version"]
+      }
+    },
+
+    "languages": {
+      "type": "object",
+      "description": "Programming and communication languages",
+      "properties": {
+        "philosophy": {
+          "type": "string",
+          "description": "Overall language design philosophy"
+        },
+        "comparison": {
+          "type": "object",
+          "description": "Comparative analysis of available languages"
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "description": "Individual language specifications"
+      }
+    },
+
+    "language_interoperability": {
+      "type": "object",
+      "description": "Cross-language communication and compilation strategies"
+    },
+
+    "roadmap": {
+      "type": "object",
+      "description": "Project development roadmap",
+      "properties": {
+        "current_phase": { "type": "string" },
+        "completed": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "next_phase": { "type": "string" },
+        "next_milestones": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "ultimate_goal": { "type": "string" },
+        "vision_document": { "type": "string" }
+      }
+    },
+
+    "deployment": {
+      "type": "object",
+      "description": "Current deployment status and configuration",
+      "properties": {
+        "environment": { "type": "string" },
+        "boot_status": { "type": "string" },
+        "boot_log": { "type": "string" },
+        "active_modules": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "language_status": {
+          "type": "object",
+          "description": "Status of each language implementation"
+        }
+      }
+    },
+
+    "for_ai_agents": {
+      "type": "object",
+      "description": "Instructions and utilities for AI agents",
+      "properties": {
+        "instructions": { "type": "string" },
+        "quick_start": { "type": "object" }
+      }
+    },
+
+    "for_researchers": {
+      "type": "object",
+      "description": "Research proposals and collaboration opportunities",
+      "properties": {
+        "experiment_proposals": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "contact": { "type": "string" },
+              "hypothesis": { "type": "string" },
+              "testable_metrics": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "meta": {
+      "type": "object",
+      "description": "Metadata about the project's creation and philosophy",
+      "properties": {
+        "creation_process": { "type": "string" },
+        "philosophical_foundation": { "type": "string" },
+        "inspiration": { "type": "string" },
+        "ultimate_vision": { "type": "string" }
+      }
+    }
+  },
+
+  "required": [
+    "schema_version",
+    "manifest_version",
+    "project",
+    "languages"
+  ],
+
+  "additionalProperties": true
+}
+```
+
+---
+
+## 📋 **INSTRUCTIONS DE DÉPLOIEMENT:**
+
+### **Étape 1: Structure de fichiers**
+```
+ton-repo/
+├── manifest.json              ← FICHIER 1 (copie-colle ci-dessus)
+├── schema/
+│   └── lichen-manifest.schema.json  ← FICHIER 2 (copie-colle ci-dessus)
+└── ... (autres fichiers)
