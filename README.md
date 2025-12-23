@@ -131,7 +131,7 @@ Démonstration de l'effet "Time Crystal" et du verrouillage de phase (Spin-Lock)
 
 ---
 
-Phi-compiler demo here : https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/
+Phi-compiler demo here : [![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/)
 
 ---
 
