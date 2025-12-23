@@ -74,8 +74,8 @@ Les composants sont organisés par dossiers locaux. Cliquez pour explorer.
 
 | Dossier | Description | Statut | Lien |
 | --- | --- | --- | --- |
-| [Languages/HELIX-PHI/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/HELIX-PHI) | HELIX-Φ - Langage spatial à double hélice (ADN Base-4) avec sécurité géométrique. | 🧬 Alpha | [whitepaper.tex](https://www.google.com/search?q=https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/HELIX-PHI/docs/whitepaper.tex) |
-| [Languages/LGL/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/LGL-Lichen-Glyph_Language) | LGL - Protocole spatial iconique pour agents IA (Voxel-native) et compression sémantique. | 🟢 V1.0 | [LGL_SPEC_V1.0.md](https://www.google.com/search?q=https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/LGL-Lichen-Glyph_Language/LGL_SPEC_V1.0.md) |
+| [Languages/HELIX-PHI/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/HELIX-PHI) | HELIX-Φ - Langage spatial à double hélice (ADN Base-4) avec sécurité géométrique. | 🧬 Alpha | [whitepaper.tex](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/HELIX-PHI/docs/whitepaper.tex) |
+| [Languages/LGL/](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/LGL-Lichen-Glyph_Language) | LGL - Protocole spatial iconique pour agents IA (Voxel-native) et compression sémantique. | 🟢 V1.0 | [LGL_SPEC_V1.0.md](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/LGL-Lichen-Glyph_Language/LGL_SPEC_V1.0.md) |
 
 ### 🔹 Architecture Système (The Machine)
 
