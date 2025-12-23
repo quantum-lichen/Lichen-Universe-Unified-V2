@@ -98,3 +98,4 @@ if __name__ == "__main__":
     print(f"VECTOR ID:    {result['vector_embedding']:.6f}")
     print(f"STATUS:       {result['integrity']}")
     print("="*40)
+---
