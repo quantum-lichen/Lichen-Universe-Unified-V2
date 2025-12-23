@@ -97,7 +97,6 @@ Les composants sont organisés par dossiers locaux. Cliquez pour explorer.
 
 ---
 
-Time cristal/spin lock like, error auto correcting effect geometricly, here : [![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-m98dnd996ujujewhwharot.streamlit.app/)
 
 ---
 
@@ -122,6 +121,13 @@ Tout code ou documentation généré pour Lichen DOIT respecter ces définitions
 | Latence I/O | 245 ms (Parsing) | 0.12 ms (Zero-Copy) | ×2000 🚀 |
 | Énergie | 100% (Baseline) | 32.5% (LES Optimized) | -60% ⚡ |
 | Résilience | Corruption possible | Indestructible (CRAID) | ∞ 🛡️ |
+
+---
+
+🧪 Preuve de Concept (Live Proof)
+Voir l'Auto-Guérison Géométrique en Temps Réel :
+
+Démonstration de l'effet "Time Crystal" et du verrouillage de phase (Spin-Lock) qui rend l'erreur mathématiquement impossible. :  [![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-m98dnd996ujujewhwharot.streamlit.app/)
 
 ---
 
