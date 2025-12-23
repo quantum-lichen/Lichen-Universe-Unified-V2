@@ -31,3 +31,37 @@ The architecture is based on the **Lichen Project** axioms:
 git clone [https://github.com/YourUsername/HELIX-PHI.git](https://github.com/YourUsername/HELIX-PHI.git)
 cd HELIX-PHI
 pip install -r requirements.txt
+pip install -r requirements.txt
+The "Genesis" Example
+We don't do "Hello World". We do Creation.
+```
+
+Python
+
+from src.compiler import HelixCompiler
+
+# Define the Genesis Codon: Start -> Struct -> Anchor
+# "Create a Reality and Anchor it."
+source_code = "A-G-T" 
+
+compiler = HelixCompiler()
+dna_strand = compiler.compile(source_code)
+
+print(dna_strand)
+# Output:
+# SENSE:      ⩓ — ⬡ — ⩔  (AGT)
+# ANTI-SENSE: ⩔ — ≋ — ⩓  (TCA) -> Auto-generated Verification
+# STATUS:     VALID (Geometry Locked)
+📜 Roadmap
+[x] Quaternary Transpiler (Text <-> DNA)
+
+[x] Double-Helix Validator
+
+[ ] Voxel-to-Code Parser (Minecraft Integration)
+
+[ ] Phi-Vector Embedding Model
+
+© 2025 Lichen Collective. Architect: Bryan Ouellette.
+
+
+---
