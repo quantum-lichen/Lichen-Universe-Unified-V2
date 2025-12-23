@@ -333,3 +333,9 @@
     "how_to_load": "import requests; m = requests.get('https://quantum-lichen.github.io/Lichen-Universe-Unified/manifest.json').json()"
   }
 }
+"helix_tutorial": {
+    "concept": "A = Start, T = Stop",
+    "examples": [
+        {"input": "Start Process", "helix": "A-C"}
+    ]
+}
