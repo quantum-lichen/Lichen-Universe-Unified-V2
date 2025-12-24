@@ -99,3 +99,4 @@ The Cognitive Entropy Minimization Law offers a rigorous framework for understan
 
 ### Terminology & Scope
 The term “law” in Cognitive Entropy Minimization Law (CEML) is used in an operational and heuristic sense, inspired by analogies with physical selection principles, not as a claim of a proven universal physical law. CEML is proposed as a candidate cognitive selection principle: a formal, testable, and falsifiable framework describing how intelligent systems may preferentially select informational structures under constraints of context, memory, and energy. Its validity is empirical and conditional, and it is intended to guide analysis, experimentation, and system design rather than to assert absolute epistemic truth.
+
