@@ -46,3 +46,4 @@ struct Universal_Atom_496 {
     next_block_offset: u16,  // Distance to child atom
     flags: u16               // Permissions
 }
+---
