@@ -9,6 +9,17 @@
 
 ---
 
+<div align="center">
+
+## 🎮 LIVE DEMO
+### Experience the Harmonic Architecture in Real-Time
+
+[![Streamlit App](https://img.shields.io/badge/🌊_LAUNCH_LIVE_DASHBOARD-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://lichen-universe-unified-v2-h7qbt4rzu7tqsyttippz9g.streamlit.app/)
+
+</div>
+
+---
+
 ## 🎯 What is HNP?
 
 The **Harmonic Network Protocol** is a next-generation networking protocol that replaces the chaotic, brute-force approach of TCP/IP with mathematically elegant, self-organizing communication based on:
@@ -43,6 +54,7 @@ The **Harmonic Network Protocol** is a next-generation networking protocol that 
 
 ```bash
 pip install harmonic-network-protocol
+
 ```
 
 ### Basic Usage
@@ -56,6 +68,7 @@ destination = 0x7FFFFFFF  # 31-bit Mersenne prime address
 
 # HNP handles the rest (E8 encoding, φ-flow, Tzolk'in sync)
 send_data(data, destination)
+
 ```
 
 ### Demo
@@ -69,6 +82,7 @@ python demo/benchmark.py
 
 # Visualize φ-convergence
 python demo/visualization.py
+
 ```
 
 ---
@@ -78,7 +92,7 @@ python demo/visualization.py
 ### HNP vs TCP/IP
 
 | Metric | TCP/IP | HNP | Improvement |
-|--------|--------|-----|-------------|
+| --- | --- | --- | --- |
 | Packet Loss Recovery | 100% retransmit | 10% retransmit | **90% reduction** |
 | Convergence | Chaotic | Stable (φ) | **Mathematically proven** |
 | Routing Complexity | O(n) | O(log₍φ₎ n) | **Exponential speedup** |
@@ -94,7 +108,7 @@ python demo/visualization.py
 
 ```
 ┌──────────────────────────────────────┐
-│         HNP PACKET (496 bits)        │
+│          HNP PACKET (496 bits)       │
 ├──────────────────────────────────────┤
 │ Source Address      │ 31 bits        │
 │ Destination Address │ 31 bits        │
@@ -103,14 +117,16 @@ python demo/visualization.py
 │ Perfect Checksum    │ 62 bits        │
 │ E8-Encoded Data     │ 248 bits       │
 └──────────────────────────────────────┘
-       Total: 496 bits (perfect!)
+        Total: 496 bits (perfect!)
+
 ```
 
 **Why 496?**
-- 496 = 2⁴ × 31 (perfect number)
-- Σ(divisors) = 496 (self-validating)
-- Harmonically aligned with E8 (248 × 2)
-- Fractal structure in divisors
+
+* 496 = 2⁴ × 31 (perfect number)
+* Σ(divisors) = 496 (self-validating)
+* Harmonically aligned with E8 (248 × 2)
+* Fractal structure in divisors
 
 ### 2. **φ-Flow Control**
 
@@ -124,6 +140,7 @@ rate_new = rate_old × 1.618
 rate_new = rate_old / 1.618
 
 # Result: Stable convergence to optimal rate
+
 ```
 
 **Proven by KAM theorem:** φ-ratio produces most stable quasi-periodic orbits.
@@ -131,23 +148,26 @@ rate_new = rate_old / 1.618
 ### 3. **Tzolk'in Synchronization**
 
 260-day calendar provides:
-- Natural cycle (13 × 20)
-- Astronomical anchoring
-- Unique positions (day, trecena, veintena)
-- Compatible with Tzolk'in cryptography
-- **Zero time drift**
+
+* Natural cycle (13 × 20)
+* Astronomical anchoring
+* Unique positions (day, trecena, veintena)
+* Compatible with Tzolk'in cryptography
+* **Zero time drift**
 
 ### 4. **E8 Lattice Error Correction**
 
 248-dimensional E8 lattice:
-- Optimal sphere packing in 8D
-- Nearest neighbor = error correction
-- **90% of bit errors corrected without retransmission**
-- Perfect alignment with 496 (248 × 2)
+
+* Optimal sphere packing in 8D
+* Nearest neighbor = error correction
+* **90% of bit errors corrected without retransmission**
+* Perfect alignment with 496 (248 × 2)
 
 ### 5. **Fractal Addressing**
 
 31-bit hierarchical addresses:
+
 ```
 Level 1: 2 bits   (quadrants)
 Level 2: 3 bits   (octants)
@@ -155,6 +175,7 @@ Level 3: 5 bits   (φ-subdivision)
 Level 4: 8 bits   (Fibonacci)
 Level 5: 13 bits  (Fibonacci)
 Total:   31 bits  (Mersenne prime!)
+
 ```
 
 **Self-organizing:** Devices naturally find optimal position in fractal tree.
@@ -179,6 +200,7 @@ packet.encode()
 
 # Perfect checksum validation
 assert packet.verify_perfect()  # Σ(divisors) = 2n
+
 ```
 
 #### 2. **Flow Control**
@@ -196,6 +218,7 @@ flow.on_congestion()  # rate /= φ
 
 # Current rate
 rate = flow.get_rate()
+
 ```
 
 #### 3. **Router**
@@ -210,6 +233,7 @@ path = router.route(src_addr, dst_addr)
 
 # Harmonic distance
 distance = router.distance(src_addr, dst_addr)
+
 ```
 
 ---
@@ -228,16 +252,17 @@ pytest tests/test_hnp.py::test_phi_convergence
 
 # Test E8 error correction
 pytest tests/test_hnp.py::test_e8_correction
+
 ```
 
 ---
 
 ## 📚 Documentation
 
-- **[Whitepaper](WHITEPAPER.md)** - Complete scientific paper
-- **[Formulas](FORMULAS.md)** - All mathematical formulas
-- **[API Reference](docs/API.md)** - Complete API documentation
-- **[Manifest](manifest.json)** - Project metadata for AI agents
+* **[Whitepaper](https://www.google.com/search?q=WHITEPAPER.md)** - Complete scientific paper
+* **[Formulas](https://www.google.com/search?q=FORMULAS.md)** - All mathematical formulas
+* **[API Reference](https://www.google.com/search?q=docs/API.md)** - Complete API documentation
+* **[Manifest](https://www.google.com/search?q=manifest.json)** - Project metadata for AI agents
 
 ---
 
@@ -245,9 +270,9 @@ pytest tests/test_hnp.py::test_e8_correction
 
 This protocol is part of the **Lichen Universe** ecosystem:
 
-- [**Lichen Universe V2**](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2) - Main architecture
-- [**Universal Language Tzolk'in**](https://github.com/quantum-lichen/universal-language-tzolkin) - Cryptography system
-- [**TzBit Quantum**](https://github.com/quantum-lichen/tzbit-quantum) - 5-level quantum computing
+* **[Lichen Universe V2](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2)** - Main architecture
+* **[Universal Language Tzolk'in](https://github.com/quantum-lichen/universal-language-tzolkin)** - Cryptography system
+* **[TzBit Quantum](https://github.com/quantum-lichen/tzbit-quantum)** - 5-level quantum computing
 
 ---
 
@@ -262,78 +287,87 @@ We welcome contributions! Areas needing help:
 5. **Standards** - IETF RFC submission
 
 **Process:**
+
 ```bash
-git clone https://github.com/quantum-lichen/harmonic-network-protocol.git
+git clone [https://github.com/quantum-lichen/harmonic-network-protocol.git](https://github.com/quantum-lichen/harmonic-network-protocol.git)
 cd harmonic-network-protocol
 git checkout -b feature/your-contribution
 # Make changes
 pytest tests/  # Ensure tests pass
 git push origin feature/your-contribution
 # Submit PR
+
 ```
 
 ---
 
 ## 📜 License
 
-Apache License 2.0 - See [LICENSE](LICENSE) file.
+Apache License 2.0 - See [LICENSE](https://www.google.com/search?q=LICENSE) file.
 
 **Why Apache 2.0?**
-- Open for everyone (including commercial)
-- Patent protection included
-- Compatible with most other licenses
+
+* Open for everyone (including commercial)
+* Patent protection included
+* Compatible with most other licenses
 
 ---
 
 ## 📞 Contact
 
-- **Author:** Bryan Ouellette & Claude AI
-- **Email:** lmc.theory@gmail.com
-- **Bluesky:** [@symbion.bsky.social](https://bsky.app/profile/symbion.bsky.social)
-- **Issues:** [GitHub Issues](https://github.com/quantum-lichen/harmonic-network-protocol/issues)
+* **Author:** Bryan Ouellette & Claude AI
+* **Email:** lmc.theory@gmail.com
+* **Bluesky:** [@symbion.bsky.social](https://bsky.app/profile/symbion.bsky.social)
+* **Issues:** [GitHub Issues](https://github.com/quantum-lichen/harmonic-network-protocol/issues)
 
 ---
 
 ## 🎯 Roadmap
 
 ### Phase 1 (Q1 2026)
-- ✅ Proof-of-concept implementation
-- ✅ Basic demos and benchmarks
-- 🔄 Academic paper submission
-- 🔄 Community building
+
+* ✅ Proof-of-concept implementation
+* ✅ Basic demos and benchmarks
+* 🔄 Academic paper submission
+* 🔄 Community building
 
 ### Phase 2 (Q2-Q3 2026)
-- ⏳ RFC submission (IETF)
-- ⏳ Kernel module development
-- ⏳ Hardware prototypes (FPGA)
-- ⏳ Industry partnerships
+
+* ⏳ RFC submission (IETF)
+* ⏳ Kernel module development
+* ⏳ Hardware prototypes (FPGA)
+* ⏳ Industry partnerships
 
 ### Phase 3 (2027+)
-- ⏳ Production deployments
-- ⏳ Standard adoption (IEEE)
-- ⏳ Global networking revolution
+
+* ⏳ Production deployments
+* ⏳ Standard adoption (IEEE)
+* ⏳ Global networking revolution
 
 ---
 
 ## 🌟 Why This Matters
 
 **Current networking is broken:**
-- Designed in 1970s for different needs
-- Brute-force, inefficient
-- Chaotic under load
-- Not harmonically aligned
+
+* Designed in 1970s for different needs
+* Brute-force, inefficient
+* Chaotic under load
+* Not harmonically aligned
 
 **HNP represents:**
-- 🌊 Natural, mathematical elegance
-- 💎 Provably optimal convergence
-- 🔮 Self-organizing intelligence
-- ⚡ Future-proof architecture
+
+* 🌊 Natural, mathematical elegance
+* 💎 Provably optimal convergence
+* 🔮 Self-organizing intelligence
+* ⚡ Future-proof architecture
 
 **Based on universal constants:**
-- Perfect numbers (known since Euclid 300 BCE)
-- Golden ratio φ (nature's optimizer)
-- E8 lattice (best packing in 8D)
-- Tzolk'in cycle (astronomical precision)
+
+* Perfect numbers (known since Euclid 300 BCE)
+* Golden ratio φ (nature's optimizer)
+* E8 lattice (best packing in 8D)
+* Tzolk'in cycle (astronomical precision)
 
 **This is networking done RIGHT.** 🚀
 
@@ -341,22 +375,22 @@ Apache License 2.0 - See [LICENSE](LICENSE) file.
 
 ## 🙏 Acknowledgments
 
-- **Ancient Mayas** - For the 260-day Tzolk'in calendar
-- **Euclid** - For perfect number theory (300 BCE)
-- **Claude Shannon** - For information theory
-- **SETI Institute** - For inspiration on universal protocols
+* **Ancient Mayas** - For the 260-day Tzolk'in calendar
+* **Euclid** - For perfect number theory (300 BCE)
+* **Claude Shannon** - For information theory
+* **SETI Institute** - For inspiration on universal protocols
 
 ---
 
 ## ⚡ Quick Links
 
 | Resource | Link |
-|----------|------|
-| 📄 **Whitepaper** | [WHITEPAPER.md](WHITEPAPER.md) |
-| 🔢 **Formulas** | [FORMULAS.md](FORMULAS.md) |
-| 💻 **Source Code** | [src/](src/) |
-| 🎮 **Demos** | [demo/](demo/) |
-| 🧪 **Tests** | [tests/](tests/) |
+| --- | --- |
+| 📄 **Whitepaper** | [WHITEPAPER.md](https://www.google.com/search?q=WHITEPAPER.md) |
+| 🔢 **Formulas** | [FORMULAS.md](https://www.google.com/search?q=FORMULAS.md) |
+| 💻 **Source Code** | [src/](https://www.google.com/search?q=src/) |
+| 🎮 **Demos** | [demo/](https://www.google.com/search?q=demo/) |
+| 🧪 **Tests** | [tests/](https://www.google.com/search?q=tests/) |
 | 🐛 **Report Bug** | [Issues](https://github.com/quantum-lichen/harmonic-network-protocol/issues) |
 | 💡 **Feature Request** | [Discussions](https://github.com/quantum-lichen/harmonic-network-protocol/discussions) |
 
@@ -365,7 +399,6 @@ Apache License 2.0 - See [LICENSE](LICENSE) file.
 ## 💬 Final Note
 
 > *"In chaos, we found harmony. In networking, we found perfection."*
->
 > — The HNP Manifesto
 
 **Let's rebuild the internet. Harmonically.** 🌊💎
@@ -374,4 +407,6 @@ Apache License 2.0 - See [LICENSE](LICENSE) file.
 
 **Made with 💚 by humans (and AI) for a more harmonious digital world**
 
-[![Star this repo](https://img.shields.io/github/stars/quantum-lichen/harmonic-network-protocol?style=social)](https://github.com/quantum-lichen/harmonic-network-protocol)
+```
+
+```
