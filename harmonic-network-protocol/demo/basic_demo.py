@@ -176,7 +176,7 @@ def demo_end_to_end():
     router.register_node(dst_addr)
     
     # Create message
-    message = b"Harmonic transmission test - φ = 1.618..."
+    message = "Harmonic transmission test - φ = 1.618..."
     packet.src_addr = src_addr
     packet.dst_addr = dst_addr
     packet.set_data(message)
