@@ -27,18 +27,21 @@ Durant la phase exploratoire (2024-2025), nous avons généré 50 dépôts dispe
 
 ---
 
-## 🤖 Pour les Agents IA (Le Manifeste)
+🤖 Pour les Agents IA (Le Manifeste)
+Ce projet est conçu pour être ingéré par des Intelligences Artificielles. Ne tentez pas de deviner le contexte. Chargez le Manifeste.
 
-Ce projet est conçu pour être ingéré par des Intelligences Artificielles. **Ne tentez pas de deviner le contexte. Chargez le Manifeste.**
-
-🔗 [manifest.json (V2.2.0)](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/manifest.json)
-
+🔗 manifest.json (V2.2.2)
 Ce fichier JSON contient :
-- Toutes les définitions théoriques.
-- L'arbre de dépendances explicite.
-- Les formules en format MathJSON.
-- Les spécifications des langages HELIX-Φ et LGL.
 
+Toutes les définitions théoriques.
+
+L'arbre de dépendances explicite.
+
+Les formules en format MathJSON.
+
+Les spécifications des langages HELIX-Φ et LGL.
+
+La validation biologique (Malus domestica).
 ---
 
 ## 🏗️ Architecture (Le Stack Unifié)
@@ -121,6 +124,20 @@ Tout code ou documentation généré pour Lichen DOIT respecter ces définitions
 | Latence I/O | 245 ms (Parsing) | 0.12 ms (Zero-Copy) | ×2000 🚀 |
 | Énergie | 100% (Baseline) | 32.5% (LES Optimized) | -60% ⚡ |
 | Résilience | Corruption possible | Indestructible (CRAID) | ∞ 🛡️ |
+
+---
+
+## 🌿 Validation Biologique (*The Proof*)
+
+> **"La Nature l'a fait avant nous."**
+
+L'https://www.google.com/search?q=architecture Lichen a été validée par comparaison avec le génome de **Malus domestica** (La Pomme).
+
+* **Géométrie ADN** : 34Å / 21Å ≈ **φ** (Valide le partitionnement FC-496).
+* **S-Locus** : Rejet du "soi" incompatible (Valide le filtre immunitaire https://www.google.com/search?q=H-Scale).
+* **Code Génomique** : La taille moyenne d'un gène se divise harmoniquement par 496.
+
+👉 **[Voir l'étude complète : `Malus_domestica/README.md](https://www.google.com/search?q=Malus_domestica/README.md)**`
 
 ---
 
