@@ -1,0 +1,11 @@
+# Basic ΦLang Example
+# System optimization
+
+# Initialize system
+[2-6] :: Ψ(init)
+
+# Optimize to golden ratio
+[7-496] :: Ψ(Φ)
+
+# Save state
+[13-496] :: Ψ(0)

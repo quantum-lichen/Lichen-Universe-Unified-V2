@@ -1,0 +1,14 @@
+# AI Chat Example
+# Multi-agent communication
+
+# Agent A initiates
+[11-6] :: Ψ(A→B)
+
+# Exchange data
+[3-28] :: Ψ(data_transfer)
+
+# Optimize result
+[7-496] :: Ψ(Φ)
+
+# Confirm
+[13-6] :: Ψ(ACK)
