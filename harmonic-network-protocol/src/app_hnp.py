@@ -4,12 +4,23 @@ import time
 import os
 
 # ==========================================
-# CONFIGURATION DU CHEMIN (PATH)
+# 🔧 CONFIGURATION ROBUSTE DU PATH
 # ==========================================
-# On s'assure que Python trouve tes modules HNP dans le dossier '../src' ou 'src'
+# Cette section est critique pour Streamlit Cloud.
+# Elle s'assure que Python trouve tes modules (hnp_packet, etc.) 
+# peu importe où ils sont rangés.
+
+# 1. Dossier où se trouve ce script (app_hnp.py)
 current_dir = os.path.dirname(os.path.abspath(__file__))
-src_path = os.path.join(current_dir, '../src') # Ajuste si nécessaire
-sys.path.insert(0, src_path)
+
+# 2. Ajout au path système
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+# 3. Sécurité : on ajoute aussi le dossier parent (au cas où src/ soit un sous-dossier)
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
 
 # ==========================================
 # IMPORTATION DES MODULES HNP
@@ -18,10 +29,10 @@ try:
     from hnp_packet import HNPPacket
     from hnp_flow import HNPFlowControl
     from hnp_router import HNPRouter
-except ImportError:
-    st.error("⚠️ ERREUR CRITIQUE : Impossible d'importer les modules HNP.")
-    st.info(f"Le système cherche dans : {src_path}")
-    st.warning("Assurez-vous que le dossier 'src' contenant hnp_packet.py, etc. est bien accessible.")
+except ImportError as e:
+    st.error(f"⚠️ ERREUR CRITIQUE D'IMPORTATION : {e}")
+    st.info(f"Dossier analysé : {current_dir}")
+    st.warning("Assurez-vous que hnp_packet.py, hnp_flow.py et hnp_router.py sont dans le même dossier que ce script.")
     st.stop()
 
 # ==========================================
@@ -229,7 +240,7 @@ with tab4:
         # Prepare packet
         packet.src_addr = src_addr
         packet.dst_addr = dst_addr
-        packet.set_data(msg_to_send) # correction ici: pas besoin d'encoder si set_data le gère, sinon .encode()
+        packet.set_data(msg_to_send) 
         packet.encode()
         
         # Route
