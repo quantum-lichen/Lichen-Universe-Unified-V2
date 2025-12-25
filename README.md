@@ -134,10 +134,10 @@ Tout code ou documentation généré pour Lichen DOIT respecter ces définitions
 Le Lichen a été validée par comparaison avec le génome de **Malus domestica** (La Pomme).
 
 * **Géométrie ADN** : 34Å / 21Å ≈ **φ** (Valide le partitionnement FC-496).
-* **S-Locus** : Rejet du "soi" incompatible (Valide le filtre immunitaire https://www.google.com/search?q=H-Scale).
+* **S-Locus** : Rejet du "soi" incompatible (Valide le filtre immunitaire).
 * **Code Génomique** : La taille moyenne d'un gène se divise harmoniquement par 496.
 
-👉 **[Voir l'étude complète : `([https://www.google.com/search?q=Malus_domestica/README.md](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Malus_domestica))**`
+[![Malus Domestica](https://img.shields.io/badge/🍎_MALUS_DOMESTICA-VOIR_L'ÉTUDE_COMPLÈTE-D00000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Malus_domestica)
 
 ---
 
