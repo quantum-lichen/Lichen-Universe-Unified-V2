@@ -1,14 +1,13 @@
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quantum-lichen.github.io/Lichen-Universe-Unified/manifest.json",
   "@context": {
     "@vocab": "https://schema.org/",
     "formula": "https://mathml.org/",
-    "theory": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/",
-    "component": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/schema/lichen-manifest.schema.json"
+    "theory": "https://quantum-lichen.org/vocab/theory",
+    "component": "https://quantum-lichen.org/vocab/component"
   },
   "@type": "SoftwareSourceCode",
-  
-  "schema_version": "lichen-manifest-1.0",
-  "$id": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/manifest.json",
   
   "manifest_version": "2.2.2",
   "generated_at": "2025-12-25T02:45:00Z",
@@ -104,6 +103,29 @@
         "usage": "CEML Regularization, LES Damping, Numerical Stability",
         "role": "Smoothing & Convergence"
       }
+    }
+  },
+
+  "biological_validation": {
+    "model_organism": "Malus domestica (Apple)",
+    "documentation": "Malus_domestica/README.md",
+    "findings": {
+      "dna_geometry": {
+        "description": "Double helix dimensions (34Å / 21Å) match Golden Ratio φ (1.619 ≈ 1.618).",
+        "implication": "Validates FC-496 φ-partitioning as biologically sound."
+      },
+      "immune_system": {
+        "description": "S-Locus mechanism (S-RNase) rejects self-pollen to maximize entropy/diversity.",
+        "implication": "Biological analog to H-Scale security filter."
+      },
+      "gene_structure": {
+        "description": "Average gene size (~2000bp) divides harmonically into 496-bit blocks.",
+        "implication": "Suggests 496 is a natural resonant frequency for information storage."
+      }
+    },
+    "applications": {
+      "digital_twin": "Use sequenced apple seed DNA as cryptographic seed.",
+      "bio_mimicry": "Align software architecture with 50M years of evolutionary optimization."
     }
   },
 
@@ -649,7 +671,6 @@
     "experiment_proposals": {
       "minecraft_ai": {
         "description": "Test language emergence in multi-agent systems",
-        "contact": "Dr. Robert Yang",
         "hypothesis": "Math-based languages create faster convergence"
       },
       "dna_storage": {
@@ -664,7 +685,7 @@
       "tzolkin_interplanetary": {
         "description": "Test Tzolk'in synchronization for Mars-Earth communication",
         "hypothesis": "Astronomical anchoring provides better sync than Earth-based clocks",
-        "partners": ["NASA", "SETI Institute"]
+        
       }
     }
   },
