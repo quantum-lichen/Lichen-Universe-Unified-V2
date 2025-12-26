@@ -9,7 +9,7 @@
 
 **Manifest** | **Status** | **License**
 :---: | :---: | :---:
-[V2.2.0](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/manifest.json) | Research Active | Apache-2.0
+[V2.3.0](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/manifest.json) | Research Active | Apache-2.0
 
 Lichen Universe Unified est la **"Source de Vérité Unique"** (Single Source of Truth) de l'écosystème Lichen. Ce dépôt centralise, standardise et unifie toutes les architectures (UICT, CEML, CRAID, SynapseΩ) sous une seule ontologie rigoureuse.
 
@@ -30,7 +30,7 @@ Durant la phase exploratoire (2024-2025), nous avons généré 50 dépôts dispe
 🤖 Pour les Agents IA (Le Manifeste)
 Ce projet est conçu pour être ingéré par des Intelligences Artificielles. Ne tentez pas de deviner le contexte. Chargez le Manifeste.
 
-🔗 manifest.json (V2.2.2)
+🔗 manifest.json (V2.3)
 Ce fichier JSON contient :
 
 Toutes les définitions théoriques.
@@ -179,20 +179,10 @@ Lichen Universe est un projet open-source sous licence **Apache 2.0**. Nous acce
 
 ## 🧪 Statut épistémologique (CEML, LES, H-Scale)
 
-Les cadres suivants sont utilisés dans Lichen Universe :
+CEML, LES et H-Scale sont des modèles opératoires, pas des vérités absolues.
 
-- **CEML (Cognitive Entropy Minimization Law)**  
-  CEML ne vérifie pas la “vérité” d’une affirmation, mais la cohérence d’un état cognitif par rapport à un contexte donné.  
-  La formule \(J(s) = \mathcal{C}(s|\Omega) / (H(s) + \varepsilon)\) doit être comprise comme un *modèle d’observation* du comportement de systèmes cognitifs (humains ou IA), pas comme une loi physique fondamentale. 
+Ils servent à évaluer la cohérence, l’entropie et l’harmonie d’un système dans un contexte donné,
+pas à prouver une loi universelle du réel.
 
-- **LES (Low-Entropy Spiral)**  
-  LES décrit un attracteur où l’entropie interne diminue tandis que l’énergie de surface augmente.  
-  Là encore, il s’agit d’un cadre phénoménologique pour caractériser certains régimes dynamiques (exploration/exploitation), pas d’une “loi de la nature” au sens strict.
-
-- **H-Scale (Harmonic Scale)**  
-  H-Scale est une métrique éthique vectorielle pour évaluer l’équilibre d’une action ou d’un résultat (cohérence, énergie utile, résonance, durabilité).  
-  Elle fournit un critère opérationnel (par exemple seuil ℋ ≥ 0.618 pour accepter une action ΦLang), mais ne garantit pas une vérité morale absolue. 
-
-En résumé : ces cadres sont des **modèles** et des **heuristiques structurées** pour guider la sélection cognitive et éthique dans Lichen. Ils mesurent la cohérence, l’entropie et l’harmonie dans un contexte donné, mais ne prétendent pas détenir une vérité ultime sur le réel.
-
-```
+Utilisés comme heuristiques structurées, ils guident la sélection cognitive et éthique
+sans prétendre détenir la vérité ultime.
