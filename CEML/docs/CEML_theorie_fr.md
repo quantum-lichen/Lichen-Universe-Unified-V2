@@ -98,3 +98,4 @@ La Loi de Minimisation de l'Entropie Cognitive offre un cadre rigoureux pour com
 
 ### Terminologie et portée
 Le terme « loi » dans la Loi de Minimisation de l’Entropie Cognitive (LMC) est employé dans un sens opérationnel et heuristique, par analogie avec des principes de sélection issus de la physique, et non comme l’affirmation d’une loi physique universelle démontrée. La LMC est proposée comme un principe candidat de sélection cognitive : un cadre formel, testable et falsifiable, décrivant la manière dont des systèmes intelligents peuvent préférentiellement sélectionner des structures d’information sous contraintes de contexte, de mémoire et d’énergie. Sa validité est empirique et conditionnelle, et elle vise à orienter l’analyse, l’expérimentation et la conception de systèmes, plutôt qu’à garantir une vérité épistémique absolue.
+---
