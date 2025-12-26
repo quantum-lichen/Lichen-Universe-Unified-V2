@@ -1,5 +1,12 @@
+import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+
+# Configuration de la page Streamlit
+st.set_page_config(page_title="Mandala 496", layout="centered")
+
+st.title("🌌 Mandala 496 (E8×E8)")
+st.write("Visualisation basée sur les constantes φ et π.")
 
 # Constantes mathématiques
 phi = (1 + np.sqrt(5)) / 2  # Nombre d'or
@@ -18,8 +25,8 @@ def generate_496_mandala():
     angles = np.linspace(0, 2 * pi, 496, endpoint=False)
 
     # Initialisation de la figure
-    plt.figure(figsize=(12, 12), facecolor='black')
-    ax = plt.gca()
+    # Note: On crée fig et ax explicitement pour Streamlit
+    fig, ax = plt.subplots(figsize=(12, 12), facecolor='black')
     ax.set_facecolor('black')
     ax.set_aspect('equal')
     ax.axis('off')
@@ -41,22 +48,24 @@ def generate_496_mandala():
 
         # Couleur des points (alternance doré et argenté)
         color = 'gold' if i % 2 == 0 else 'silver'
-        plt.scatter(x, y, color=color, s=10, alpha=0.8)
+        ax.scatter(x, y, color=color, s=10, alpha=0.8)
 
     # Ajouter des motifs liés à φ et π
     for i in range(5):  # 5 motifs (liés au pentagone et φ)
         angle = 2 * pi * i / 5
         x = outer_radius * np.cos(angle)
         y = outer_radius * np.sin(angle)
-        plt.scatter(x, y, color='red', s=50, alpha=0.9, marker='o')
+        ax.scatter(x, y, color='red', s=50, alpha=0.9, marker='o')
 
-    # Titre et légende
-    plt.title(f"Mandala 496 (E8×E8, φ, π)\nRatio: {ratio:.3f}", color='white', fontsize=14)
-    plt.figtext(0.5, 0.01, f"φ ≈ {phi:.5f}, π ≈ {pi:.5f}", color='white', ha='center', fontsize=10)
+    # Titre et légende (directement sur le plot)
+    ax.set_title(f"Mandala 496 (E8×E8, φ, π)\nRatio: {ratio:.3f}", color='white', fontsize=14)
+    plt.figtext(0.5, 0.1, f"φ ≈ {phi:.5f}, π ≈ {pi:.5f}", color='white', ha='center', fontsize=10)
 
-    # Sauvegarder et afficher
-    plt.savefig("mandala_496.png", dpi=300, bbox_inches='tight', facecolor='black')
-    plt.show()
+    # AFFICHAGE STREAMLIT (Au lieu de plt.show)
+    st.pyplot(fig)
 
 # Générer le mandala
-generate_496_mandala()
+if st.button('Générer le Mandala'):
+    generate_496_mandala()
+else:
+    generate_496_mandala() # Générer au chargement par défaut
