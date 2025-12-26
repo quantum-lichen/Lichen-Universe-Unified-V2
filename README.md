@@ -177,5 +177,22 @@ Lichen Universe est un projet open-source sous licence **Apache 2.0**. Nous acce
 > *"Aligning computation with the laws of the universe."* 🌀
 
 ```
+## 🧪 Statut épistémologique (CEML, LES, H-Scale)
+
+Les cadres suivants sont utilisés dans Lichen Universe :
+
+- **CEML (Cognitive Entropy Minimization Law)**  
+  CEML ne vérifie pas la “vérité” d’une affirmation, mais la cohérence d’un état cognitif par rapport à un contexte donné.  
+  La formule \(J(s) = \mathcal{C}(s|\Omega) / (H(s) + \varepsilon)\) doit être comprise comme un *modèle d’observation* du comportement de systèmes cognitifs (humains ou IA), pas comme une loi physique fondamentale. [attached_file:1][web:42]
+
+- **LES (Low-Entropy Spiral)**  
+  LES décrit un attracteur où l’entropie interne diminue tandis que l’énergie de surface augmente.  
+  Là encore, il s’agit d’un cadre phénoménologique pour caractériser certains régimes dynamiques (exploration/exploitation), pas d’une “loi de la nature” au sens strict. [attached_file:1][web:43]
+
+- **H-Scale (Harmonic Scale)**  
+  H-Scale est une métrique éthique vectorielle pour évaluer l’équilibre d’une action ou d’un résultat (cohérence, énergie utile, résonance, durabilité).  
+  Elle fournit un critère opérationnel (par exemple seuil ℋ ≥ 0.618 pour accepter une action ΦLang), mais ne garantit pas une vérité morale absolue. [attached_file:1]
+
+En résumé : ces cadres sont des **modèles** et des **heuristiques structurées** pour guider la sélection cognitive et éthique dans Lichen. Ils mesurent la cohérence, l’entropie et l’harmonie dans un contexte donné, mais ne prétendent pas détenir une vérité ultime sur le réel.
 
 ```
