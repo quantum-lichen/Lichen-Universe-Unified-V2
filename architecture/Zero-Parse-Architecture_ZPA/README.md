@@ -4,8 +4,16 @@
 
 [![Demo App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lichen-universe-unified-v2-fyk9axsckjfhcbdxwx846k.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=Streamlit&logoColor=white)](https://streamlit.io)
+
+> **"Le futur de l'informatique n'est pas de lire des données plus vite, mais d'arrêter de les lire pour commencer à les utiliser instantanément."**
+
+---
+
+## 🎮 Démonstration Live
+
+👉 **[ACCÉDER AU DASHBOARD ZPA (High-Performance Demo)](https://lichen-universe-unified-v2-fyk9axsckjfhcbdxwx846k.streamlit.app/)** 👈
 
 ---
 
@@ -17,7 +25,6 @@
 - [Architecture](#architecture)
 - [Installation](#installation)
 - [Utilisation](#utilisation)
-- [Démonstration](#démonstration)
 - [Contributions](#contributions)
 - [Licence](#licence)
 
