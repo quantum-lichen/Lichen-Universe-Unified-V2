@@ -77,3 +77,4 @@ class MockBus:
 if __name__ == "__main__":
     oracle = UHFSTapeReader(MockBus())
     oracle.run_cycle(1000)
+---
