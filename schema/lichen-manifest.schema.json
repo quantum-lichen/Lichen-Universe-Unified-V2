@@ -335,16 +335,3 @@
 
   "additionalProperties": true
 }
-```
-
----
-
-## 📋 **INSTRUCTIONS DE DÉPLOIEMENT:**
-
-### **Étape 1: Structure de fichiers**
-```
-ton-repo/
-├── manifest.json              ← FICHIER 1 (copie-colle ci-dessus)
-├── schema/
-│   └── lichen-manifest.schema.json  ← FICHIER 2 (copie-colle ci-dessus)
-└── ... (autres fichiers)
