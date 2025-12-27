@@ -26,3 +26,4 @@ Contrairement au JSON (mou, variable, coûteux à parser), le FC-496 est "dur" (
 * **`specs/bit_structure.md`** : La carte mémoire précise (Bitwise Map).
 * **`FORMULAS.md`** : Les équations de partitionnement.
 * **`poc/atom_builder.py`** : Script de génération de cellules valides.
+---
