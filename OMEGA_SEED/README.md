@@ -36,7 +36,7 @@ Oublie les transistors gravés en lignes droites. L'Omega-Seed utilise une archi
 
 ### II. LE SANG : LE FORMAT GKF-496 (GÉNOME COMPUTATIONNEL)
 
-Tu as mentionné le GKF-496. Dans l'Omega-Seed, ce n'est pas juste un format de fichier. C'est la **mémoire vive**.
+Le GKF-496. Dans l'Omega-Seed, ce n'est pas juste un format de fichier. C'est la **mémoire vive**.
 
 * **L'ADN Numérique (Double Hélice )**
 * Toute donnée est stockée sous forme de double hélice virtuelle.
