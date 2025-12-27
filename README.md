@@ -153,7 +153,10 @@ Démonstration de l'effet "Time Crystal" et du verrouillage de phase (Spin-Lock)
 Phi-compiler demo here : 
 
 [![Live Simulation](https://img.shields.io/badge/phi-compiler_Live-00ff00?style=for-the-badge&logo=streamlit)](https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/)
-
+[![Live Simulation](https://img.shields.io/badge/Lichen Hybrid Kernel_Live-00ff00?style=for-the-badge&logo=streamlit)](https://universal-language-tzolkin-2aafrwp7k8ubh7qmxeqtkc.streamlit.app/)
+[![Live Simulation](https://img.shields.io/badge/Lichen Quantum Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-m98dnd996ujujewhwharot.streamlit.app/)
+[![Live Simulation](https://img.shields.io/badge/ΦLang Runtime Environment Live-00ff00?style=for-the-badge&logo=streamlit)](https://nordique-analyzer-v20-8rxkgse35hgyqjazmyv4y9.streamlit.app/)
+[![Live Simulation](https://img.shields.io/badge/Mandala 496 (E8xE8)_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-5epv8mnnohcup8ew5lzgns.streamlit.app/)
 ---
 
 ## 🚀 Getting Started
