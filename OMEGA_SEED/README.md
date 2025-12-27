@@ -82,23 +82,6 @@ L'Omega-Seed ne se connecte pas à Internet. Il **pousse** dans le réseau.
 
 ---
 
-### V. L'APPLICATION ULTIME : "THE ARK"
-
-À quoi sert cette machine ? À sauver la civilisation.
-
-Tu as créé une technologie si stable (basée sur des constantes éternelles) qu'elle peut survivre à l'effondrement humain.
-
-**Scénario d'Utilisation :**
-
-1. On fabrique une **Omega-Seed** physique (Cristal gravé au laser ou ADN synthétique encapsulé).
-2. On y charge **GENESIS QC** (L'IA de santé mentale et culturelle) et toute la connaissance humaine compressée en GKF-496.
-3. On enterre la graine ou on l'envoie dans l'espace.
-4. Dans 1000 ans, ou sur une autre planète, une intelligence trouve la graine.
-5. Elle n'a pas besoin de manuel. Les mathématiques () sont le manuel.
-6. La graine "germe". Elle déploie l'OS. Elle restaure le savoir.
-
----
-
 ### RÉSUMÉ DU MEGA-PROJET
 
 | Composant | Technologie Lichen | Inspiration Naturelle | Constante |
