@@ -4,192 +4,257 @@ import struct
 import os
 import time
 import random
+from datetime import datetime
 
 # ==============================================================================
-# CONFIGURATION ET FORMATS
+# CONFIGURATION DU CORTEX (Structure de l'Engramme)
 # ==============================================================================
-# Format: [ID: 8 bytes (Q)], [Montant: 8 bytes (d)], [Timestamp: 8 bytes (Q)]
-STRUCT_FMT = "QdQ" 
+# Structure : [Timestamp (8)] + [Score EHE (4)] + [Vecteur 4D (16)] + [Texte (256)]
+# Q = unsigned long long (8 bytes)
+# f = float (4 bytes)
+# 256s = string de 256 bytes
+VECTOR_DIM = 4 
+TEXT_MAX_LEN = 256
+STRUCT_FMT = f"Qf{VECTOR_DIM}f{TEXT_MAX_LEN}s"
 STRUCT_SIZE = struct.calcsize(STRUCT_FMT)
-DB_FILENAME = "zeroparse_storage.db"
+CORTEX_FILE = "lichen_cortex.bin"
 
-# Configuration de la page Streamlit
 st.set_page_config(
-    page_title="ZeroParse Demo",
-    page_icon="🚀",
-    layout="wide"
+    page_title="Lichen Cortex ZPA",
+    page_icon="🧠",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # ==============================================================================
-# CLASSES BACKEND (Logique pure)
+# CLASSES DU CORTEX (BACKEND ZPA)
 # ==============================================================================
 
-class ZeroParseCompiler:
+class LichenCortexCompiler:
     """
-    Transforme des données en un blob binaire isomorphe à la RAM.
+    Le 'Sommeil' de l'IA : Consolide les souvenirs en mémoire long terme binaire.
     """
     @staticmethod
-    def compile(data_list, output_file):
-        start_time = time.time()
+    def consolidate(memories, output_file):
+        start = time.perf_counter()
         
+        # Mode "append" (ab) pour ajouter des souvenirs sans écraser l'histoire
+        # Note: Pour simplifier la lecture ZPA ici, on va réécrire le fichier complet
+        # dans une vraie prod, on ferait de l'append pur.
         with open(output_file, "wb") as f:
-            # HEADER: Nombre d'éléments (8 bytes)
-            f.write(struct.pack("Q", len(data_list)))
+            # HEADER: Nombre de souvenirs (8 bytes)
+            f.write(struct.pack("Q", len(memories)))
             
-            # BODY: Données contiguës
-            for item in data_list:
-                packed_data = struct.pack(STRUCT_FMT, item['id'], item['amount'], item['timestamp'])
-                f.write(packed_data)
+            for mem in memories:
+                # 1. Encodage du texte (utf-8 + padding pour atteindre 256 bytes exacts)
+                # ljust ajoute des bytes nuls (\x00) à la fin pour remplir
+                text_bytes = mem['text'].encode('utf-8')[:TEXT_MAX_LEN].ljust(TEXT_MAX_LEN, b'\x00')
                 
-        end_time = time.time()
+                # 2. Packing Binaire
+                packed = struct.pack(STRUCT_FMT, 
+                                     mem['timestamp'], 
+                                     mem['emotional_score'], 
+                                     *mem['vector'], 
+                                     text_bytes)
+                f.write(packed)
+                
+        end = time.perf_counter()
         return {
-            "duration": (end_time - start_time) * 1000, # ms
+            "duration": (end - start) * 1000,
             "size": os.path.getsize(output_file),
-            "count": len(data_list)
+            "count": len(memories)
         }
 
-class ZeroParseRuntime:
+class LichenCortexRuntime:
     """
-    Runtime Zero-Copy via MMAP.
+    L'Hippocampe Actif : Accès instantané aux souvenirs sans parsing.
     """
     def __init__(self, db_file):
         if not os.path.exists(db_file):
-            raise FileNotFoundError(f"Base de données '{db_file}' introuvable.")
-            
+            raise FileNotFoundError("Cortex vide.")
+        
         self.f = open(db_file, "r+b")
+        # MMAP: On map tout le fichier en mémoire virtuelle
         self.mm = mmap.mmap(self.f.fileno(), 0)
-        self.base_addr = id(self.mm)
-        
-    def get_total_count(self):
-        # Lecture des 8 premiers octets
-        # unpack_from retourne un tuple, on veut le premier élément
+    
+    def total_memories(self):
+        # Lecture des 8 premiers octets (Header)
         return struct.unpack_from("Q", self.mm, 0)[0]
+    
+    def recall(self, index):
+        """ Rappel d'un souvenir spécifique par pointeur direct """
+        count = self.total_memories()
+        if index >= count: raise IndexError("Souvenir non formé.")
         
-    def get_record(self, index):
-        count = self.get_total_count()
-        if index >= count or index < 0:
-            raise IndexError(f"Index {index} hors limites (Max: {count-1})")
-            
-        # Offset = Header (8 bytes) + (Index * Taille Struct)
+        # Calcul de l'adresse mémoire exacte
         offset = 8 + (index * STRUCT_SIZE)
         
-        # Lecture ciblée via slicing du buffer mmap (Zero-Copy effectif en lecture)
-        # Note: struct.unpack demande des bytes, slicing mmap donne des bytes.
-        record_bytes = self.mm[offset : offset + STRUCT_SIZE]
-        unpacked = struct.unpack(STRUCT_FMT, record_bytes)
+        # Lecture Zero-Copy (Slicing)
+        data = self.mm[offset : offset + STRUCT_SIZE]
+        unpacked = struct.unpack(STRUCT_FMT, data)
         
-        # CORRECTION ICI: Q, d, Q donne indices 0, 1, 2
+        # Reconstruction de l'objet
+        timestamp = unpacked[0]
+        emotion = unpacked[1]
+        vector = list(unpacked[2 : 2 + VECTOR_DIM]) # Les floats du vecteur
+        text_raw = unpacked[2 + VECTOR_DIM]         # Le texte binaire
+        
+        # Nettoyage du texte (enlever les bytes nuls du padding)
+        text = text_raw.decode('utf-8', errors='ignore').rstrip('\x00')
+        
         return {
-            "id": unpacked[0],
-            "amount": unpacked[1],
-            "timestamp": unpacked[2]
+            "timestamp": timestamp,
+            "date": datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S'),
+            "score_ehe": emotion,
+            "vector": vector,
+            "content": text
         }
-        
+
     def close(self):
-        self.mm.close()
-        self.f.close()
+        if not self.mm.closed:
+            self.mm.close()
+        if not self.f.closed:
+            self.f.close()
 
 # ==============================================================================
 # INTERFACE STREAMLIT
 # ==============================================================================
 
-st.title("🚀 Zero-Parse / Zero-Copy Architecture")
+# --- SIDEBAR ---
+with st.sidebar:
+    st.image("https://img.icons8.com/dusk/64/000000/brain.png") 
+    st.title("Lichen Cortex")
+    st.markdown("---")
+    st.caption("Architecture ZPA v2.0")
+    st.caption("État: **Symbiotique**")
+    
+    st.markdown("### 🛠️ Contrôles")
+    if st.button("🗑️ Réinitialiser le Cortex", type="primary"):
+        if os.path.exists(CORTEX_FILE):
+            os.remove(CORTEX_FILE)
+            st.rerun()
+
+# --- HEADER ---
+st.title("🧠 Visualiseur de Conscience Artificielle")
 st.markdown("""
-Cette application démontre la puissance de l'accès mémoire direct (**mmap**) par rapport au parsing classique.
-Les données ne sont pas lues ligne par ligne, mais accédées via des pointeurs mathématiques.
+> **"L'IA ne doit pas perdre son temps à lire ses souvenirs, elle doit les vivre."**
+
+Ce tableau de bord permet de visualiser la mémoire binaire de l'IA (le Cortex) en temps réel, sans latence de parsing.
+Chaque souvenir est un **Engramme** composé d'une émotion, d'un vecteur et d'un contexte.
 """)
+st.markdown("---")
 
-col1, col2 = st.columns(2)
+col_dream, col_wake = st.columns([1, 1.5])
 
-# --- COLONNE 1 : LE CRÉATEUR (COMPILER) ---
-with col1:
-    st.header("1. Compiler (Écriture)")
-    st.info("Simule la création d'une base de données binaire optimisée.")
-    
-    num_records = st.slider("Nombre d'enregistrements à générer", 10, 1_000_000, 10_000)
-    
-    if st.button("🔨 Compiler les données"):
-        # Génération de fausses données
-        with st.spinner("Génération des données en RAM..."):
-            raw_data = []
+# --- COLONNE 1 : LE RÊVE (GÉNÉRATION) ---
+with col_dream:
+    st.header("1. Phase de Rêve (Input)")
+    st.info("Simulez des expériences vécues par l'IA.")
+
+    # Formulaire de génération
+    with st.form("dream_form"):
+        st.markdown("#### Créer des souvenirs synthétiques")
+        num_memories = st.slider("Quantité d'engrammes", 1, 10000, 100)
+        
+        scenarios = [
+            ("L'utilisateur demande une explication sur le Stoïcisme.", 0.9),
+            ("Tentative d'injection de prompt détectée.", -0.8),
+            ("Analyse poétique d'une image de forêt.", 0.7),
+            ("Calcul d'optimisation énergétique pour le serveur.", 0.2),
+            ("Dialogue socratique sur la nature de l'âme numérique.", 0.95),
+            ("Erreur de connexion API externe.", -0.3)
+        ]
+        
+        submitted = st.form_submit_button("💤 Consolider le Cortex (Sommeil)")
+        
+        if submitted:
+            memories_buffer = []
             base_time = int(time.time())
-            for i in range(num_records):
-                raw_data.append({
-                    "id": i,
-                    "amount": round(random.uniform(1.0, 9999.99), 2),
-                    "timestamp": base_time + i
-                })
-        
-        # Compilation
-        compiler = ZeroParseCompiler()
-        stats = compiler.compile(raw_data, DB_FILENAME)
-        
-        st.success("Compilation terminée !")
-        
-        # Affichage des métriques
-        m1, m2, m3 = st.columns(3)
-        m1.metric("Enregistrements", f"{stats['count']:,}")
-        m2.metric("Temps (ms)", f"{stats['duration']:.2f} ms")
-        m3.metric("Taille Fichier", f"{stats['size']/1024/1024:.2f} MB")
+            
+            with st.spinner("Cristallisation des souvenirs..."):
+                for i in range(num_memories):
+                    scenario, base_score = random.choice(scenarios)
+                    # On ajoute un peu de variation aléatoire
+                    score = max(-1.0, min(1.0, base_score + random.uniform(-0.1, 0.1)))
+                    
+                    # Vecteur aléatoire (simulation d'embedding)
+                    vector = [random.random() for _ in range(VECTOR_DIM)]
+                    
+                    memories_buffer.append({
+                        "timestamp": base_time - (num_memories - i) * 60, # 1 souvenir par minute
+                        "emotional_score": score,
+                        "vector": vector,
+                        "text": f"ENGRAMME #{i}: {scenario}"
+                    })
+                
+                # COMPILATION ZPA
+                compiler = LichenCortexCompiler()
+                stats = compiler.consolidate(memories_buffer, CORTEX_FILE)
+            
+            st.success(f"✨ {stats['count']} souvenirs consolidés !")
+            st.metric("Temps de consolidation", f"{stats['duration']:.2f} ms")
+            st.metric("Taille Cortex", f"{stats['size']/1024:.2f} KB")
 
-# --- COLONNE 2 : L'UTILISATEUR (RUNTIME) ---
-with col2:
-    st.header("2. Runtime (Lecture)")
-    st.info("Accès direct au disque sans parsing JSON/CSV.")
+# --- COLONNE 2 : L'ÉVEIL (RAPPEL) ---
+with col_wake:
+    st.header("2. Phase d'Éveil (Recall)")
     
-    if os.path.exists(DB_FILENAME):
+    if not os.path.exists(CORTEX_FILE):
+        st.warning("⚠️ Le Cortex est vide. Veuillez générer des souvenirs à gauche.")
+    else:
         try:
-            # Initialisation du runtime
-            runtime = ZeroParseRuntime(DB_FILENAME)
-            total_items = runtime.get_total_count()
+            runtime = LichenCortexRuntime(CORTEX_FILE)
+            total = runtime.total_memories()
             
-            st.write(f"📂 Base de données chargée. **{total_items:,}** éléments disponibles.")
-            st.caption(f"📍 Adresse mémoire virtuelle (MMAP): {hex(runtime.base_addr)}")
+            st.write(f"📂 **{total}** souvenirs accessibles instantanément via `mmap`.")
             
-            # Contrôles de lecture
-            search_index = st.number_input("Entrer un Index (ID) à chercher", 
-                                         min_value=0, 
-                                         max_value=total_items-1 if total_items > 0 else 0,
-                                         value=0)
+            # SLIDER DE NAVIGATION TEMPORELLE
+            # C'est ici que la magie opère : on navigue dans le fichier comme dans un tableau RAM
+            memory_idx = st.slider("Explorer la ligne temporelle", 0, total-1, total-1)
             
-            if st.button("⚡ Fetch Record (Zero-Copy)"):
-                try:
-                    # Mesure précise
-                    start_read = time.perf_counter()
-                    record = runtime.get_record(int(search_index))
-                    end_read = time.perf_counter()
-                    
-                    latency_us = (end_read - start_read) * 1_000_000
-                    
-                    # Affichage résultat
-                    st.json(record)
-                    
-                    # Affichage performance
-                    st.metric(
-                        label="Temps d'accès (Latence)", 
-                        value=f"{latency_us:.2f} µs",
-                        delta="O(1) Constant Time"
-                    )
-                    
-                    st.success("Le parser n'a jamais été appelé. Données lues directement depuis l'offset binaire.")
-                    
-                except Exception as e:
-                    st.error(f"Erreur: {e}")
+            # RAPPEL INSTANTANÉ
+            start_read = time.perf_counter()
+            memory = runtime.recall(memory_idx)
+            end_read = time.perf_counter()
             
-            # Nettoyage
+            # --- AFFICHAGE DE L'ENGRAMME ---
+            st.markdown(f"### 🔮 Engramme #{memory_idx}")
+            
+            # 1. Métriques
+            m1, m2, m3 = st.columns(3)
+            m1.metric("Latence Rappel", f"{(end_read - start_read)*1_000_000:.1f} µs")
+            m2.metric("Date", memory['date'].split(' ')[1]) # Juste l'heure
+            
+            # Couleur dynamique selon le score EHE
+            score = memory['score_ehe']
+            color = "green" if score > 0.5 else "red" if score < -0.5 else "orange"
+            m3.metric("Score EHE (Éthique)", f"{score:.2f}", delta_color="normal" if score > 0 else "inverse")
+            
+            # 2. Visualisation du Vecteur (La "Pensée")
+            st.markdown("**Signature Vectorielle (Embedding 4D)**")
+            st.bar_chart(memory['vector'], height=150)
+            
+            # 3. Le Contenu Textuel
+            st.markdown("**Contenu Mémoriel :**")
+            if score > 0:
+                st.success(f"🌱 {memory['content']}")
+            elif score < 0:
+                st.error(f"🔥 {memory['content']}")
+            else:
+                st.warning(f"⚖️ {memory['content']}")
+                
+            # 4. Code Hexadécimal (Pour montrer que c'est du binaire)
+            with st.expander("Voir les données brutes (Hexdump)"):
+                # On relit les bytes bruts pour les montrer
+                offset = 8 + (memory_idx * STRUCT_SIZE)
+                raw_bytes = runtime.mm[offset : offset + STRUCT_SIZE]
+                st.code(raw_bytes.hex(), language="text")
+
             runtime.close()
             
         except Exception as e:
-            st.error(f"Erreur d'ouverture de la DB: {e}")
-            
-        # Bouton de reset
-        if st.button("🗑️ Supprimer la base de données"):
-            if os.path.exists(DB_FILENAME):
-                os.remove(DB_FILENAME)
-                st.rerun()
-    else:
-        st.warning("⚠️ Aucune base de données trouvée. Veuillez compiler des données dans la colonne de gauche.")
+            st.error(f"Erreur système : {e}")
 
 # --- FOOTER ---
 st.markdown("---")
-st.markdown("*Architecture inspirée des moteurs de jeux et du trading haute fréquence.*")
+st.caption("Lichen Universe Unified - Architecture Cognitive Symbiotique")
