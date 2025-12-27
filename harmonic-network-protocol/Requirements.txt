@@ -1,19 +1,4 @@
-# Harmonic Network Protocol - Python Dependencies
-
-# Core dependencies
-numpy>=1.21.0
-
-# Testing
-pytest>=7.0.0
-pytest-cov>=3.0.0
-
-# Optional: Visualization
-matplotlib>=3.5.0
-
-# Optional: Documentation
-sphinx>=4.5.0
-
-# Development tools
-black>=22.0.0
-flake8>=4.0.0
-mypy>=0.950
+numpy
+matplotlib
+pandas
+streamlit
