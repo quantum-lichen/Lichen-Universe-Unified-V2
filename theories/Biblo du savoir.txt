@@ -1,0 +1,155 @@
+Parfait. Voilà une **feuille de route concrète, claire et prête à démarrer** pour ta *Bibliothèque du savoir* — open-source, vérifiée par IA, conçue pour produire un **consensus méthodologique** plutôt qu’un culte de la « vérité finale ». J’ai fait ça en mode pratique : vision, principes, architecture minimale, workflows de vérification, MVP, gouvernance, risques, et tâches immédiates. On y va — mon petit chat 🐱‍👤
+
+# Vision courte
+
+Créer une **bibliothèque open-source du savoir vérifié** qui standardise la façon dont on présente un énoncé : *fait / analyse / opinion / spéculation*, avec traçabilité complète, contrôle d’origine, et processus humain+IA pour validation. Objectif : rendre possible un **consensus réplicable** sur les faits publics.
+
+# Principes fondamentaux
+
+1. **Transparence** : provenance (sources, horodatage, hash), pipeline visible.
+2. **Protocole de validation** : étapes normalisées pour classer un énoncé.
+3. **Open-source & Licence claire** : code sous Apache-2.0 ou MIT; contenus sous CC-BY-SA (ou CC0 pour corpus critiques).
+4. **Human-in-the-loop** : IA assiste, experts valident, communauté conteste.
+5. **Mesurabilité** : score de confiance, métriques d’audit.
+6. **Neutralité procédurale** : gouvernance multi-parties (ONG, universités, pays à faible revenu).
+
+# Architecture conceptuelle (haute niveau)
+
+* **Ingestion** : scrapers, soumissions manuelles, import CSV/API, dépôt Git pour fichiers.
+* **Preprocessing** : normalisation, extraction d’assertions (NLP), détection de claims.
+* **KG + Base de preuves** : base relationnelle + graph DB pour liens source→assertion.
+* **Moteur de vérification IA** : modèle pour retrouver preuves, proposer étiquette & score.
+* **Workflow humain** : file d’examen pour réviseurs (crowd + experts), procès-verbal de décision.
+* **Ledger de provenance** : horodatage + hash (blockchain optional / simple Merkle log).
+* **API / Frontend** : recherche, affichage de provenance, badge “Fait vérifié / Analyse / Opinion / Spéculation”.
+* **Audit & Monitoring** : métriques d’usage, biais, corrections.
+
+# Schéma de métadonnées (exemple à implémenter d’entrée)
+
+```json
+{
+  "claim_id": "uuid",
+  "assertion_text": "String",
+  "canonicalized": "String",
+  "source_list": [
+    {"type":"paper|article|dataset|gov_report|eye_witness", "url":"", "author":"", "date":"YYYY-MM-DD", "hash":""}
+  ],
+  "provenance": {"submitted_by": "user_id", "submitted_at":"ISO", "ingest_method":"api|web|scrape"},
+  "classification": {"level":"Fait|Analyse|Opinion|Speculation", "confidence":0.0},
+  "verification_history": [
+    {"actor":"AI_vX", "action":"suggest_classification", "score":0.67, "timestamp":""},
+    {"actor":"expert_id", "action":"validated|rejected|comment", "notes":"", "timestamp":""}
+  ],
+  "evidence": [{"source_id":"", "quote":"", "context":"", "relevance_score":0.0}],
+  "tags":["climat","health","geopolitics"],
+  "license":"CC-BY-SA-4.0",
+  "last_updated":"ISO"
+}
+```
+
+# Processus de vérification (protocole standard)
+
+1. **Extraction** : l’énoncé est extrait & canonicalisé.
+2. **Recherche automatique** : IA récupère sources potentielles, calcule scores d’adéquation.
+3. **Prédiction préliminaire** : IA propose `classification` + `confidence` + preuves.
+4. **Revue crowd** : 3–5 réviseurs communautaires évaluent (vote + commentaires).
+5. **Panel d’experts** (si contesté ou score > seuil) : décision finale publique + résumé.
+6. **Publication** : étiquette visible + liste d’évidences + log immuable des décisions.
+7. **Appel / Révision** : processus pour nouvelles preuves + re-validation (versioning obligatoire).
+
+# Échelles de confiance & Badges (UI)
+
+* **Fait vérifié (F1)** — preuves primaires, consensus expert, score ≥ 0.9
+* **Probablement vrai (F2)** — preuves secondaires, pas d’opposition majeure, 0.7–0.9
+* **Analyse (A1)** — interprétation professionnelle basée sur faits connus
+* **Opinion (O1)** — avis subjectif déclaré
+* **Spéculation (S1)** — non vérifiable / hypothèse
+
+Chaque badge affiche : *qui a validé*, *preuves*, *date*, *version*.
+
+# Gouvernance & Décentralisation
+
+* **Foundation** non-profit (multi-stakeholder) pour héberger projet.
+* **Comité scientifique** (universités, ONG, pays en développement) pour définir protocoles.
+* **Conseil d’éthique** (transparence biais, conflits d’intérêt).
+* **Open review** : toutes les décisions (même les votes experts) publiques anonymisées.
+
+# Stratégie technique recommandée (MVP stack)
+
+* Backend : Python (FastAPI)
+* DB relationnelle : PostgreSQL (+ PostGIS si geo)
+* Graph DB : Neo4j ou Dgraph (preuves & liens)
+* Search / embeddings : ElasticSearch ou vector DB (Milvus/Weaviate)
+* Frontend : React + Tailwind (preview UI)
+* Worker : Celery/RQ pour tâches NLP
+* Modèles NLP : open models (Llama-style open weights) + pipelines huggingface
+* CI/CD + infra : Docker, Kubernetes (ou VPS pour MVP)
+* Licence code : Apache-2.0 ; contenu : CC-BY-SA 4.0
+
+# MVP minimal (livrables immédiats)
+
+1. Repo Git public + README + CLA (contrib rules).
+2. API d’ingestion + interface web simple pour soumettre un claim.
+3. Pipeline IA basique : extraire claim → rechercher 3 sources → proposer classification.
+4. Interface de revue pour 3 réviseurs (crowd).
+5. Page claim publique (preuve + historique).
+6. Politique de licences et charte de gouvernance.
+
+# Mécanismes anti-biais & transparence IA
+
+* **Datasheets & Model Cards** pour chaque modèle.
+* **Logging complet des prompts** + version des modèles (disponible publiquement).
+* **Métriques de biais** (disparités de résultats par langue/pays/sujet).
+* **Processus de correction** : submit counter-evidence + re-vote.
+
+# Incitations & économie
+
+* **Réputation** pour réviseurs (karma), badge expert.
+* **Micro-paiements / grants** pour experts (via Fondation).
+* **Partenariats académiques** pour validations (publis, peer review).
+* **Subventions pour pays à faible revenu** pour intégrer curriculum local.
+
+# Risques & mitigations rapides
+
+* **Capture politique / capture corporate** → gouvernance multi-stakeholder, transparence budgets.
+* **Censure invoquée** → système opt-in : la norme n’empêche rien, elle certifie.
+* **Biais IA** → audits indépendants réguliers.
+* **Fake sources massifs** → détection automatique d’ancres de confiance, listes noires transparentes.
+
+# Indicateurs de succès (KPI)
+
+* % claims « Fait vérifié » avec 3 preuves primaires.
+* Temps moyen de validation (MVP cible <72h).
+* Nombre d’experts accrédités.
+* Diversité géographique des sources.
+* Réduction mesurable d’erreurs factuelles dans échantillons médias.
+
+# Feuille de route courte (phases)
+
+* Phase 0 (Semaine 0–4) : repo, spec métadonnées, prototype simple soumission + UI.
+* Phase 1 (Mois 1–4) : ingestion web, IA de preuve basique, crowd review.
+* Phase 2 (Mois 4–8) : panel d’experts, provenance ledger, model cards.
+* Phase 3 (Mois 8–18) : internationalisation, intégration cursus scolaire pilote (partenariat pays), process ISO-ization (préparer dossier).
+
+# 6 actions immédiates que tu peux lancer tout de suite
+
+1. Créer le repo Git public + LICENSE + README « Bibliothèque du Savoir ».
+2. Rédiger le **spec métadonnée** (colle l’exemple ci-dessus dans le README).
+3. Prototyper une page web simple pour soumettre un claim (HTML + Netlify).
+4. Recruter 3 amis experts/doctorants pour test (validation manuelle).
+5. Lancer un petit dataset test (20 claims) et faire 1 cycle full (IA → crowd → expert).
+6. Préparer un pitch court (1 page) pour une Fondation + ONG éducation (financement pilote).
+
+# Petit kit de communication (pitch 1 paragraphe)
+
+> *La Bibliothèque du Savoir est une archive open-source de claims publics, vérifiés par un protocole humain+IA et publiquement traçable. Elle n’impose rien ; elle met à disposition un standard réplicable pour séparer fait, analyse et opinion — afin de restaurer la base commune nécessaire à la gouvernance et à l’éducation.*
+
+---
+
+Voilà — c’est une base complète, opérationnelle et pensée pour pouvoir **grandir, rester neutre et obtenir l’adhésion**. Si tu veux, je peux te générer **tout de suite** :
+
+* un **README** prêt à coller dans un repo (avec spec métadonnées) ;
+* ou un **template de page web** de soumission (HTML + JS basique) ;
+* ou le **flux de travail détaillé** pour les réviseurs (checklist à imprimer).
+
+Tu dis lequel et je te l’envoie direct. ^_-
