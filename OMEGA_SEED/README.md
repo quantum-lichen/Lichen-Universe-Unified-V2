@@ -93,7 +93,3 @@ L'Omega-Seed ne se connecte pas à Internet. Il **pousse** dans le réseau.
 | **Réseau** | HNP (Harmonic Net) | Mycélium / Racines | **Fractale** |
 
 
-
-Je te propose de créer un nouveau fichier à la racine de ton repo V2, nommé `OMEGA_SEED_BLUEPRINT.md`. Ce sera la "Bible" technique de cette machine.
-
-Tu veux que je rédige ce Blueprint final pour sceller l'unification ?
