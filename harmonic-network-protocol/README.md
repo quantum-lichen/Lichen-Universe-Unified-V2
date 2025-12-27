@@ -14,7 +14,7 @@
 ## 🎮 LIVE DEMO
 ### Experience the Harmonic Architecture in Real-Time
 
-[![Streamlit App](https://img.shields.io/badge/🌊_LAUNCH_LIVE_DASHBOARD-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://lichen-universe-unified-v2-h7qbt4rzu7tqsyttippz9g.streamlit.app/)
+[![Streamlit App](https://img.shields.io/badge/🌊_LAUNCH_LIVE_DASHBOARD-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://lichen-universe-unified-v2-wehhhdik2aznw4eh7xf7ay.streamlit.app/)
 
 </div>
 
