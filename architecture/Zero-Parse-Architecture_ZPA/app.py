@@ -1,141 +1,195 @@
+import streamlit as st
 import mmap
 import struct
 import os
 import time
-from abc import ABC, abstractmethod
+import random
 
 # ==============================================================================
 # CONFIGURATION ET FORMATS
 # ==============================================================================
-# Définition de notre structure binaire "Transaction" pour l'Isomorphisme.
-# Format:[Montant: 8 bytes]
-# 'Q' = unsigned long long (8 bytes), 'd' = double (8 bytes)
+# Format: [ID: 8 bytes (Q)], [Montant: 8 bytes (d)], [Timestamp: 8 bytes (Q)]
 STRUCT_FMT = "QdQ" 
 STRUCT_SIZE = struct.calcsize(STRUCT_FMT)
 DB_FILENAME = "zeroparse_storage.db"
 
+# Configuration de la page Streamlit
+st.set_page_config(
+    page_title="ZeroParse Demo",
+    page_icon="🚀",
+    layout="wide"
+)
+
 # ==============================================================================
-# COMPILER / ENCODER (Le Créateur)
+# CLASSES BACKEND (Logique pure)
 # ==============================================================================
+
 class ZeroParseCompiler:
     """
-    Simule la phase d'édition/création. 
-    Transforme des données 'humaines' en un blob binaire isomorphe à la RAM.
-    Dans une vraie ZPA, ceci serait fait par un éditeur projectionnel.
+    Transforme des données en un blob binaire isomorphe à la RAM.
     """
     @staticmethod
     def compile(data_list, output_file):
-        print(f"\n[Compiler] 🔨 Compilation de {len(data_list)} enregistrements vers '{output_file}'...")
         start_time = time.time()
         
         with open(output_file, "wb") as f:
             # HEADER: Nombre d'éléments (8 bytes)
             f.write(struct.pack("Q", len(data_list)))
             
-            # BODY: Données contiguës (Array-of-Structs)
+            # BODY: Données contiguës
             for item in data_list:
-                # Sérialisation native. Aucune métadonnée JSON, aucun séparateur.
-                # C'est une copie exacte de ce à quoi la struct ressemblerait en C/C++.
                 packed_data = struct.pack(STRUCT_FMT, item['id'], item['amount'], item['timestamp'])
                 f.write(packed_data)
                 
         end_time = time.time()
-        print(f"[Compiler] ✅ Terminé en {(end_time - start_time)*1000:.4f}ms.")
-        print(f"[Compiler] Taille du fichier généré : {os.path.getsize(output_file)} bytes.")
+        return {
+            "duration": (end_time - start_time) * 1000, # ms
+            "size": os.path.getsize(output_file),
+            "count": len(data_list)
+        }
 
-# ==============================================================================
-# DECODER / RUNTIME (L'Utilisateur Zero-Copy)
-# ==============================================================================
 class ZeroParseRuntime:
     """
-    Le Runtime qui n'effectue AUCUN parsing.
-    Il utilise MMAP pour accéder au disque comme si c'était de la RAM.
+    Runtime Zero-Copy via MMAP.
     """
     def __init__(self, db_file):
         if not os.path.exists(db_file):
             raise FileNotFoundError(f"Base de données '{db_file}' introuvable.")
             
         self.f = open(db_file, "r+b")
-        # MMAP: Projection du fichier en mémoire. 
-        # C'est l'équivalent de charger tout le fichier sans le lire physiquement.
         self.mm = mmap.mmap(self.f.fileno(), 0)
         self.base_addr = id(self.mm)
-        print(f"\n 🚀 Base de données mappée. Adresse Virtuelle: {hex(self.base_addr)}")
         
     def get_total_count(self):
-        # Lecture directe des 8 premiers octets (Header)
-        # O(1) - Pas de scan
-        return struct.unpack_from("Q", self.mm, 0)
+        # Lecture des 8 premiers octets
+        # unpack_from retourne un tuple, on veut le premier élément
+        return struct.unpack_from("Q", self.mm, 0)[0]
         
     def get_record(self, index):
-        """
-        ACCÈS O(1) - FORMULE MATHÉMATIQUE
-        Pas de boucle 'for', pas de 'split', pas de 'json.loads'.
-        Juste des mathématiques de pointeurs.
-        """
         count = self.get_total_count()
         if index >= count or index < 0:
-            raise IndexError("Index hors limites")
+            raise IndexError(f"Index {index} hors limites (Max: {count-1})")
             
-        # Formule de l'offset (voir formulas.md)
-        # Offset = Taille_Header + (Index * Taille_Struct)
+        # Offset = Header (8 bytes) + (Index * Taille Struct)
         offset = 8 + (index * STRUCT_SIZE)
         
-        # Simulation de l'accès pointeur (Casting)
-        # En C/Rust, ce serait: Transaction* t = (Transaction*)(base_ptr + offset);
-        # Ici en Python, on lit directement la plage mémoire.
-        record_bytes = self.mm
+        # Lecture ciblée via slicing du buffer mmap (Zero-Copy effectif en lecture)
+        # Note: struct.unpack demande des bytes, slicing mmap donne des bytes.
+        record_bytes = self.mm[offset : offset + STRUCT_SIZE]
         unpacked = struct.unpack(STRUCT_FMT, record_bytes)
         
+        # CORRECTION ICI: Q, d, Q donne indices 0, 1, 2
         return {
-            "id": unpacked,
-            "amount": unpacked[2],
-            "timestamp": unpacked[3]
+            "id": unpacked[0],
+            "amount": unpacked[1],
+            "timestamp": unpacked[2]
         }
         
     def close(self):
         self.mm.close()
         self.f.close()
-        print(" Fermeture du mapping.")
 
 # ==============================================================================
-# DÉMONSTRATION
+# INTERFACE STREAMLIT
 # ==============================================================================
-if __name__ == "__main__":
-    # 1. Données brutes (Source)
-    raw_data = [
-        {"id": 101, "amount": 250.50, "timestamp": 1678880000},
-        {"id": 102, "amount": 99.99, "timestamp": 1678880005},
-        {"id": 103, "amount": 1200.00, "timestamp": 1678880010},
-        {"id": 104, "amount": 5.75, "timestamp": 1678880015},
-    ]
+
+st.title("🚀 Zero-Parse / Zero-Copy Architecture")
+st.markdown("""
+Cette application démontre la puissance de l'accès mémoire direct (**mmap**) par rapport au parsing classique.
+Les données ne sont pas lues ligne par ligne, mais accédées via des pointeurs mathématiques.
+""")
+
+col1, col2 = st.columns(2)
+
+# --- COLONNE 1 : LE CRÉATEUR (COMPILER) ---
+with col1:
+    st.header("1. Compiler (Écriture)")
+    st.info("Simule la création d'une base de données binaire optimisée.")
     
-    # 2. Compilation (Écriture Isomorphe)
-    compiler = ZeroParseCompiler()
-    compiler.compile(raw_data, DB_FILENAME)
+    num_records = st.slider("Nombre d'enregistrements à générer", 10, 1_000_000, 10_000)
     
-    # 3. Runtime (Lecture Zero-Parse)
-    runtime = ZeroParseRuntime(DB_FILENAME)
+    if st.button("🔨 Compiler les données"):
+        # Génération de fausses données
+        with st.spinner("Génération des données en RAM..."):
+            raw_data = []
+            base_time = int(time.time())
+            for i in range(num_records):
+                raw_data.append({
+                    "id": i,
+                    "amount": round(random.uniform(1.0, 9999.99), 2),
+                    "timestamp": base_time + i
+                })
+        
+        # Compilation
+        compiler = ZeroParseCompiler()
+        stats = compiler.compile(raw_data, DB_FILENAME)
+        
+        st.success("Compilation terminée !")
+        
+        # Affichage des métriques
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Enregistrements", f"{stats['count']:,}")
+        m2.metric("Temps (ms)", f"{stats['duration']:.2f} ms")
+        m3.metric("Taille Fichier", f"{stats['size']/1024/1024:.2f} MB")
+
+# --- COLONNE 2 : L'UTILISATEUR (RUNTIME) ---
+with col2:
+    st.header("2. Runtime (Lecture)")
+    st.info("Accès direct au disque sans parsing JSON/CSV.")
     
-    try:
-        total = runtime.get_total_count()
-        print(f"[App] Le Runtime voit {total} enregistrements.")
-        
-        # Accès aléatoire au dernier élément (instantané)
-        idx_to_fetch = 3
-        print(f"[App] Accès direct à l'index {idx_to_fetch}...")
-        
-        start_read = time.perf_counter()
-        record = runtime.get_record(idx_to_fetch)
-        end_read = time.perf_counter()
-        
-        print(f"[App] Résultat: ID={record['id']}, Amount={record['amount']}")
-        print(f"[App] Temps d'accès (latence): {(end_read - start_read)*1_000_000:.2f} microsecondes")
-        
-        print("\n[App] Conclusion: Le 'parser' n'a jamais été appelé lors de la lecture.")
-        
-    finally:
-        runtime.close()
-        # Nettoyage
-        if os.path.exists(DB_FILENAME):
-            os.remove(DB_FILENAME)
+    if os.path.exists(DB_FILENAME):
+        try:
+            # Initialisation du runtime
+            runtime = ZeroParseRuntime(DB_FILENAME)
+            total_items = runtime.get_total_count()
+            
+            st.write(f"📂 Base de données chargée. **{total_items:,}** éléments disponibles.")
+            st.caption(f"📍 Adresse mémoire virtuelle (MMAP): {hex(runtime.base_addr)}")
+            
+            # Contrôles de lecture
+            search_index = st.number_input("Entrer un Index (ID) à chercher", 
+                                         min_value=0, 
+                                         max_value=total_items-1 if total_items > 0 else 0,
+                                         value=0)
+            
+            if st.button("⚡ Fetch Record (Zero-Copy)"):
+                try:
+                    # Mesure précise
+                    start_read = time.perf_counter()
+                    record = runtime.get_record(int(search_index))
+                    end_read = time.perf_counter()
+                    
+                    latency_us = (end_read - start_read) * 1_000_000
+                    
+                    # Affichage résultat
+                    st.json(record)
+                    
+                    # Affichage performance
+                    st.metric(
+                        label="Temps d'accès (Latence)", 
+                        value=f"{latency_us:.2f} µs",
+                        delta="O(1) Constant Time"
+                    )
+                    
+                    st.success("Le parser n'a jamais été appelé. Données lues directement depuis l'offset binaire.")
+                    
+                except Exception as e:
+                    st.error(f"Erreur: {e}")
+            
+            # Nettoyage
+            runtime.close()
+            
+        except Exception as e:
+            st.error(f"Erreur d'ouverture de la DB: {e}")
+            
+        # Bouton de reset
+        if st.button("🗑️ Supprimer la base de données"):
+            if os.path.exists(DB_FILENAME):
+                os.remove(DB_FILENAME)
+                st.rerun()
+    else:
+        st.warning("⚠️ Aucune base de données trouvée. Veuillez compiler des données dans la colonne de gauche.")
+
+# --- FOOTER ---
+st.markdown("---")
+st.markdown("*Architecture inspirée des moteurs de jeux et du trading haute fréquence.*")
