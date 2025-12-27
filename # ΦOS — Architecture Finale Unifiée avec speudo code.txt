@@ -1,0 +1,1658 @@
+# ΦOS — **Architecture Finale Unifiée** (version « ∞ Kernel »)
+
+Voici la **architecture finale, consolidée et opérationnelle** de ΦOS, fusionnant **toutes** tes idées, le contenu que tu as fourni et les éléments déjà préparés (pseudocode, repo skeleton, document CLAUDE). Je garde le format pratique : définition des composants, API/ABI clefs, format des capabilities, flux, sécurité, roadmap exécutable, tests & métriques. Tout est pensé pour prototyper conceptuellement puis implémenter en cycles courts.
+
+> Sources principales intégrées dans cette synthèse : ton corpus fusionné (pseudocode & MEGA spec), le repo skeleton généré et le texte *ΦOS (Phi Operating System) CLAUDE.txt*. 
+
+---
+
+# 1 — Vision condensée (1 phrase)
+
+ΦOS = *micro-noyau minimal + services userland modulaires + eBPF étendu + AI runtime natif + ordonnanceur unifié CPU/GPU/TPU*, conçu pour performance IA, sécurité par capacités et évolution continue sans redémarrage. 
+
+---
+
+# 2 — Principes d’ingénierie (rappel fondamental)
+
+* **Minimalité du noyau** : mécanismes, pas de politiques. 
+* **Sécurité par capacités** : tokens non-forgeables, révocation par versioning. 
+* **Zero-copy & shared pages** : priorité aux mappings pour gros transferts (IPC, GPU). 
+* **eBPF vérifié & JIT** : extensibilité sûre pour hooks runtime. 
+* **IA citoyen 1re classe** : cache modèles, batching, device selection. 
+
+---
+
+# 3 — Vue d’ensemble (diagramme léger)
+
+```
+  [Apps / Unikernels]
+            │ (cap + IPC)
+            ▼
+  [Userland Services]  ←──────── eBPF hooks ─── [eBPF Engine]
+  (FS / Drivers / AI / Net / Scheduler-svc)
+            │
+            ▼ (fast IPC / shared pages)
+        [ΦCore Microkernel]
+  (Capabilities | Memory | IPC | IRQ | Scheduler)
+            │
+            ▼
+          [HAL / Devices]
+  (CPU | GPU | TPU | NVMe | NIC | IOMMU)
+```
+
+---
+
+# 4 — Composants détaillés & contrats d’interface
+
+### 4.1 ΦCore (Microkernel) — responsabilités minimales
+
+* **Capability manager** : création, lookup, invoke, revoke (version bump).
+* **Memory manager** : allocation physique / page refcount, map_virtual, COW basic.
+* **IPC** : endpoints, mailbox (small messages), shared_region mapping (large messages).
+* **Scheduler (kernel)** : minimal preemptive timeslice, priority queues, hooks pour scheduler-service.
+* **Interrupt dispatch** : unify hardware IRQ -> userland drivers notifications.
+* **eBPF hook points** : XDP-like network, syscall entry, scheduler hooks, AI_INFER pre/post.
+
+**API kernel (exemples)**
+
+```c
+int cap_invoke(cap_handle cap, uint32_t op, void *in, size_t inlen, void *out, size_t outlen);
+int ipc_send(cap_handle dest_ep, void *buf, size_t len, cap_handle caps[], int n_caps);
+int ipc_recv(cap_handle my_ep, void *buf, size_t bufsize, cap_handle out_caps[], int *n_caps);
+int map_memory(cap_handle mem_cap, uintptr_t vaddr, uint32_t flags);
+int create_thread(cap_handle thread_svc, void (*entry)(void*), void *stack, cap_handle caps[], int n_caps);
+```
+
+(Design inspiré du pseudocode et du repo skeleton). 
+
+---
+
+### 4.2 Services Userland (contracts)
+
+* **ΦFS (VFS + AI-store)** : expose capacité `fs_client_cap`; operations via cap_invoke/IPC; supports MAP_BLOB returning a memory capability (zero-copy). 
+* **Driver model** : drivers = userland processes, receive IRQ-cap + device-mem mapping cap; crash / restart safe. 
+* **AI Runtime (ΦAI Engine)** : service userland with `ai_runtime_cap`; responsibilities : model cache, batcher, device selector, execution orchestration (uses mapped pages & GPU drivers). 
+* **Scheduler-service (opt)** : userland policy; kernel provides hooks to yield/donate CPU and to temporarily delegate scheduling decisions. 
+
+---
+
+### 4.3 eBPF Engine
+
+* **Verifier** (no unbounded loops, bounds checks).
+* **JIT** into safe native code; attachable to hook points (NET/XDP, SYSCALL, AI_INFER, SCHEDULER).
+* **Use cases** : tracing, security filtering, dynamic optimization, A/B experiment live. 
+
+---
+
+# 5 — Format des Capabilities (binaire recommandé)
+
+```
+struct Cap {
+  uint64_t id;
+  uint8_t  type;    // MEM, IPC_EP, DEV, THREAD, MODEL,...
+  uint8_t  rights;  // bitmask (READ,WRITE,MAP,SEND,RECV,ADMIN)
+  uint32_t version; // increment on revoke
+  uint64_t obj_ptr; // kernel internal handle
+  uint8_t  mac[32]; // optional HMAC for hardware-backed caps
+}
+```
+
+* Revocation = atomique `version++`. Kernel rejects old versions. (sécurité & simplicité). 
+
+---
+
+# 6 — IPC & Shared Pages (pattern opératoire)
+
+1. **Small message (≤ K)** : kernel copies to mailbox (fast path).
+2. **Large payload** : sender pins pages, creates `SharedRegion`, kernel maps same physical pages into receiver with rights; returns region cap.
+3. **Caps transfer** : capabilities can be moved or copied with "copy-limited" semantics; kernel updates cap owner metadata. 
+
+---
+
+# 7 — Ordonnanceur unifié CPU/GPU/TPU (design)
+
+* **ExecutionUnit** abstraction (type, queue, load, temp, power).
+* **find_best_unit_for_thread(thread)** : heuristique (type de calcul, localité données, température, latence demandée, priority).
+* **Batching** : pour IA, le scheduler co-ordonne batching windows (ex : 1–5ms) pour max throughput sans dépasser latence SLO. 
+
+---
+
+# 8 — Runtime IA (ΦAI Engine) — contrats & optimisations
+
+* **Model cache** : LRU + warmup; quantization on the fly.
+* **Device selector** : `select_best_device(model, constraints)` (heuristics: model type, size, device load).
+* **Batcher** : accumulate requests per-model per-device; dispatch when batch ready or latency deadline.
+* **Zero-copy data path** : NVMe → pinned RAM → GPU via DMA / pinned pages; use IOMMU for safety.
+
+---
+
+# 9 — VDFS (Vector DB FileSystem) — design essentiel
+
+* CAS storage for blobs + HNSW index for embeddings.
+* Expose `MAP_BLOB` → memory capability pointing to pinned pages of blob.
+* Provide fast search API (semantic queries) in userland via `vdfs_search(query_vector,k)`. 
+
+---
+
+# 10 — Sécurité & défense en profondeur
+
+* **Niveau 0 (hardware)** : IOMMU, SMEP/SMAP, enclaves (SGX/SEV) si dispo.
+* **Niveau 1 (kernel)** : microkernel minimal, capability enforcement, no direct global root. 
+* **Niveau 2 (eBPF monitor)** : runtime anomaly detection, syscall filters, rate limiting.
+* **Niveau 3 (sentinel AI)** : service d’analyse comportementale (audit, revoke on anomaly). 
+
+---
+
+# 11 — Roadmap priorisée (pratique – livrables)
+
+## Phase 0 — Spécification & prototype (0–2 mois) — **Livrable** : spec complète + repo skeleton
+
+* Finaliser ABI, format cap, IPC header. ✅ (déjà amorcé). 
+
+## Phase 1 — Kernel MVP (2–6 mois) — **Livrable** : bootable minimal, IPC shared pages, cap manager, simple scheduler
+
+* Tests QEMU, unit tests, basic ΦFS, init userland. (objectif : POC boot & simple IPC). 
+
+## Phase 2 — Services clefs (6–12 mois) — **Livrable** : ΦFS (VDFS), AI runtime CPU/GPU, drivers userland, eBPF verifier+JIT
+
+* Add batching, model cache, zero-copy NVMe pipeline. 
+
+## Phase 3 — Performance & sécurité (12–18 mois) — **Livrable** : optimized IPC (lock-free), NUMA, formal verification (core invariants), fuzzing campaign. 
+
+## Phase 4 — Ecosystème (18–36 mois) — **Livrable** : packaging, unikernel builder, cloud images, community onboarding. 
+
+---
+
+# 12 — Plan de tests & QA (essentiel)
+
+* **Unit tests** pour chaque module (cap, ipc, memory).
+* **Integration tests** boot → init → spawn fs → read blob → map → ai_infer.
+* **Fuzzing** : cap parsing, ipc_send, eBPF bytecode (libFuzzer / AFL++). 
+* **Formal checks** : model checking/proofs pour invariants critiques (capability enforcement, absence d’élévation). 
+
+---
+
+# 13 — Métriques & objectifs de performance (OKRs)
+
+* **IPC latency (shared)** < 500 ns (objectif R&D). 
+* **Context switch** < 1 µs (objectif).
+* **Boot** < 2s (minimal image).
+* **AI throughput** +50–100% vs stacks traditionnels (via batching + zero-copy).
+  Mesurer: p50/p95 latences, throughput/sec, CPU/GPU utilization, model SLO misses.
+
+---
+
+# 14 — Décisions d’implémentation techniques recommandées
+
+* Langage noyau : **Rust (no_std)** pour sécurité mémoire ; `unsafe` très limité. 
+* eBPF verifier & JIT : LLVM backed or custom code generator (phase 2).
+* Build & test : cross/Rust nightly, QEMU harness, GH Actions + fuzz runs. (skeleton déjà généré). 
+
+---
+
+# 15 — Gouvernance & conduite du projet (workflow pour toi)
+
+1. **Conserver ce document** comme « bible » d’architecture.
+2. **Travailler par MVPs** : livrable(s) petits et testables.
+3. **Itérer** : après chaque MVP, bench & adjust heuristics (scheduler, batching).
+4. **Publier & recruter** : rend public les pièces non sensibles → attire collaborateurs.
+5. **Séparer IP sensible** : modèles propriétaires & clés → enclave & chiffrement.
+
+---
+
+# 16 — Artefacts que je peux produire tout de suite (disponible maintenant)
+
+J’ai déjà créé le repo skeleton. Je peux produire immédiatement, dans ce chat, **un ou plusieurs** des éléments suivants (copie/colle la/les lettres) et je te fournis tout de suite dans la réponse :
+
+* **A** — Diagramme SVG/PNG finalisé (version illustrée détaillée).
+* **B** — Document technique « ABI & Cap format » complet (binaire spec + exemples hex).
+* **C** — PSEUDOCODE final traduisible en Rust (modules complets : cap.rs, ipc.rs, memory.rs, scheduler.rs) — version longue commentée.
+* **D** — Plan de fuzzing & CI (GH Actions + exemple fuzz target).
+* **E** — Template de « dossier de présentation » (1-page executive + 1-page tech) pour crédibilité / pitch.
+
+---
+
+# 17 — Remarque finale & proposition immédiate
+
+Tu touches à un écosystème énorme — tu as la vision. La **Phase 0 & 1** sont ce qu’il faut pour transformer cette vision en quelque chose que tu peux montrer (preuve, repo, demos). Si tu veux que je **génère maintenant l’un des artefacts A-E**, dis-moi lesquels et je te les produis tout de suite ici (texte, fichiers ou zips).
+
+On fait ça étape par étape — tu choisi la première brique, je la code/écris/pack immédiatement. 🚀
+
+
+📦 Les 11 modules principaux :
+
+Capability System — Format binaire, validation, revocation, invoke
+Memory Management — Alloc physique, mapping virtuel, COW, pinning DMA
+IPC — Small messages (fast path), large messages (zero-copy shared pages)
+Scheduler — Preemptive kernel + heuristique CPU/GPU/TPU
+eBPF Engine — Verifier (bounds check, loop detection) + JIT x86-64
+AI Runtime — Model cache, batcher intelligent, device selector, zero-copy pipeline
+VDFS — Content-addressable storage + HNSW vector search
+Network Stack — XDP hooks, socket management, zero-copy TX/RX
+Device Drivers — Userland model, exemple NVMe avec DMA
+Boot & Init — Kernel startup + init process (PID 1)
+Syscall Interface — ABI minimal avec hooks eBPF
+
+🎯 Points clés du design :
+
+Zero-copy partout : IPC shared pages, NVMe→GPU DMA, VDFS mapped blobs
+Sécurité par capabilities : validation + MAC hardware-backed + revocation atomique
+eBPF extensible : hooks sur network (XDP), syscalls, scheduler, AI inference
+AI optimisé : batching intelligent, device selection multi-critère, quantization on-the-fly
+HNSW search : recherche vectorielle sémantique en O(log n)
+
+Le code est directement traduisible en Rust — j'ai même inclus les détails d'implémentation (structures, algorithms, edge cases). C'est prêt pour Phase 1 !
+
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ΦOS — PSEUDOCODE COMPLET & DÉTAILLÉ (Architecture Finale Unifiée)
+// ═══════════════════════════════════════════════════════════════════════════
+// Modules: Capabilities | Memory | IPC | Scheduler | eBPF | AI Runtime | VDFS
+// Langage cible: Rust (no_std) — Ce pseudocode est un blueprint traduisible
+// ═══════════════════════════════════════════════════════════════════════════
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 1: CAPABILITY SYSTEM (Core Security Primitive)
+// ───────────────────────────────────────────────────────────────────────────
+
+// Format binaire d'une capability (64 bytes aligné cache-line)
+struct Capability {
+    id: u64,                    // Unique ID global
+    cap_type: CapType,          // Type de ressource
+    rights: Rights,             // Bitmask de permissions
+    version: u32,               // Incrémenté lors revocation
+    obj_ptr: u64,               // Pointeur kernel interne vers objet
+    owner_pid: u32,             // Process owner (pour audit)
+    mac: [u8; 32],              // HMAC optionnel (hardware-backed)
+    _reserved: [u8; 7],         // Padding futur
+}
+
+enum CapType {
+    MEMORY,         // Région mémoire
+    IPC_ENDPOINT,   // Endpoint pour IPC
+    DEVICE,         // Accès device
+    THREAD,         // Thread handle
+    MODEL,          // AI Model handle
+    FILE,           // File handle (VDFS)
+    NETWORK,        // Network socket
+}
+
+bitflags Rights {
+    READ   = 0x01,
+    WRITE  = 0x02,
+    EXEC   = 0x04,
+    MAP    = 0x08,
+    SEND   = 0x10,
+    RECV   = 0x20,
+    ADMIN  = 0x40,  // Super-right pour délégation
+}
+
+// Manager global des capabilities (singleton kernel)
+struct CapabilityManager {
+    caps: HashMap<u64, CapabilityObject>,  // ID -> objet kernel
+    next_id: AtomicU64,
+    hmac_key: [u8; 32],                    // Clé pour MAC hardware
+}
+
+impl CapabilityManager {
+    // Création d'une nouvelle capability
+    fn create(cap_type: CapType, rights: Rights, obj: KernelObject) -> Result<Capability> {
+        let id = self.next_id.fetch_add(1);
+        let obj_ptr = self.store_object(obj)?;
+        
+        let cap = Capability {
+            id,
+            cap_type,
+            rights,
+            version: 1,
+            obj_ptr,
+            owner_pid: current_process_id(),
+            mac: self.compute_mac(id, cap_type, rights, obj_ptr),
+            _reserved: [0; 7],
+        };
+        
+        self.caps.insert(id, CapabilityObject { cap, refcount: 1 });
+        Ok(cap)
+    }
+    
+    // Validation d'une capability (vérifie version, MAC, rights)
+    fn validate(cap: &Capability, required_rights: Rights) -> Result<&KernelObject> {
+        // Vérifier existence
+        let obj = self.caps.get(&cap.id).ok_or(ERR_INVALID_CAP)?;
+        
+        // Vérifier version (détecte revocation)
+        if obj.cap.version != cap.version {
+            return Err(ERR_REVOKED);
+        }
+        
+        // Vérifier MAC si hardware-backed
+        if self.verify_mac_enabled() {
+            if !self.verify_mac(cap) {
+                return Err(ERR_FORGED);
+            }
+        }
+        
+        // Vérifier rights
+        if !cap.rights.contains(required_rights) {
+            return Err(ERR_PERMISSION_DENIED);
+        }
+        
+        Ok(self.get_object(cap.obj_ptr))
+    }
+    
+    // Revocation atomique par version bump
+    fn revoke(cap_id: u64) -> Result<()> {
+        let obj = self.caps.get_mut(&cap_id).ok_or(ERR_INVALID_CAP)?;
+        obj.cap.version += 1;  // Atomique: toutes anciennes copies invalides
+        Ok(())
+    }
+    
+    // Copie d'une capability (avec possibilité de réduire rights)
+    fn copy(cap: &Capability, new_rights: Rights) -> Result<Capability> {
+        self.validate(cap, Rights::empty())?;  // Juste vérifier validité
+        
+        if !cap.rights.contains(new_rights) {
+            return Err(ERR_PERMISSION_DENIED);
+        }
+        
+        Ok(Capability {
+            rights: new_rights,  // Rights réduits
+            ..*cap               // Reste identique
+        })
+    }
+    
+    // Invoke: appel générique sur une capability
+    fn invoke(cap: &Capability, op: u32, in_buf: &[u8], out_buf: &mut [u8]) -> Result<usize> {
+        let obj = self.validate(cap, Rights::READ)?;
+        
+        match obj {
+            KernelObject::IpcEndpoint(ep) => ep.invoke(op, in_buf, out_buf),
+            KernelObject::Device(dev) => dev.ioctl(op, in_buf, out_buf),
+            KernelObject::AIModel(model) => model.infer(op, in_buf, out_buf),
+            _ => Err(ERR_NOT_SUPPORTED),
+        }
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 2: MEMORY MANAGEMENT (Physical + Virtual)
+// ───────────────────────────────────────────────────────────────────────────
+
+const PAGE_SIZE: usize = 4096;
+
+struct PhysicalPage {
+    paddr: PhysAddr,
+    refcount: AtomicU32,      // COW & shared pages
+    flags: PageFlags,
+}
+
+bitflags PageFlags {
+    PRESENT    = 0x01,
+    WRITABLE   = 0x02,
+    USER       = 0x04,
+    DIRTY      = 0x08,
+    PINNED     = 0x10,  // Pour DMA / zero-copy
+    COW        = 0x20,  // Copy-on-write
+}
+
+struct MemoryManager {
+    free_pages: FreeList,              // Allocateur physique
+    page_table_cache: Cache<PageTable>,
+}
+
+impl MemoryManager {
+    // Allocation d'une page physique
+    fn alloc_page() -> Result<PhysicalPage> {
+        let paddr = self.free_pages.pop().ok_or(ERR_OUT_OF_MEMORY)?;
+        Ok(PhysicalPage {
+            paddr,
+            refcount: AtomicU32::new(1),
+            flags: PageFlags::PRESENT,
+        })
+    }
+    
+    // Libération (décrémente refcount, libère si 0)
+    fn free_page(page: &PhysicalPage) {
+        if page.refcount.fetch_sub(1) == 1 {
+            self.free_pages.push(page.paddr);
+        }
+    }
+    
+    // Mapping virtuel -> physique
+    fn map_page(page_table: &mut PageTable, vaddr: VirtAddr, paddr: PhysAddr, 
+                flags: PageFlags) -> Result<()> {
+        let pte = page_table.get_or_create_pte(vaddr)?;
+        
+        if pte.is_present() {
+            return Err(ERR_ALREADY_MAPPED);
+        }
+        
+        pte.set(paddr, flags);
+        tlb_flush(vaddr);
+        Ok(())
+    }
+    
+    // Unmapping
+    fn unmap_page(page_table: &mut PageTable, vaddr: VirtAddr) -> Result<PhysicalPage> {
+        let pte = page_table.get_pte(vaddr).ok_or(ERR_NOT_MAPPED)?;
+        let page = pte.get_page();
+        pte.clear();
+        tlb_flush(vaddr);
+        Ok(page)
+    }
+    
+    // Copy-on-Write handler (appelé sur page fault)
+    fn handle_cow(page_table: &mut PageTable, vaddr: VirtAddr) -> Result<()> {
+        let pte = page_table.get_pte_mut(vaddr).ok_or(ERR_NOT_MAPPED)?;
+        
+        if !pte.flags().contains(PageFlags::COW) {
+            return Err(ERR_PAGE_FAULT);
+        }
+        
+        let old_page = pte.get_page();
+        
+        // Si refcount == 1, on peut réutiliser la page
+        if old_page.refcount.load() == 1 {
+            pte.set_flags(pte.flags() - PageFlags::COW + PageFlags::WRITABLE);
+            tlb_flush(vaddr);
+            return Ok(());
+        }
+        
+        // Sinon, copier la page
+        let new_page = self.alloc_page()?;
+        copy_page_data(old_page.paddr, new_page.paddr);
+        
+        pte.set(new_page.paddr, PageFlags::PRESENT | PageFlags::WRITABLE | PageFlags::USER);
+        tlb_flush(vaddr);
+        
+        self.free_page(&old_page);  // Décrémente refcount
+        Ok(())
+    }
+    
+    // Pinning pour DMA / zero-copy (empêche swap)
+    fn pin_pages(vaddr: VirtAddr, len: usize) -> Result<Vec<PhysAddr>> {
+        let mut paddrs = Vec::new();
+        
+        for offset in (0..len).step_by(PAGE_SIZE) {
+            let va = vaddr + offset;
+            let pte = current_page_table().get_pte_mut(va).ok_or(ERR_NOT_MAPPED)?;
+            let page = pte.get_page_mut();
+            
+            page.flags |= PageFlags::PINNED;
+            paddrs.push(page.paddr);
+        }
+        
+        Ok(paddrs)
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 3: IPC (Inter-Process Communication)
+// ───────────────────────────────────────────────────────────────────────────
+
+const IPC_INLINE_MAX: usize = 256;  // Seuil small/large message
+
+struct IpcEndpoint {
+    id: u64,
+    owner: ProcessId,
+    mailbox: Mailbox,           // Pour small messages
+    shared_regions: Vec<SharedRegion>,  // Pour large messages
+}
+
+struct Mailbox {
+    queue: RingBuffer<Message>,
+    waiters: WaitQueue,
+}
+
+struct Message {
+    sender: ProcessId,
+    inline_data: [u8; IPC_INLINE_MAX],
+    len: usize,
+    caps: [Capability; 4],  // Capabilities transférées
+    n_caps: usize,
+}
+
+struct SharedRegion {
+    id: u64,
+    pages: Vec<PhysicalPage>,
+    sender_vaddr: VirtAddr,
+    receiver_vaddr: VirtAddr,
+    len: usize,
+}
+
+impl IpcEndpoint {
+    // Send (small message — fast path avec copie)
+    fn send_inline(dest_ep: &Capability, data: &[u8], caps: &[Capability]) -> Result<()> {
+        CAP_MGR.validate(dest_ep, Rights::SEND)?;
+        
+        if data.len() > IPC_INLINE_MAX {
+            return Err(ERR_MESSAGE_TOO_LARGE);
+        }
+        
+        let ep = CAP_MGR.get_object::<IpcEndpoint>(dest_ep)?;
+        
+        let mut msg = Message::default();
+        msg.sender = current_process_id();
+        msg.inline_data[..data.len()].copy_from_slice(data);
+        msg.len = data.len();
+        msg.caps[..caps.len()].copy_from_slice(caps);
+        msg.n_caps = caps.len();
+        
+        ep.mailbox.queue.push(msg)?;
+        ep.mailbox.waiters.wake_one();
+        
+        Ok(())
+    }
+    
+    // Send (large message — zero-copy avec shared pages)
+    fn send_shared(dest_ep: &Capability, data: &[u8], caps: &[Capability]) 
+        -> Result<Capability> {
+        CAP_MGR.validate(dest_ep, Rights::SEND)?;
+        
+        let sender_vaddr = VirtAddr::from_ptr(data.as_ptr());
+        let len = data.len();
+        
+        // Pin les pages du sender
+        let paddrs = MEM_MGR.pin_pages(sender_vaddr, len)?;
+        
+        // Créer la région partagée
+        let region = SharedRegion {
+            id: generate_region_id(),
+            pages: paddrs.iter().map(|pa| PhysicalPage { 
+                paddr: *pa, 
+                refcount: AtomicU32::new(2),  // sender + receiver
+                flags: PageFlags::PRESENT | PageFlags::PINNED,
+            }).collect(),
+            sender_vaddr,
+            receiver_vaddr: VirtAddr::null(),  // Sera alloué par receiver
+            len,
+        };
+        
+        let ep = CAP_MGR.get_object::<IpcEndpoint>(dest_ep)?;
+        ep.shared_regions.push(region.clone());
+        
+        // Notifier le receiver
+        let msg = Message {
+            sender: current_process_id(),
+            inline_data: [0; IPC_INLINE_MAX],
+            len: 0,  // Pas de données inline
+            caps: [caps[0], region_to_cap(&region), Capability::default(), Capability::default()],
+            n_caps: 1 + caps.len(),
+        };
+        
+        ep.mailbox.queue.push(msg)?;
+        ep.mailbox.waiters.wake_one();
+        
+        // Retourner la capability de la région pour le sender
+        Ok(region_to_cap(&region))
+    }
+    
+    // Receive (bloquant)
+    fn recv(my_ep: &Capability, buf: &mut [u8], out_caps: &mut [Capability]) 
+        -> Result<usize> {
+        CAP_MGR.validate(my_ep, Rights::RECV)?;
+        
+        let ep = CAP_MGR.get_object::<IpcEndpoint>(my_ep)?;
+        
+        // Attendre un message
+        let msg = loop {
+            if let Some(m) = ep.mailbox.queue.pop() {
+                break m;
+            }
+            ep.mailbox.waiters.wait()?;
+        };
+        
+        // Copier les données inline
+        if msg.len > 0 {
+            if buf.len() < msg.len {
+                return Err(ERR_BUFFER_TOO_SMALL);
+            }
+            buf[..msg.len].copy_from_slice(&msg.inline_data[..msg.len]);
+        }
+        
+        // Transférer capabilities
+        out_caps[..msg.n_caps].copy_from_slice(&msg.caps[..msg.n_caps]);
+        
+        Ok(msg.len)
+    }
+    
+    // Mapper une région partagée dans l'espace d'adressage du receiver
+    fn map_shared_region(region_cap: &Capability) -> Result<&[u8]> {
+        CAP_MGR.validate(region_cap, Rights::MAP)?;
+        
+        let region = CAP_MGR.get_object::<SharedRegion>(region_cap)?;
+        
+        // Allouer espace virtuel dans le receiver
+        let vaddr = allocate_vaddr_range(region.len)?;
+        
+        // Mapper les pages physiques
+        let page_table = current_page_table();
+        for (i, page) in region.pages.iter().enumerate() {
+            MEM_MGR.map_page(
+                page_table, 
+                vaddr + i * PAGE_SIZE, 
+                page.paddr,
+                PageFlags::PRESENT | PageFlags::USER | PageFlags::WRITABLE
+            )?;
+        }
+        
+        Ok(unsafe { slice::from_raw_parts(vaddr.as_ptr(), region.len) })
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 4: SCHEDULER (Kernel + Userland Service)
+// ───────────────────────────────────────────────────────────────────────────
+
+struct Thread {
+    id: ThreadId,
+    state: ThreadState,
+    context: Context,       // Registres CPU sauvegardés
+    priority: u8,
+    timeslice: u64,         // Quantum restant (ns)
+    exec_unit: ExecutionUnit,  // CPU/GPU/TPU assigné
+    caps: Vec<Capability>,  // Capabilities du thread
+}
+
+enum ThreadState {
+    Ready,
+    Running,
+    Blocked(BlockReason),
+    Zombie,
+}
+
+enum BlockReason {
+    WaitIPC(IpcEndpoint),
+    WaitIO(DeviceId),
+    Sleep(Timestamp),
+}
+
+struct ExecutionUnit {
+    unit_type: UnitType,
+    unit_id: usize,
+    load: f32,           // 0.0 - 1.0
+    temperature: f32,    // Celsius
+    power: f32,          // Watts
+}
+
+enum UnitType {
+    CPU,
+    GPU,
+    TPU,
+}
+
+struct Scheduler {
+    ready_queues: [RunQueue; 8],  // Par priorité
+    current_thread: Option<ThreadId>,
+    ticks: AtomicU64,
+}
+
+impl Scheduler {
+    // Ordonnanceur minimal kernel (preemptive round-robin)
+    fn schedule() -> ThreadId {
+        let current = self.current_thread;
+        
+        // Sauvegarder contexte du thread actuel
+        if let Some(tid) = current {
+            let thread = THREADS.get_mut(tid)?;
+            save_context(&mut thread.context);
+            
+            if thread.timeslice == 0 {
+                thread.timeslice = QUANTUM_NS;
+                self.enqueue_ready(thread);
+            }
+        }
+        
+        // Sélectionner prochain thread (priorité la plus haute)
+        let next = self.pick_next_thread()?;
+        
+        // Hook vers scheduler-service userland (optionnel)
+        if SCHEDULER_SERVICE_ENABLED {
+            self.call_scheduler_service(current, next);
+        }
+        
+        // Restaurer contexte
+        let thread = THREADS.get(next)?;
+        restore_context(&thread.context);
+        
+        self.current_thread = Some(next);
+        next
+    }
+    
+    // Sélection du prochain thread (policy simple)
+    fn pick_next_thread() -> Option<ThreadId> {
+        // Parcourir les queues par priorité décroissante
+        for queue in self.ready_queues.iter().rev() {
+            if let Some(tid) = queue.pop_front() {
+                return Some(tid);
+            }
+        }
+        None
+    }
+    
+    // Heuristique pour assigner une execution unit (CPU/GPU/TPU)
+    fn find_best_unit_for_thread(thread: &Thread) -> ExecutionUnit {
+        let compute_type = infer_compute_type(thread);
+        
+        let candidates = EXECUTION_UNITS.iter()
+            .filter(|u| u.unit_type == compute_type)
+            .collect::<Vec<_>>();
+        
+        // Score = f(load, temperature, locality)
+        let best = candidates.iter()
+            .min_by_key(|u| {
+                let load_score = (u.load * 100.0) as u32;
+                let temp_score = if u.temperature > 80.0 { 1000 } else { 0 };
+                let locality_score = if thread.last_unit == u.unit_id { 0 } else { 50 };
+                
+                load_score + temp_score + locality_score
+            })
+            .unwrap();
+        
+        best.clone()
+    }
+    
+    // Yield (thread cède volontairement le CPU)
+    fn yield_cpu() {
+        let tid = self.current_thread.unwrap();
+        let thread = THREADS.get_mut(tid)?;
+        thread.timeslice = 0;  // Force reschedule
+        self.schedule();
+    }
+    
+    // Hook eBPF scheduler (appelé avant/après schedule)
+    fn ebpf_hook_schedule(event: ScheduleEvent) {
+        if let Some(prog) = EBPF_ENGINE.get_program(HOOK_SCHEDULER) {
+            let ctx = ScheduleContext {
+                prev_tid: event.prev,
+                next_tid: event.next,
+                timestamp: rdtsc(),
+            };
+            prog.run(&ctx);
+        }
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 5: eBPF ENGINE (Verifier + JIT)
+// ───────────────────────────────────────────────────────────────────────────
+
+const EBPF_MAX_INSNS: usize = 4096;
+const EBPF_STACK_SIZE: usize = 512;
+
+struct EbpfProgram {
+    insns: Vec<EbpfInsn>,
+    jit_code: Option<*const u8>,  // Code natif JITté
+    verified: bool,
+}
+
+struct EbpfInsn {
+    opcode: u8,
+    dst_reg: u8,
+    src_reg: u8,
+    offset: i16,
+    imm: i32,
+}
+
+enum EbpfHook {
+    XDP_INGRESS,
+    XDP_EGRESS,
+    SYSCALL_ENTRY,
+    SYSCALL_EXIT,
+    SCHED_SWITCH,
+    AI_INFER_PRE,
+    AI_INFER_POST,
+}
+
+struct EbpfEngine {
+    programs: HashMap<EbpfHook, Vec<EbpfProgram>>,
+    verifier: EbpfVerifier,
+    jit: EbpfJit,
+}
+
+impl EbpfEngine {
+    // Chargement et vérification d'un programme eBPF
+    fn load_program(bytecode: &[u8], hook: EbpfHook) -> Result<ProgramId> {
+        let insns = parse_bytecode(bytecode)?;
+        
+        if insns.len() > EBPF_MAX_INSNS {
+            return Err(ERR_PROGRAM_TOO_LARGE);
+        }
+        
+        // Vérification de sécurité
+        self.verifier.verify(&insns)?;
+        
+        let prog = EbpfProgram {
+            insns,
+            jit_code: None,
+            verified: true,
+        };
+        
+        // JIT compilation
+        if JIT_ENABLED {
+            prog.jit_code = Some(self.jit.compile(&prog.insns)?);
+        }
+        
+        let id = self.register_program(hook, prog)?;
+        Ok(id)
+    }
+    
+    // Exécution d'un programme eBPF
+    fn run_program(prog: &EbpfProgram, ctx: &[u8]) -> Result<u64> {
+        if let Some(jit_fn) = prog.jit_code {
+            // Exécution JIT (fast path)
+            unsafe {
+                let f: extern "C" fn(*const u8) -> u64 = transmute(jit_fn);
+                Ok(f(ctx.as_ptr()))
+            }
+        } else {
+            // Interprétation (fallback)
+            self.interpret(&prog.insns, ctx)
+        }
+    }
+    
+    // Vérifieur eBPF (sécurité)
+    fn verify(insns: &[EbpfInsn]) -> Result<()> {
+        let mut regs = [RegState::Unknown; 11];  // r0-r10
+        regs[10].set_type(RegType::Stack);       // r10 = stack pointer
+        
+        for (pc, insn) in insns.iter().enumerate() {
+            match insn.opcode {
+                // ALU ops
+                OP_ADD64 | OP_SUB64 | OP_MUL64 => {
+                    self.check_reg_initialized(regs[insn.src_reg])?;
+                    regs[insn.dst_reg] = regs[insn.src_reg];
+                }
+                
+                // Load/Store — vérifier bounds
+                OP_LDXDW | OP_STXDW => {
+                    self.check_memory_access(regs[insn.dst_reg], insn.offset)?;
+                }
+                
+                // Jumps — pas de boucles infinies
+                OP_JMP => {
+                    let target = pc + insn.offset as usize;
+                    if target >= insns.len() {
+                        return Err(ERR_INVALID_JUMP);
+                    }
+                    // Vérifier pas de backward jump infini
+                    if target <= pc && !self.is_bounded_loop(insns, pc, target) {
+                        return Err(ERR_UNBOUNDED_LOOP);
+                    }
+                }
+                
+                OP_EXIT => break,
+                
+                _ => return Err(ERR_INVALID_OPCODE),
+            }
+        }
+        
+        Ok(())
+    }
+    
+    // JIT compilation (x86-64 example)
+    fn jit_compile(insns: &[EbpfInsn]) -> Result<*const u8> {
+        let mut code = Vec::new();
+        
+        // Prologue
+        code.extend_from_slice(&[
+            0x55,                   // push rbp
+            0x48, 0x89, 0xe5,       // mov rbp, rsp
+            0x48, 0x83, 0xec, 0x40, // sub rsp, 64 (stack space)
+        ]);
+        
+        for insn in insns {
+            match insn.opcode {
+                OP_ADD64 => {
+                    // add r_dst, r_src
+                    code.extend_from_slice(&[
+                        0x4c | reg_to_rex(insn.dst_reg),
+                        0x01,
+                        0xc0 | (reg_to_modrm(insn.src_reg) << 3) | reg_to_modrm(insn.dst_reg),
+                    ]);
+                }
+                
+                OP_MOV64_IMM => {
+                    // mov r_dst, imm
+                    code.push(0x48 | reg_to_rex(insn.dst_reg));
+                    code.push(0xc7);
+                    code.push(0xc0 | reg_to_modrm(insn.dst_reg));
+                    code.extend_from_slice(&insn.imm.to_le_bytes());
+                }
+                
+                OP_EXIT => {
+                    // Epilogue
+                    code.extend_from_slice(&[
+                        0x48, 0x89, 0xec,  // mov rsp, rbp
+                        0x5d,              // pop rbp
+                        0xc3,              // ret
+                    ]);
+                    break;
+                }
+                
+                _ => return Err(ERR_JIT_UNSUPPORTED),
+            }
+        }
+        
+        // Allouer mémoire exécutable
+        let page = allocate_executable_page(code.len())?;
+        copy_to_page(page, &code);
+        
+        Ok(page as *const u8)
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 6: AI RUNTIME (ΦAI Engine)
+// ───────────────────────────────────────────────────────────────────────────
+
+struct AIRuntime {
+    model_cache: ModelCache,
+    batcher: Batcher,
+    device_selector: DeviceSelector,
+}
+
+struct ModelCache {
+    cache: LRUCache<ModelId, LoadedModel>,
+    max_size_gb: usize,
+}
+
+struct LoadedModel {
+    id: ModelId,
+    weights: MappedMemory,      // Pinned pages
+    metadata: ModelMetadata,
+    device: ExecutionUnit,
+    quantization: QuantizationLevel,
+}
+
+struct Batcher {
+    pending: HashMap<ModelId, Vec<InferRequest>>,
+    batch_window_ns: u64,       // Fenêtre pour accumuler requests
+    max_batch_size: usize,
+}
+
+struct InferRequest {
+    request_id: u64,
+    input: Tensor,
+    callback: Capability,       // IPC endpoint pour réponse
+    deadline: Timestamp,        // SLO
+}
+
+impl AIRuntime {
+    // Chargement lazy d'un modèle (avec cache)
+    fn load_model(model_id: ModelId) -> Result<&LoadedModel> {
+        if let Some(model) = self.model_cache.get(&model_id) {
+            return Ok(model);  // Cache hit
+        }
+        
+        // Cache miss — charger depuis VDFS
+        let blob_cap = VDFS.get_model_blob(model_id)?;
+        let weights = VDFS.map_blob(blob_cap)?;  // Zero-copy mapping
+        
+        // Sélectionner device optimal
+        let device = self.device_selector.select_for_model(&model_id)?;
+        
+        // Quantization on-the-fly si besoin
+        let quantization = if device.unit_type == UnitType::TPU {
+            QuantizationLevel::INT8
+        } else {
+            QuantizationLevel::FP16
+        };
+        
+        let model = LoadedModel {
+            id: model_id,
+            weights,
+            metadata: load_metadata(model_id)?,
+            device,
+            quantization,
+        };
+        
+        self.model_cache.insert(model_id, model);
+        Ok(self.model_cache.get(&model_id).unwrap())
+    }
+    
+    // Inférence avec batching automatique
+    fn infer(model_id: ModelId, input: Tensor, callback: Capability, deadline: Timestamp) 
+        -> Result<()> {
+        let request = InferRequest {
+            request_id: generate_request_id(),
+            input,
+            callback,
+            deadline,
+        };
+        
+        // Ajouter au batcher
+        self.batcher.add_request(model_id, request);
+        
+        // Déclencher batch si conditions remplies
+        if self.batcher.should_dispatch(model_id) {
+            self.dispatch_batch(model_id)?;
+        }
+        
+        Ok(())
+    }
+    
+    // Dispatch d'un batch vers GPU/TPU
+    fn dispatch_batch(model_id: ModelId) -> Result<()> {
+        let requests = self.batcher.take_batch(model_id)?;
+        let model = self.load_model(model_id)?;
+        
+        // Hook eBPF pré-inférence
+        EBPF_ENGINE.run_hook(HOOK_AI_INFER_PRE, &BatchContext {
+            model_id,
+            batch_size: requests.len(),
+            device: model.device.unit_id,
+        });
+        
+        // Créer tensor batché (zero-copy via pinned pages)
+        let batch_tensor = self.build_batch_tensor(&requests)?;
+        
+        // Exécution sur device
+        let outputs = match model.device.unit_type {
+            UnitType::GPU => self.run_on_gpu(model, batch_tensor)?,
+            UnitType::TPU => self.run_on_tpu(model, batch_tensor)?,
+            UnitType::CPU => self.run_on_cpu(model, batch_tensor)?,
+        };
+        
+        // Hook eBPF post-inférence
+        EBPF_ENGINE.run_hook(HOOK_AI_INFER_POST, &BatchContext {
+            model_id,
+            batch_size: requests.len(),
+            device: model.device.unit_id,
+        });
+        
+        // Dispatch responses via IPC
+        for (i, request) in requests.iter().enumerate() {
+            let output = outputs.get_slice(i)?;
+            IPC.send_inline(&request.callback, output.as_bytes(), &[])?;
+        }
+        
+        Ok(())
+    }
+    
+    // Exécution GPU (exemple avec driver userland)
+    fn run_on_gpu(model: &LoadedModel, input: Tensor) -> Result<Tensor> {
+        let gpu_driver_cap = DEVICE_MGR.get_driver_cap(model.device.unit_id)?;
+        
+        // Allouer buffer GPU via driver
+        let gpu_buf = GPU_DRIVER.alloc_buffer(input.size_bytes())?;
+        
+        // DMA transfer CPU -> GPU (zero-copy via pinned pages)
+        let pinned_pages = MEM_MGR.pin_pages(input.data_ptr(), input.size_bytes())?;
+        GPU_DRIVER.dma_transfer(pinned_pages, gpu_buf)?;
+        
+        // Launch kernel
+        let kernel_cap = model.metadata.get_gpu_kernel()?;
+        GPU_DRIVER.launch_kernel(kernel_cap, gpu_buf, model.weights)?;
+        
+        // DMA transfer GPU -> CPU (résultat)
+        let output_size = model.metadata.output_size;
+        let output_buf = allocate_pinned_buffer(output_size)?;
+        GPU_DRIVER.dma_transfer(gpu_buf, output_buf)?;
+        
+        Ok(Tensor::from_buffer(output_buf, model.metadata.output_shape))
+    }
+    
+    // Device selector (heuristique)
+    fn select_device_for_model(model_id: ModelId) -> Result<ExecutionUnit> {
+        let metadata = load_metadata(model_id)?;
+        let candidates = EXECUTION_UNITS.iter()
+            .filter(|u| u.unit_type != UnitType::CPU)  // Préférer accélérateurs
+            .collect::<Vec<_>>();
+        
+        // Score multi-critères
+        let best = candidates.iter()
+            .min_by_key(|u| {
+                let load_penalty = (u.load * 1000.0) as u32;
+                let temp_penalty = if u.temperature > 85.0 { 5000 } else { 0 };
+                let type_bonus = match (u.unit_type, metadata.preferred_device) {
+                    (UnitType::TPU, DevicePreference::TPU) => 0,
+                    (UnitType::GPU, DevicePreference::GPU) => 0,
+                    _ => 1000,
+                };
+                
+                load_penalty + temp_penalty + type_bonus
+            })
+            .ok_or(ERR_NO_DEVICE_AVAILABLE)?;
+        
+        Ok(best.clone())
+    }
+}
+
+impl Batcher {
+    // Décision de dispatch (latency vs throughput trade-off)
+    fn should_dispatch(model_id: ModelId) -> bool {
+        let pending = self.pending.get(&model_id)?;
+        
+        // Critère 1: batch plein
+        if pending.len() >= self.max_batch_size {
+            return true;
+        }
+        
+        // Critère 2: deadline proche
+        let now = current_timestamp();
+        if pending.iter().any(|r| r.deadline - now < Duration::from_millis(5)) {
+            return true;
+        }
+        
+        // Critère 3: fenêtre temporelle expirée
+        let oldest = pending.first()?.submission_time;
+        if now - oldest >= self.batch_window_ns {
+            return true;
+        }
+        
+        false
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 7: VDFS (Vector Database FileSystem)
+// ───────────────────────────────────────────────────────────────────────────
+
+struct VDFS {
+    cas_store: ContentAddressableStore,    // Blobs
+    hnsw_index: HNSWIndex,                 // Embeddings → blob_id
+    metadata_db: MetadataDB,
+}
+
+struct Blob {
+    hash: Hash256,          // SHA-256 content hash
+    size: usize,
+    pages: Vec<PhysicalPage>,  // Pinned physical pages
+    refcount: AtomicU32,
+}
+
+struct HNSWIndex {
+    layers: Vec<HNSWLayer>,
+    entry_point: NodeId,
+    ef_construction: usize,  // Paramètre qualité
+    m: usize,                // Connections par noeud
+}
+
+struct HNSWNode {
+    id: NodeId,
+    vector: Vec<f32>,        // Embedding
+    blob_id: Hash256,        // Référence vers blob
+    neighbors: Vec<NodeId>,
+}
+
+impl VDFS {
+    // Stockage d'un blob (content-addressable)
+    fn store_blob(data: &[u8]) -> Result<Hash256> {
+        let hash = sha256(data);
+        
+        // Déduplication
+        if self.cas_store.contains(&hash) {
+            return Ok(hash);
+        }
+        
+        // Allouer et copier vers pages pinnées
+        let num_pages = (data.len() + PAGE_SIZE - 1) / PAGE_SIZE;
+        let mut pages = Vec::new();
+        
+        for i in 0..num_pages {
+            let page = MEM_MGR.alloc_page()?;
+            let offset = i * PAGE_SIZE;
+            let chunk = &data[offset..min(offset + PAGE_SIZE, data.len())];
+            
+            unsafe {
+                copy_to_page(page.paddr, chunk);
+            }
+            
+            pages.push(page);
+        }
+        
+        let blob = Blob {
+            hash,
+            size: data.len(),
+            pages,
+            refcount: AtomicU32::new(1),
+        };
+        
+        self.cas_store.insert(hash, blob);
+        Ok(hash)
+    }
+    
+    // Mapping zero-copy d'un blob (retourne capability mémoire)
+    fn map_blob(blob_hash: Hash256) -> Result<Capability> {
+        let blob = self.cas_store.get(&blob_hash).ok_or(ERR_BLOB_NOT_FOUND)?;
+        
+        // Créer capability pointant vers les pages pinnées
+        let mem_cap = CAP_MGR.create(
+            CapType::MEMORY,
+            Rights::READ | Rights::MAP,
+            KernelObject::MappedBlob(blob.clone())
+        )?;
+        
+        Ok(mem_cap)
+    }
+    
+    // Indexation d'un embedding
+    fn index_embedding(vector: Vec<f32>, blob_hash: Hash256) -> Result<()> {
+        // Normaliser le vecteur
+        let norm = vector.iter().map(|x| x * x).sum::<f32>().sqrt();
+        let normalized = vector.iter().map(|x| x / norm).collect();
+        
+        // Insertion HNSW
+        let node = HNSWNode {
+            id: generate_node_id(),
+            vector: normalized,
+            blob_id: blob_hash,
+            neighbors: Vec::new(),
+        };
+        
+        self.hnsw_index.insert(node)?;
+        Ok(())
+    }
+    
+    // Recherche sémantique (K nearest neighbors)
+    fn search(query_vector: Vec<f32>, k: usize) -> Result<Vec<SearchResult>> {
+        let normalized = normalize_vector(query_vector);
+        
+        // Recherche HNSW
+        let mut candidates = Vec::new();
+        let mut visited = HashSet::new();
+        let mut ep = self.hnsw_index.entry_point;
+        
+        // Phase 1: descente depuis le top layer
+        for layer in (1..self.hnsw_index.layers.len()).rev() {
+            ep = self.greedy_search_layer(&normalized, ep, 1, layer, &mut visited)?[0];
+        }
+        
+        // Phase 2: recherche finale au layer 0
+        candidates = self.greedy_search_layer(&normalized, ep, k * 2, 0, &mut visited)?;
+        
+        // Trier par distance et prendre top-k
+        candidates.sort_by(|a, b| a.distance.partial_cmp(&b.distance).unwrap());
+        candidates.truncate(k);
+        
+        // Charger les métadonnées des blobs
+        let results = candidates.iter()
+            .map(|c| {
+                let node = self.hnsw_index.get_node(c.node_id)?;
+                let metadata = self.metadata_db.get(&node.blob_id)?;
+                Ok(SearchResult {
+                    blob_hash: node.blob_id,
+                    distance: c.distance,
+                    metadata,
+                })
+            })
+            .collect::<Result<Vec<_>>>()?;
+        
+        Ok(results)
+    }
+    
+    // Greedy search dans un layer HNSW
+    fn greedy_search_layer(query: &[f32], entry: NodeId, ef: usize, layer: usize,
+                           visited: &mut HashSet<NodeId>) -> Result<Vec<Candidate>> {
+        let mut candidates = BinaryHeap::new();  // Max-heap
+        let mut w = BinaryHeap::new();           // Min-heap des résultats
+        
+        visited.insert(entry);
+        let entry_node = self.hnsw_index.get_node(entry)?;
+        let dist = cosine_distance(query, &entry_node.vector);
+        
+        candidates.push(Reverse(Candidate { node_id: entry, distance: dist }));
+        w.push(Candidate { node_id: entry, distance: dist });
+        
+        while let Some(Reverse(c)) = candidates.pop() {
+            if c.distance > w.peek().unwrap().distance {
+                break;  // Tous les candidats restants sont trop loin
+            }
+            
+            let node = self.hnsw_index.get_node_at_layer(c.node_id, layer)?;
+            
+            for &neighbor_id in &node.neighbors {
+                if visited.contains(&neighbor_id) {
+                    continue;
+                }
+                visited.insert(neighbor_id);
+                
+                let neighbor = self.hnsw_index.get_node(neighbor_id)?;
+                let d = cosine_distance(query, &neighbor.vector);
+                
+                if d < w.peek().unwrap().distance || w.len() < ef {
+                    candidates.push(Reverse(Candidate { node_id: neighbor_id, distance: d }));
+                    w.push(Candidate { node_id: neighbor_id, distance: d });
+                    
+                    if w.len() > ef {
+                        w.pop();
+                    }
+                }
+            }
+        }
+        
+        Ok(w.into_sorted_vec())
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 8: NETWORK STACK (Userland avec eBPF XDP)
+// ───────────────────────────────────────────────────────────────────────────
+
+struct NetworkStack {
+    interfaces: Vec<NetworkInterface>,
+    sockets: HashMap<SocketId, Socket>,
+    xdp_programs: HashMap<InterfaceId, EbpfProgram>,
+}
+
+struct NetworkInterface {
+    id: InterfaceId,
+    mac: MacAddr,
+    driver_cap: Capability,      // Driver userland
+    rx_queue: RingBuffer<Packet>,
+    tx_queue: RingBuffer<Packet>,
+}
+
+struct Socket {
+    id: SocketId,
+    protocol: Protocol,
+    local_addr: SocketAddr,
+    remote_addr: Option<SocketAddr>,
+    rx_buf: RingBuffer<Packet>,
+    ipc_endpoint: Capability,    // Pour notifications
+}
+
+impl NetworkStack {
+    // Attachement d'un programme eBPF XDP
+    fn attach_xdp(interface_id: InterfaceId, prog: EbpfProgram) -> Result<()> {
+        EBPF_ENGINE.verify(&prog)?;
+        self.xdp_programs.insert(interface_id, prog);
+        Ok(())
+    }
+    
+    // Réception packet (appelé par driver IRQ)
+    fn recv_packet(interface_id: InterfaceId, packet: Packet) -> Result<XdpAction> {
+        // Hook XDP ingress
+        if let Some(prog) = self.xdp_programs.get(&interface_id) {
+            let action = EBPF_ENGINE.run_program(prog, packet.data())?;
+            
+            match action {
+                XDP_DROP => return Ok(XdpAction::Drop),
+                XDP_PASS => {},  // Continue processing
+                XDP_TX => {
+                    // Renvoyer packet immédiatement
+                    self.send_packet(interface_id, packet)?;
+                    return Ok(XdpAction::Tx);
+                }
+                XDP_REDIRECT => {
+                    // Rediriger vers autre interface
+                    let target_if = extract_redirect_target(&packet)?;
+                    self.send_packet(target_if, packet)?;
+                    return Ok(XdpAction::Redirect);
+                }
+            }
+        }
+        
+        // Parsing et dispatch vers socket
+        let (proto, src, dst) = parse_packet_headers(&packet)?;
+        
+        if let Some(socket) = self.find_socket(proto, dst) {
+            socket.rx_buf.push(packet)?;
+            
+            // Notifier le process via IPC
+            IPC.send_inline(&socket.ipc_endpoint, &[], &[])?;
+        }
+        
+        Ok(XdpAction::Pass)
+    }
+    
+    // Envoi packet (zero-copy via pinned pages)
+    fn send_packet(interface_id: InterfaceId, packet: Packet) -> Result<()> {
+        let interface = self.interfaces.get(interface_id)?;
+        
+        // Hook XDP egress
+        if let Some(prog) = self.xdp_programs.get(&interface_id) {
+            let action = EBPF_ENGINE.run_program(prog, packet.data())?;
+            if action == XDP_DROP {
+                return Ok(());
+            }
+        }
+        
+        // Enqueue pour TX
+        interface.tx_queue.push(packet)?;
+        
+        // Notifier driver via IRQ capability
+        notify_driver(interface.driver_cap)?;
+        
+        Ok(())
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 9: DEVICE DRIVERS (Userland Model)
+// ───────────────────────────────────────────────────────────────────────────
+
+struct DeviceDriver {
+    device_id: DeviceId,
+    device_mem: Capability,      // MMIO mapping
+    irq_cap: Capability,         // IRQ endpoint
+    dma_regions: Vec<DMARegion>,
+}
+
+struct DMARegion {
+    vaddr: VirtAddr,
+    paddr: PhysAddr,
+    size: usize,
+    pinned: bool,
+}
+
+impl DeviceDriver {
+    // Exemple: driver NVMe (SSD ultra-rapide)
+    fn nvme_driver_main() {
+        let dev_cap = receive_device_capability();
+        let irq_cap = receive_irq_capability();
+        
+        // Mapper MMIO
+        let mmio = map_device_memory(dev_cap)?;
+        
+        // Setup queues DMA
+        let admin_queue = allocate_dma_queue(ADMIN_QUEUE_SIZE)?;
+        let io_queues = (0..NUM_IO_QUEUES)
+            .map(|_| allocate_dma_queue(IO_QUEUE_SIZE))
+            .collect::<Result<Vec<_>>>()?;
+        
+        // Initialiser device
+        nvme_init_controller(mmio, admin_queue)?;
+        
+        // Boucle événements IRQ
+        loop {
+            // Attendre IRQ
+            IPC.recv(irq_cap, &mut buf, &mut caps)?;
+            
+            // Handler interruption
+            let cqe = nvme_process_completion(mmio, &io_queues)?;
+            
+            // Notifier demandeur via IPC
+            let request_id = cqe.command_id;
+            let callback = pending_requests.remove(request_id)?;
+            IPC.send_inline(callback, cqe.data(), &[])?;
+        }
+    }
+    
+    // Lecture zero-copy depuis NVMe
+    fn nvme_read_zero_copy(lba: u64, num_blocks: u32, dest_buf: &mut [u8]) 
+        -> Result<()> {
+        // Pin destination buffer
+        let paddrs = MEM_MGR.pin_pages(VirtAddr::from_ptr(dest_buf.as_ptr()), 
+                                       dest_buf.len())?;
+        
+        // Construire PRPs (Physical Region Pages) pour DMA
+        let prps = build_prp_list(paddrs)?;
+        
+        // Soumettre commande NVMe
+        let cmd = NVMeCommand::Read {
+            lba,
+            num_blocks,
+            prp1: prps[0],
+            prp2: if prps.len() > 1 { prps[1] } else { 0 },
+        };
+        
+        nvme_submit_command(&self.io_queues[0], cmd)?;
+        
+        // Attendre completion (IRQ)
+        wait_for_completion(cmd.id)?;
+        
+        // Data est maintenant dans dest_buf (DMA direct)
+        Ok(())
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 10: BOOT & INITIALIZATION
+// ───────────────────────────────────────────────────────────────────────────
+
+fn kernel_main(boot_info: &BootInfo) {
+    // Phase 1: Hardware initialization
+    init_gdt();
+    init_idt();
+    init_paging(boot_info.memory_map);
+    init_heap();
+    
+    // Phase 2: Core subsystems
+    CAP_MGR.init();
+    MEM_MGR.init(boot_info.memory_map);
+    IPC.init();
+    SCHEDULER.init();
+    EBPF_ENGINE.init();
+    
+    // Phase 3: Spawn init userland process
+    let init_binary = load_init_from_initrd()?;
+    let init_caps = create_init_capabilities()?;
+    
+    let init_proc = Process::spawn(
+        init_binary,
+        init_caps,
+        Priority::HIGH
+    )?;
+    
+    // Phase 4: Start scheduler
+    SCHEDULER.add_thread(init_proc.main_thread);
+    SCHEDULER.start();
+    
+    // Kernel idle loop (jamais atteint normalement)
+    loop {
+        halt();
+    }
+}
+
+// Process init userland (PID 1)
+fn init_main() {
+    // Spawn services essentiels
+    spawn_service("phi_fs", PHIFS_BINARY, fs_caps());
+    spawn_service("ai_runtime", AI_RUNTIME_BINARY, ai_caps());
+    spawn_service("net_stack", NET_STACK_BINARY, net_caps());
+    spawn_service("device_manager", DEVICE_MGR_BINARY, dev_caps());
+    
+    // Attendre que tous soient prêts
+    wait_for_services_ready();
+    
+    // Spawn shell ou application principale
+    spawn_app("phi_shell", SHELL_BINARY, user_caps());
+    
+    // Boucle maintenance
+    loop {
+        // Respawn services crashed
+        monitor_and_restart_services();
+        sleep(Duration::from_secs(1));
+    }
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// MODULE 11: SYSCALL INTERFACE (ABI Kernel/Userland)
+// ───────────────────────────────────────────────────────────────────────────
+
+// Syscalls disponibles (minimal set)
+const SYS_CAP_INVOKE: usize = 1;
+const SYS_IPC_SEND: usize = 2;
+const SYS_IPC_RECV: usize = 3;
+const SYS_MAP_MEMORY: usize = 4;
+const SYS_UNMAP_MEMORY: usize = 5;
+const SYS_CREATE_THREAD: usize = 6;
+const SYS_YIELD: usize = 7;
+const SYS_EXIT: usize = 8;
+
+// Handler syscall (entry point depuis userland)
+#[no_mangle]
+pub extern "C" fn syscall_handler(
+    syscall_num: usize,
+    arg1: usize,
+    arg2: usize,
+    arg3: usize,
+    arg4: usize,
+    arg5: usize,
+) -> isize {
+    // Hook eBPF syscall entry
+    EBPF_ENGINE.run_hook(HOOK_SYSCALL_ENTRY, &SyscallContext {
+        num: syscall_num,
+        pid: current_process_id(),
+    });
+    
+    let result = match syscall_num {
+        SYS_CAP_INVOKE => sys_cap_invoke(
+            arg1 as CapHandle,
+            arg2 as u32,
+            arg3 as *const u8,
+            arg4 as usize,
+            arg5 as *mut u8,
+        ),
+        
+        SYS_IPC_SEND => sys_ipc_send(
+            arg1 as CapHandle,
+            arg2 as *const u8,
+            arg3 as usize,
+            arg4 as *const CapHandle,
+            arg5 as usize,
+        ),
+        
+        SYS_IPC_RECV => sys_ipc_recv(
+            arg1 as CapHandle,
+            arg2 as *mut u8,
+            arg3 as usize,
+            arg4 as *mut CapHandle,
+            arg5 as *mut usize,
+        ),
+        
+        SYS_MAP_MEMORY => sys_map_memory(
+            arg1 as CapHandle,
+            arg2 as VirtAddr,
+            arg3 as u32,
+        ),
+        
+        SYS_YIELD => {
+            SCHEDULER.yield_cpu();
+            0
+        }
+        
+        SYS_EXIT => {
+            current_thread().exit(arg1 as i32);
+            unreachable!();
+        }
+        
+        _ => Err(ERR_INVALID_SYSCALL) as isize,
+    };
+    
+    // Hook eBPF syscall exit
+    EBPF_ENGINE.run_hook(HOOK_SYSCALL_EXIT, &SyscallContext {
+        num: syscall_num,
+        pid: current_process_id(),
+    });
+    
+    result
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FIN DU PSEUDOCODE — ARCHITECTURE ΦOS COMPLÈTE
+// ═══════════════════════════════════════════════════════════════════════════
+// 
+// PROCHAINES ÉTAPES:
+// 1. Traduire ce pseudocode en Rust (no_std)
+// 2. Implémenter tests unitaires pour chaque module
+// 3. Setup environnement QEMU pour boot MVP
+// 4. Itérer sur performance (benchmarks IPC, scheduler, AI inference)
+// 5. Fuzzing + formal verification des invariants critiques
+//
+// Ce code est un BLUEPRINT complet — chaque fonction est implémentable
+// directement en Rust avec minimal adaptation. Let's build this! 🚀
+// ═══════════════════════════════════════════════════════════════════════════

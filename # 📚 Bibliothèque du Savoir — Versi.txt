@@ -1,0 +1,193 @@
+# 📚 Bibliothèque du Savoir — Version Améliorée (TOC, Schémas & Annexes)
+
+## Table des Matières
+
+1. [Vision](#1-vision)
+2. [Principes Fondateurs](#2-principes-fondateurs)
+3. [Architecture Conceptuelle](#3-architecture-conceptuelle)
+
+   * Pipeline global
+   * Modules
+4. [Schéma de Métadonnées](#4-sch%C3%A9ma-de-m%C3%A9tadonn%C3%A9es)
+5. [Protocole de Vérification](#5-protocole-de-v%C3%A9rification)
+6. [Badges & Échelles de Confiance](#6-badges--%C3%A9chelles-de-confiance)
+7. [Gouvernance & Décentralisation](#7-gouvernance--d%C3%A9centralisation)
+8. [Stack Technique MVP](#8-stack-technique-mvp)
+9. [Indicateurs de Succès (KPI)](#9-indicateurs-de-succ%C3%A8s-kpi)
+10. [Sécurité & Robustesse](#10-s%C3%A9curit%C3%A9--robustesse)
+11. [Stratégie d’Adoption](#11-strat%C3%A9gie-d%E2%80%99adoption)
+12. [Scénarios d’usage](#12-sc%C3%A9narios-d%E2%80%99usage)
+13. [Feuille de route synthétique](#13-feuille-de-route-synth%C3%A9tique)
+14. [Vers une Norme ISO](#14-vers-une-norme-iso-de-linformation--de-l%C3%A9ducation)
+15. [Conclusion](#15-conclusion)
+16. [Glossaire](#16-glossaire)
+17. [Annexes](#17-annexes)
+
+---
+
+### 16. Glossaire
+
+* **Claim** : Affirmation ou énoncé factuel soumis pour vérification.
+* **RAG (Retrieval-Augmented Generation)** : Méthode combinant recherche de données et génération de texte.
+* **Pipeline** : Série d’étapes automatisées et humaines pour vérifier et publier un claim.
+* **NLP** : Natural Language Processing, traitement du langage naturel.
+* **PROV-O / RDF** : Standards pour la provenance et la structuration sémantique.
+* **ISO** : Organisation internationale de normalisation.
+* **KPI** : Indicateur clé de performance.
+
+### 17. Annexes
+
+#### 17.1. Exemple JSON d’affirmation
+
+```json
+{
+  "claim_id": "uuid",
+  "assertion_text": "Le changement climatique affecte les rendements agricoles.",
+  "canonicalized": "Le changement climatique impacte l'agriculture.",
+  "source_list": ["FAO 2023", "IPCC 2022"],
+  "provenance": {"submitted_by": "user123", "submission_date": "2025-11-15"},
+  "classification": {"type": "Fait", "confidence_score": 0.92},
+  "verification_history": [{"step": "NLP", "score": 0.89}, {"step": "Expert", "approved": true}],
+  "evidence": ["Rapport FAO 2023", "Résumé IPCC 2022"],
+  "tags": ["climat", "agriculture"],
+  "license": "CC-BY-SA-4.0",
+  "last_updated": "2025-11-15T12:00:00Z"
+}
+```
+
+#### 17.2. Checklist Sécurité & Qualité
+
+* Authentification OAuth2 et SSO vérifiée
+* Protection contre injection SQL et XSS
+* Audit modèles NLP (hallucinations, biais)
+* Logs immuables pour versioning
+* Contrôle des sources avant publication
+
+#### 17.3. Diagrammes Mermaid (à exporter)
+
+```mermaid
+flowchart TD
+    A[Soumission claim] --> B[Extraction NLP]
+    B --> C[Scoring IA]
+    C --> D[Recherche de preuves]
+    D --> E[Validation humaine]
+    E --> F[Publication + Traçabilité]
+    F --> G[Feedback & mise à jour]
+```
+
+```mermaid
+gantt
+title Feuille de route Bibliothèque du Savoir
+dateFormat  YYYY-MM-DD
+section Phase 0
+Repo Git, spec métadonnées : 2025-11-01, 2025-11-28
+section Phase 1
+Ingestion web, IA basique, crowd review : 2025-12-01, 2026-03-31
+section Phase 2
+Panel experts, ledger, model cards : 2026-04-01, 2026-08-31
+section Phase 3
+Internationalisation, cursus pilote, ISO : 2026-09-01, 2027-06-30
+```
+
+```mermaid
+flowchart LR
+    A[Fondation] --> B[Comité scientifique]
+    B --> C[Conseil éthique]
+    C --> D[Open review / décision]
+```
+
+#### 17.4. Next Steps / Appel à Action
+
+* Déployer un MVP sur MediaWiki + Qdrant
+* Recruter experts pilotes pour validation initiale
+* Tester pipeline NLP + IA en multilingue
+* Collecter premiers claims et lancer phase crowd review
+* Préparer dossier ISO / normalisation avec partenaires académiques
+
+
+Parfait BryanΩ — tu veux passer du **blueprint** au **déploiement concret**. Je vais te préparer un kit de documents à envoyer, avec une liste ciblée de destinataires stratégiques. L’idée est de transformer ton projet en une campagne de mobilisation crédible et professionnelle.
+
+---
+
+# 📑 Documents à préparer
+
+### 1. **Executive Summary (2 pages)**
+- **Langue** : anglais (pour portée internationale).
+- **Contenu** : vision, problème, solution, pipeline, gouvernance, ISO ambition.
+- **Style** : concis, visuel, avec 1 schéma pipeline + 1 tableau KPI.
+- **Usage** : premier contact avec fondations, ONG, universités.
+
+---
+
+### 2. **Pitch Deck (6–8 slides)**
+- **Slides** :
+  1. Vision & Problem
+  2. Solution (pipeline IA+humain)
+  3. Features (badges, provenance, governance)
+  4. Technical Stack MVP
+  5. Impact Metrics (KPI)
+  6. Roadmap & ISO ambition
+  7. Call to Action
+- **Usage** : présentation orale ou PDF envoyé à financeurs.
+
+---
+
+### 3. **Technical White Paper (10–15 pages)**
+- **Langue** : français/anglais selon audience.
+- **Contenu** : architecture détaillée, schémas Mermaid, workflows anti-biais, gouvernance, annexes JSON.
+- **Usage** : chercheurs, universités, comités ISO, partenaires techniques.
+
+---
+
+### 4. **One-Page Partner Brief**
+- **Langue** : anglais.
+- **Contenu** : résumé + “Next Steps” (pilot program, partnership offer).
+- **Usage** : ONG, ministères, médias.
+
+---
+
+### 5. **Letter of Intent / Cover Email**
+- **Langue** : anglais.
+- **Contenu** : invitation à rejoindre le projet pilote, proposition de réunion exploratoire.
+- **Usage** : premier contact personnalisé.
+
+---
+
+# 🎯 Destinataires stratégiques
+
+### 🌍 Fondations & ONG
+- **Open Society Foundations** (transparence, gouvernance)
+- **Mozilla Foundation** (open-source, internet health)
+- **UNESCO** (éducation, lutte contre désinformation)
+- **Ford Foundation** (justice sociale, information)
+- **Knight Foundation** (journalisme, médias)
+
+### 🏛️ Institutions académiques
+- Universités avec programmes en fact-checking / IA (Harvard Berkman Klein, Oxford Internet Institute, Sciences Po Médialab)
+- Réseaux de bibliothèques nationales (Bibliothèque nationale de France, Library of Congress)
+
+### 📰 Médias & fact-checking
+- **Poynter Institute / International Fact-Checking Network**
+- **Reuters Institute**
+- **Full Fact (UK)**
+- **Africa Check**
+
+### 📘 Normes & gouvernance
+- **ISO (International Organization for Standardization)** — comité sur information & éducation
+- **IEEE** — standards sur IA et transparence
+- **OECD** — initiatives sur gouvernance de l’information
+
+---
+
+# 🚀 Next Steps (Action Plan)
+
+1. **Finalize documents** : executive summary + pitch deck + partner brief.
+2. **Identify 10 pilot contacts** : 3 fondations, 3 universités, 2 médias, 2 ONG.
+3. **Send initial outreach** : cover email + executive summary.
+4. **Schedule exploratory calls** : 30 min, présenter pitch deck.
+5. **Launch pilot dataset** : 20 claims, démonstration pipeline.
+6. **Prepare ISO pre-proposal** : white paper + timeline.
+
+---
+
+👉 Je peux te rédiger dès maintenant un **Executive Summary en anglais** prêt à envoyer, ou un **email type de contact** pour fondations/ONG. Tu veux que je commence par l’Executive Summary ou par le modèle d’email ?

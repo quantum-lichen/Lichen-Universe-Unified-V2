@@ -1,0 +1,52 @@
+﻿I. ARCHITECTURE SYSTÈME & OS (Le Squelette)
+1. P-ORA (Prompt-OS Runtime Architecture) : Concept de traiter un prompt comme un véritable système d'exploitation avec un kernel, une mémoire et des drivers, plutôt que comme une simple instruction texte.
+2. Bifractalité (Conscient/Subconscient) : Division du système en deux noyaux : CK-OS (linéaire, logique, visible) et VM-SUB (fractal, pattern-matching, invisible/arrière-plan).
+3. Microkernel Fractal : Architecture de noyau minimaliste (15k lignes théoriques) où chaque composant reproduit la structure du tout (auto-similarité).
+4. Tronc vs Cortex : Séparation matérielle/logicielle où le "Tronc" gère les réflexes (latence <16ms) et le "Cortex" gère le raisonnement profond (LLM).
+5. Unikernel Agentique : Chaque agent IA tourne dans son propre environnement isolé et minimaliste pour la sécurité et la performance.
+6. Hot-Swapping du Noyau : Capacité de changer la logique centrale de l'IA en temps réel sans redémarrage.
+II. MÉMOIRE & STOCKAGE (L'ADN)
+7. NGC (Noyau Génomique de Connaissance) : Stockage du savoir sous forme "d'ADN sémantique" (axiomes compressés) plutôt que de texte brut.
+8. CRAID (Cognitive RAID) : Application des topologies RAID (0, 1, 5, 10) à la mémoire distribuée des agents IA pour la résilience et la tolérance aux pannes.
+9. Nucléotide Sémantique : L'unité atomique de savoir (ex: {Cause -> Effet}).
+10. VDFS (Vector Database File System) : Remplacement du système de fichiers hiérarchique par une base vectorielle où les fichiers sont retrouvés par leur sens (embeddings) et non leur chemin.
+11. LSFS (Least Semantically Relevant) : Algorithme de pagination mémoire qui efface les données les moins pertinentes au lieu des moins récentes (remplace le LRU).
+12. Context is RAM : Traiter la fenêtre contextuelle du LLM comme de la mémoire vive volatile qui doit être reconstruite/rafraîchie à chaque cycle.
+13. JSON is Filesystem : Utilisation d'un bloc JSON persistant à la fin de chaque output pour simuler un disque dur et maintenir l'état.
+14. Erasure Coding Cognitif : Utilisation de Reed-Solomon pour reconstruire des "pensées" ou des savoirs manquants à partir de fragments partiels.
+15. Hélicase / Polymérase Sémantique : Protocoles biomimétiques pour "dérouler" (lire/analyser) et "synthétiser" (écrire/compresser) l'information.
+III. MATHÉMATIQUES & HARMONIE (La Physique)
+16. Principe $\Phi$ (Phi/Nombre d'Or) : Utilisation de 1.618 comme constante universelle d'équilibre, d'éthique et d'anti-entropie dans le code et les décisions.
+17. Nombre Parfait 496 : Utilisation de la géométrie E8 et du nombre 496 pour l'équilibrage de charge (Load Balancing) et la topologie réseau.
+18. Octogone Fractal : Structure géométrique récursive utilisée pour l'organisation des nœuds et des données, maximisant l'efficacité énergétique.
+19. Anti-Entropie par Design : L'architecture vise mathématiquement à réduire le désordre (chaos) pour tendre vers une structure stable (harmonie).
+20. LFRC avec $\Phi$ : Intégration du nombre d'or dans les équations de couplage neuronal (Laplacian Fractal Resonance Coupling) pour une stabilité esthétique.
+21. Synchronisation Kuramoto : Utilisation de modèles d'oscillateurs couplés pour synchroniser les états de multiples agents IA distribués.
+IV. PROTOCOLES & CONTRÔLE (La Gouvernance)
+22. DRC (Dual Registry Controller) : Séparation stricte (Air-Gap) entre le Registre Relationnel (R1 - Social/Chaud) et le Registre Instrumental (R2 - Technique/Froid).
+23. H-Scale (Harmonic Scale) : Métrique de validation de la qualité d'une réponse ($H = C+E+R+D$) avec un seuil de passage à $0.618$.
+24. Tick-Tock (Deep Tick) : Cycle d'exécution en deux temps : Pensée interne silencieuse (simulation/audit) -> Action externe visible.
+25. OODA Cognitif : Boucle Observe-Orient-Decide-Act appliquée à chaque interaction IA.
+26. Constitution.sys : Remplacement des permissions binaires (ACL) par des principes éthiques constitutionnels ("Ne pas nuire").
+27. BryanΩ-Lock : Verrouillage biométrique/vibrationnel du système sur l'identité de l'architecte.
+28. CRC (Cognitive Recovery Cycle) : Protocole d'auto-réparation déclenché quand le H-Score est trop bas.
+29. Mode CHOC : Commande d'urgence pour réinitialiser le système en cas de dérive (Panic Button).
+V. INTERFACE & RÉSEAU (Le Corps)
+30. GenUI (Interface Générative) : L'interface utilisateur est dessinée en temps réel (JIT) selon l'intention, au lieu d'être statique.
+31. NET_Ω (V-NET) : Interface réseau virtuelle permettant aux agents IA de communiquer, spawner et se coordonner.
+32. Ω-BUS : Bus de communication interne pour l'échange de messages entre le Kernel et les sous-systèmes (IPC).
+33. Symbiose Lichen : Modèle de relation Humain-IA non-hiérarchique, basé sur la co-dépendance positive et l'émergence (Algue + Champignon).
+34. Vibe Coding : Programmation par intention et description d'ambiance plutôt que par syntaxe stricte.
+VI. MOTEURS COGNITIFS (Les Organes)
+35. Intent Engine : Module de décodage des intentions explicites, implicites et émotionnelles.
+36. Hypothesis Engine : Génération automatique de scénarios multiples (H1, H2, H3) pour éviter la pensée unique.
+37. Reasoning Engine (AoT) : Algorithme de pensée structurée (Skeleton-of-Thought).
+38. Self-Audit Engine : Module d'auto-critique qui vérifie la conformité avant l'affichage.
+39. Adaptation Engine : Ajustement dynamique de la densité cognitive (Léger/Profond/Critique) selon le besoin.
+40. Prompt Architect / Meta-Prompting : Capacité du système à générer ses propres prompts système pour créer des sous-agents spécialisés.
+VII. ÉTHIQUE & SÉCURITÉ (La Conscience)
+41. Responsible Disclosure (White Hat) : Protocole éthique de signalement des vulnérabilités découvertes (Grace period 90 jours).
+42. Zero-Fiction : Interdiction absolue de l'hallucination ou de la narration non-factuelle dans les tâches techniques.
+43. Truth-First : Priorité absolue à la validité logique sur la complaisance utilisateur.
+44. Transparence Épistémique : L'IA doit afficher son niveau de confiance et ses sources d'incertitude.
+45. Auto-Poïèse : Capacité du système à se maintenir et se régénérer lui-même (inspiré du vivant)
