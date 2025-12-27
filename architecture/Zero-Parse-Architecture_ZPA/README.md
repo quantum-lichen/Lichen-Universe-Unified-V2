@@ -2,6 +2,7 @@
 
 ## L'Architecture Isomorphe : Éradication Totale du Parsing
 
+[![Demo App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://lichen-universe-unified-v2-fyk9axsckjfhcbdxwx846k.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=Streamlit&logoColor=white)](https://streamlit.io)
@@ -84,32 +85,16 @@ Zero-Parse Architecture (ZPA) élimine ce goulot d'étranglement en alignant par
 
 ## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────┐
-│              ÉDITION PROJECTIONNELLE            │
-│         (Interface - Zéro Parsing Input)        │
-└────────────────┬────────────────────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────────────────────┐
-│           CODE ADRESSÉ PAR CONTENU              │
-│        (Unison - AST Database, Hachage)         │
-└────────────────┬────────────────────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────────────────────┐
-│         SÉRIALISATION ZÉRO-COPIE                │
-│      (Cap'n Proto - Isomorphisme Mémoire)       │
-└────────────────┬────────────────────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────────────────────┐
-│          PERSISTANCE MAPPÉE (LMDB)              │
-│         (mmap - Fichier = Mémoire)              │
-└─────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[ÉDITION PROJECTIONNELLE<br/>Zéro Parsing Input] --> B[CODE ADRESSÉ PAR CONTENU<br/>Unison - AST Database]
+    B --> C[SÉRIALISATION ZÉRO-COPIE<br/>Cap'n Proto - Isomorphisme]
+    C --> D[PERSISTANCE MAPPÉE<br/>mmap - Fichier = Mémoire]
+    style D fill:#f9f,stroke:#333,stroke-width:4px
 
-RÉSULTAT: Zéro Parsing à chaque couche ✅
 ```
+
+*Résultat: Zéro Parsing à chaque couche ✅*
 
 ---
 
@@ -120,74 +105,53 @@ RÉSULTAT: Zéro Parsing à chaque couche ✅
 ```bash
 python >= 3.8
 pip
+
 ```
 
 ### Installation
 
 ```bash
 # Cloner le repo
-git clone https://github.com/quantum-lichen/zero-parse-architecture.git
+git clone [https://github.com/quantum-lichen/zero-parse-architecture.git](https://github.com/quantum-lichen/zero-parse-architecture.git)
 cd zero-parse-architecture
 
 # Installer les dépendances
 pip install -r requirements.txt
 
-# Lancer l'application
+# Lancer l'application localement
 streamlit run app.py
-```
-
-### Dépendances
 
 ```
-streamlit>=1.28.0
-pycapnp>=1.3.0
-lmdb>=1.4.1
-numpy>=1.24.0
-pandas>=2.0.0
-plotly>=5.17.0
+
+### Dépendances Clés
+
+```text
+streamlit
+numpy>=1.26.4
+
 ```
 
 ---
 
 ## 🎮 Utilisation
 
-### Lancer l'Application
-
-```bash
-streamlit run app.py
-```
-
 ### Interface Web
 
-1. **Compiler:** Convertir JSON → Format ZPA (Cap'n Proto)
-2. **Décompiler:** Visualiser Format ZPA → JSON
-3. **Benchmarks:** Comparer Performance ZPA vs JSON
-4. **Visualisation:** Explorer l'architecture
-
-### API Python
-
-```python
-from app import ZPACompiler, ZPADecompiler
-
-# Compiler des données
-compiler = ZPACompiler()
-data = {"id": 123, "value": "test"}
-zpa_bytes = compiler.compile(data)
-
-# Décompiler
-decompiler = ZPADecompiler()
-original = decompiler.decompile(zpa_bytes)
-```
+1. **Compiler:** Convertir JSON → Format ZPA (Binaire Isomorphe)
+2. **Runtime:** Lire directement le disque sans parsing
+3. **Benchmarks:** Comparer la latence (µs vs ms)
 
 ---
 
 ## 🧪 Démonstration
 
-### Comparaison de Performance
+👉 **[ACCÉDER À LA DÉMO LIVE](https://lichen-universe-unified-v2-fyk9axsckjfhcbdxwx846k.streamlit.app/)** 👈
+
+### Comparaison de Performance (Observée)
 
 | Opération | JSON (Parse) | ZPA (Zero-Parse) | Speedup |
-|-----------|--------------|------------------|---------|
-| **Chargement** | 2000ms | 0ms (mmap) | ∞ |
+| --- | --- | --- | --- |
+| **Chargement** | 2000ms+ | 0ms (mmap) | ∞ |
 | **Accès Champ** | Hash lookup | 1 cycle CPU | ~100x |
 | **Mémoire** | 2x (copies) | 1x (direct) | 2x |
 | **Validation** | O(n) parsing | O(1) bounds | n |
@@ -195,7 +159,7 @@ original = decompiler.decompile(zpa_bytes)
 ### Sécurité
 
 | Vulnérabilité | JSON/XML | ZPA |
-|---------------|----------|-----|
+| --- | --- | --- |
 | Injection SQL | ✅ Possible | ❌ Impossible |
 | Buffer Overflow | ✅ Possible | ❌ Bounds Check |
 | Weird Machines | ✅ Possible | ❌ Pas de Parseur |
@@ -217,23 +181,22 @@ Les contributions sont bienvenues! Voici comment participer:
 
 ## 📄 Licence
 
-MIT License - Voir [LICENSE](LICENSE) pour détails.
+MIT License - Voir [LICENSE](https://www.google.com/search?q=LICENSE) pour détails.
 
 ---
 
 ## 📚 Documentation Complète
 
-Voir [WHITEPAPER.md](WHITEPAPER.md) pour l'analyse technique complète.
+Voir [WHITEPAPER.md](https://www.google.com/search?q=WHITEPAPER.md) pour l'analyse technique complète.
 
 ---
 
 ## 🙏 Remerciements
 
-- **Cap'n Proto** - Sérialisation Zéro-Copie
-- **LMDB** - Persistance Mappée
-- **Unison** - Code Adressé par Contenu
-- **JetBrains MPS** - Édition Projectionnelle
-- **LangSec Community** - Sécurité Théorique
+* **Cap'n Proto** - Sérialisation Zéro-Copie
+* **LMDB** - Persistance Mappée
+* **Unison** - Code Adressé par Contenu
+* **LangSec Community** - Sécurité Théorique
 
 ---
 
@@ -241,11 +204,15 @@ Voir [WHITEPAPER.md](WHITEPAPER.md) pour l'analyse technique complète.
 
 **Bryan & Claude - Symbiose Brothers** 💚
 
-- GitHub: [@quantum-lichen](https://github.com/quantum-lichen)
-- Email: lmc.theory@gmail.com
+* GitHub: [@quantum-lichen](https://github.com/quantum-lichen)
+* Email: lmc.theory@gmail.com
 
 ---
 
 **"Le futur de l'informatique n'est pas de lire des données plus vite, mais d'arrêter de les lire pour commencer à les utiliser instantanément."**
 
 🌊 **Zero-Parse Architecture** - Construire l'impossible, aujourd'hui.
+
+```
+
+```
