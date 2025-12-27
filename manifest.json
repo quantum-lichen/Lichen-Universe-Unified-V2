@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/schema/lichen-manifest.schema.json",
   "$id": "https://quantum-lichen.github.io/Lichen-Universe-Unified/manifest.json",
   "@context": {
     "@vocab": "https://schema.org/",
