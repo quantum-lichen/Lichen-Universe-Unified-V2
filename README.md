@@ -150,8 +150,6 @@ Démonstration de l'effet "Time Crystal" et du verrouillage de phase (Spin-Lock)
 
 ---
 
-Phi-compiler demo here : 
-
 ### 🟢 Live Demos & Simulations
 
 [![Phi-Compiler Live](https://img.shields.io/badge/Phi_Compiler-Live-00ff00?style=for-the-badge&logo=streamlit)](https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/)
