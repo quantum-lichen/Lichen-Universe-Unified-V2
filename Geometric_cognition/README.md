@@ -69,14 +69,16 @@ We hypothesize that the brain evaluates cognitive structures (mathematical formu
 **Definition 2.2 (Cognitive Geometric Invariants):** For a neural manifold $\mathcal{M}$ representing a cognitive structure, we define the following invariants:
 
 1. **Topological Complexity ($\beta_k$):** The Betti numbers, counting $k$-dimensional "holes" in $\mathcal{M}$:
+   
    $$\beta_0 = \text{\# connected components}, \quad \beta_1 = \text{\# loops}, \quad \beta_2 = \text{\# voids}, \ldots$$
 
-2. **Symmetry Measure ($\Sigma$):** The size of the automorphism group of $\mathcal{M}$:
+3. **Symmetry Measure ($\Sigma$):** The size of the automorphism group of $\mathcal{M}$:
+   
    $$\Sigma(\mathcal{M}) = |\text{Aut}(\mathcal{M})|$$
 
-3. **Geodesic Curvature ($\kappa_g$):** The intrinsic curvature of paths on $\mathcal{M}$, measuring how "straight" the manifold is.
+5. **Geodesic Curvature ($\kappa_g$):** The intrinsic curvature of paths on $\mathcal{M}$, measuring how "straight" the manifold is.
 
-4. **Intrinsic Dimensionality ($d_{\text{int}}$):** The minimum embedding dimension satisfying $\epsilon$-covering:
+6. **Intrinsic Dimensionality ($d_{\text{int}}$):** The minimum embedding dimension satisfying $\epsilon$-covering:
    $$d_{\text{int}} = \lim_{\epsilon \to 0} \frac{\log N_{\epsilon}(\mathcal{M})}{\log(1/\epsilon)}$$
    where $N_{\epsilon}(\mathcal{M})$ is the minimum number of $\epsilon$-balls covering $\mathcal{M}$.
 
