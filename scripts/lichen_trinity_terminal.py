@@ -7,7 +7,7 @@ import time
 
 # --- CONFIGURATION DU TERMINAL ---
 st.set_page_config(
-    page_title="LICHEN TRINITY TERMINAL",
+    page_title="LICHEN TRINITY V3.2 FIXED",  # <--- SI TU VOIS ÇA, C'EST QUE ÇA A MARCHÉ
     page_icon="💠",
     layout="wide",
     initial_sidebar_state="expanded"
