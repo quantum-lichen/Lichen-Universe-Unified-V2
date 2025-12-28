@@ -727,7 +727,238 @@
          "Mémoire persistante",
          "Évolution dirigée"
        ]
+    },
+    {
+      "id": "myconet-v1.0",
+      "name": "MycoNet Protocol",
+      "full_name": "Mycelium-Inspired Network Computing",
+      "version": "1.0",
+      "status": "theory_complete",
+      "tagline": "The Wood Wide Web meets digital networks",
+      "abstract": "Protocole de réseau distribué inspiré du mycelium fongique (400M+ années d'évolution). Utilise electrical spikes comme communication, distributed sensing, et self-healing networks. Le mycelium naturel = HNP biologique avec 10^12 junction points (Armillaria bulbosa). Intégration avec ΦLang pour communication inter-nodes.",
+      "documentation_file": "MycoNet/myco_net.md",
+      "readme": "MycoNet/README.md",
+      "biological_inspiration": {
+        "organism": "Armillaria bulbosa (Honey Fungus)",
+        "scale": "10^12 elementary processing units (trillion junction points)",
+        "age": "400+ million years of evolution",
+        "network_type": "Wood Wide Web (inter-tree communication)",
+        "communication": "Electrical voltage spikes (neuron-like behavior)",
+        "properties": [
+          "Distributed sensing across kilometers",
+          "Self-healing after damage",
+          "Resource sharing between nodes",
+          "Pattern recognition and memory",
+          "Logical gate implementation via spikes"
+        ]
+      },
+      "technical_specification": {
+        "communication": "Electrical spike trains → FC-496 packets",
+        "routing": "Mycelium growth algorithm (optimal path finding)",
+        "topology": "Fractal network (self-similar at all scales)",
+        "sensing": "Distributed environmental monitoring",
+        "healing": "Automatic rerouting after node failure",
+        "philang_integration": "ΦLang instructions carried as spike patterns"
+      },
+      "synergy_with_lichen": {
+        "name_origin": "Lichen = Fungi + Algae symbiosis (mycelium is the fungal half!)",
+        "hnp_analog": "MycoNet = biological HNP (same principles, 400M years tested)",
+        "fc496_analog": "Junction points = natural FC-496 atoms",
+        "kuramoto_sync": "Mycelium already does phase-locking naturally"
+      },
+      "applications": [
+        "Distributed sensor networks (environmental monitoring)",
+        "Self-healing infrastructure (roads, buildings with embedded sensors)",
+        "IoT coordination (billions of devices, mycelium-like topology)",
+        "Swarm robotics (fungi-inspired coordination)",
+        "Planetary-scale networks (Mars colonization with biological networks)"
+      ],
+      "related_theories": ["hnp-v1.0", "fc-496-theory-v2.1", "philang-theory", "kuramoto-pentagonal-v1.0"],
+      "created": "2025-12-27 (during birthday week session)",
+      "synchronicity": "Created BEFORE Claude suggested it (cosmic alignment confirmed)"
+    },
+    {
+      "id": "geometric-cognition-v1.0",
+      "name": "Geometric Cognition Hypothesis",
+      "full_name": "Geometry-First Cognitive Architecture",
+      "version": "1.0",
+      "status": "hypothesis_proposed",
+      "tagline": "Thinking in shapes, not words",
+      "abstract": "Hypothèse que la cognition naturelle (humaine, animale, IA) opère fondamentalement en termes géométriques plutôt que linguistiques. Le langage naturel = interface humaine, mais le substrat cognitif = structures géométriques (φ-ratios, E8 lattices, topologies). CEML validation = test géométrique. ΦLang = langage qui expose directement la géométrie cognitive.",
+      "documentation_file": "Geometric_cognition/Geometric_Cognition_Hypothesis.md",
+      "core_hypothesis": "Intelligence = manipulation de structures géométriques dans espaces vectoriels haute dimension",
+      "evidence": {
+        "biological": [
+          "DNA helix geometry (34Å/21Å ≈ φ in Malus domestica)",
+          "Neural firing patterns = geometric attractors",
+          "Visual cortex = topological maps of reality",
+          "Grid cells in hippocampus = geometric navigation"
+        ],
+        "mathematical": [
+          "CEML score = geometric fitness (C/H ratio)",
+          "E8 lattice = optimal error correction geometry",
+          "φ-partitions = natural information structure",
+          "Kuramoto sync = geometric phase alignment"
+        ],
+        "artificial": [
+          "Transformer attention = geometric similarity in embedding space",
+          "ΦLang validation = geometrically impossible to be invalid",
+          "Vector embeddings = meaning as geometry",
+          "Gradient descent = geometric optimization"
+        ]
+      },
+      "implications": {
+        "for_ai": "AI should operate on geometric representations directly (like ΦLang), not text",
+        "for_neuroscience": "Brain computes geometrically, language is just I/O layer",
+        "for_math": "Mathematics IS the language of thought (not metaphor)",
+        "for_communication": "Inter-species communication requires geometric protocol (not linguistic)"
+      },
+      "philang_connection": "ΦLang exposes geometric cognition directly - [Prime-Perfect] coordinates in 496D space",
+      "related_theories": ["philang-theory", "ceml-v2.1", "fc-496-theory-v2.1", "uict-v2.1"],
+      "created": "2025-12-27"
+    },
+    {
+      "id": "kuramoto-social-v1.0",
+      "name": "Kuramoto Social Dynamics",
+      "full_name": "Phase Synchronization in Biological Social Systems",
+      "version": "1.0",
+      "status": "theory_with_simulation",
+      "tagline": "From fireflies to cichlids: nature synchronizes",
+      "abstract": "Application du modèle Kuramoto aux systèmes sociaux biologiques. Démonstration que les comportements collectifs (bancs de poissons, essaims, sociétés) suivent des lois de phase-locking identiques aux oscillateurs physiques. Cas d'étude: Cichlids du Lac Tanganyika. Théorie des modes (sync, anti-sync, chimera) avec simulations interactives. Omega bias theory pour prédire émergence de leadership.",
+      "documentation_files": {
+        "tanganyika": "kuramoto_social/TANGANYIKA_kuramoto.md",
+        "modes": "kuramoto_social/modes_kuramoto.md",
+        "omega_bias": "kuramoto_social/omega_bias_theory.md",
+        "simulation": "kuramoto_social/anti_mode_sim.html"
+      },
+      "case_study": {
+        "organism": "Cichlidae (Lac Tanganyika)",
+        "behaviors_modeled": [
+          "Schooling coordination (phase-locked swimming)",
+          "Territorial displays (anti-phase oscillations)",
+          "Breeding synchronization (seasonal phase alignment)",
+          "Dominance hierarchies (omega bias emergence)"
+        ],
+        "parameters": {
+          "K": "Coupling strength (social interaction intensity)",
+          "omega": "Natural frequency (individual behavioral rhythm)",
+          "N": "Population size",
+          "topology": "Network structure (who interacts with whom)"
+        }
+      },
+      "modes_theory": {
+        "synchronized": {
+          "description": "All agents in phase (r → 1)",
+          "biological_examples": ["Firefly flashing", "Fish schooling", "Bird flocking"],
+          "stability": "Stable when K > K_critical"
+        },
+        "anti_synchronized": {
+          "description": "Agents in anti-phase (opposite behaviors)",
+          "biological_examples": ["Predator-prey oscillations", "Territorial disputes"],
+          "stability": "Stable in certain network topologies (simulation included)"
+        },
+        "chimera": {
+          "description": "Coexistence of sync and async regions",
+          "biological_examples": ["Split-brain phenomena", "Partial synchronization in colonies"],
+          "stability": "Requires specific coupling structures"
+        }
+      },
+      "omega_bias_theory": {
+        "hypothesis": "Individuals with natural frequency close to mean ω̄ become natural leaders",
+        "formula": "Leadership_score = 1 / |ωᵢ - ω̄|",
+        "prediction": "Groups self-organize around 'omega nodes' (natural pacemakers)",
+        "validation": "Observable in cichlid social hierarchies and human group dynamics"
+      },
+      "simulation": {
+        "file": "kuramoto_social/anti_mode_sim.html",
+        "type": "Interactive HTML + JavaScript",
+        "features": [
+          "Real-time visualization of phase dynamics",
+          "Parameter tuning (K, omega distribution)",
+          "Mode switching (sync ↔ anti-sync)",
+          "Order parameter r(t) tracking"
+        ]
+      },
+      "applications": [
+        "Multi-agent AI coordination (ΦLang agents syncing via Kuramoto)",
+        "Social network analysis (Twitter, Reddit phase dynamics)",
+        "Wildlife conservation (predicting collective behaviors)",
+        "Organizational management (team synchronization optimization)"
+      ],
+      "synergy_with_lichen": {
+        "kuramoto_pentagonal": "Same mathematical framework applied to quantum error correction",
+        "philang_sync": "ΦLang execution requires Kuramoto phase-lock (r > 0.95)",
+        "myconet": "Mycelium networks also show phase synchronization"
+      },
+      "related_theories": ["kuramoto-pentagonal-v1.0", "myconet-v1.0", "philang-theory"],
+      "created": "2025-12-27",
+      "innovation": "First application of Kuramoto model to Lake Tanganyika cichlids with interactive simulation"
+    },
+    {
+      "id": "dimension-theory-v1.0",
+      "name": "Dimension Theory",
+      "full_name": "Universal Dimensional Architecture",
+      "version": "1.0",
+      "status": "whitepaper_complete",
+      "abstract": "Théorie unifiée sur la nature des dimensions dans les systèmes informatiques et physiques. Explore pourquoi 496 dimensions est optimal (E8×E8 perfection), comment les dimensions se replient (fractal folding), et la connexion entre dimensionnalité et capacité informationnelle. Propose que dimension = degré de liberté informationnel, et que 496D = sweet spot universel.",
+      "documentation_file": "dimension/whitepaper.md",
+      "readme": "dimension/README.md",
+      "core_concepts": {
+        "dimension_as_freedom": "Chaque dimension = un degré de liberté indépendant",
+        "496_optimum": "E8 (248D) × 2 = 496D = maximum packing efficiency in 8D slices",
+        "fractal_folding": "High-D spaces fold into lower-D manifolds (like protein folding)",
+        "information_capacity": "N dimensions → 2^N states (but 496D with structure >> random high-D)"
+      },
+      "mathematical_foundation": {
+        "e8_connection": "E8 lattice = optimal sphere packing in 8D",
+        "e8_doubled": "E8 × E8 = 496D gauge group in string theory",
+        "perfect_number": "496 = 2^4 × 31 = 3rd perfect number (σ(496) = 2×496)",
+        "golden_partition": "496 = 306 + 190, where 306/190 ≈ φ"
+      },
+      "applications": {
+        "fc496": "FC-496 atoms live in 496D vector space",
+        "philang": "ΦLang instructions are 496D vectors (Prime(8D) + Perfect(8D) + Param(480D))",
+        "embeddings": "Optimal embedding dimension for semantic spaces",
+        "quantum": "496 qubits with E8 error correction = practical quantum computer"
+      },
+      "related_theories": ["fc-496-theory-v2.1", "philang-theory", "e8-lattice", "uict-v2.1"],
+      "created": "2025-12-27"
+    },
+    {
+      "id": "zpa-francais-v1.0",
+      "name": "Zero-Parse Architecture (Français)",
+      "full_name": "Architecture Isomorphe pour l'Éradication du Parsing",
+      "version": "1.0",
+      "status": "document_complet",
+      "language": "français",
+      "abstract": "Document complet en français sur l'Architecture Zéro-Parse (ZPA). Explique comment éliminer complètement le parsing informatique en alignant représentation mémoire, disque, et réseau. Utilise Cap'n Proto (sérialisation zéro-copie), LMDB (mémoire mappée), Unison (code-as-data), et édition projectionnelle. Argument: 80-90% du CPU gaspillé en parsing peut être éliminé. Document destiné audience francophone.",
+      "documentation_file": "architecture/Zero-Parse-Architecture_ZPA/Éliminer le Parsing _ Architecture Informatique.txt",
+      "target_audience": "Développeurs, architectes systèmes, chercheurs francophones",
+      "key_technologies": {
+        "serialization": "Cap'n Proto, FlatBuffers, rkyv (zero-copy)",
+        "storage": "LMDB (memory-mapped database)",
+        "code_format": "Unison (code stored as AST, not text)",
+        "editing": "Projectional editing (JetBrains MPS)",
+        "security": "LangSec principles (eliminate parser complexity)"
+      },
+      "performance_claims": {
+        "cpu_saved": "80-90% of CPU currently wasted on parsing",
+        "latency": "Zero loading time (mmap instant access)",
+        "memory": "2x reduction (no duplication between formats)",
+        "security": "Eliminates entire classes of vulnerabilities (injection, buffer overflow)"
+      },
+      "synergy_with_lichen": {
+        "fc496": "FC-496 format IS zero-parse (496-bit atoms, direct access)",
+        "uhfs": "UHFS uses mmap (zero-copy filesystem)",
+        "philang": "ΦLang = zero parsing by design (geometric validation, not text parsing)",
+        "hnp": "HNP packets = zero parsing (fixed structure, direct interpretation)"
+      },
+      "innovation": "Complete ZPA framework document in French (accessibility for francophone community)",
+      "related_theories": ["fc-496-theory-v2.1", "uhfs-theory-v2.1", "philang-theory"],
+      "created": "2025-12-27"
     }
+  ]
+}
   ],
   "core_components": [
     {
