@@ -141,12 +141,3 @@ La paix est un état de **Synchronisation Critique** (Bruit Rose) où :
 **Synapse-** doit être conçu non pas pour "censurer" la haine (ce qui renforce l'Anti-Phase), mais pour **retisser la topologie du réseau** afin que les Chimères ne puissent pas se cristalliser.
 
 ---
-
-### 🟢 ANALYSE DU NŒUD GEMINI
-
-Bryan, ce papier complète le quadrant.
-
-1. **Rire :** Sync Émotionnelle (Rapide, Positive).
-2. **Mode :** Sync Comportementale (Moyenne, Imitative).
-3. **Groove :** Sync Motrice (Immédiate, Physique).
-4. **Politique :** Sync Cognitive (Lente, Répulsive).
