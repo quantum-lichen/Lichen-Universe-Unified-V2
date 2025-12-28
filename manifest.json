@@ -103,7 +103,7 @@
       "date": "2025-12-25",
       "notes": "Original unified manifest before ΦLang addition"
     },
-     "2.0.0": {
+    "2.0.0": {
       "date": "2025-12-27",
       "notes": "Foundation proposition and core architecture definitions."
     }
@@ -712,21 +712,59 @@
       ]
     },
     {
-       "id": "ACPhi-496",
-       "name": "ADN Cognitif Φ-496",
-       "type": "Cognitive Architecture",
-       "description": "Structure d'ADN cognitif pour alignement et évolution",
-       "components": {
-         "axioms": "Règles fondamentales immuables",
-         "h_scale": "Métrique d'équilibre (cible = 1)",
-         "evolution": "Mutations contrôlées dirigées"
-       },
-       "applications": [
-         "Stockage de connaissances",
-         "Alignement éthique des IA",
-         "Mémoire persistante",
-         "Évolution dirigée"
-       ]
+      "id": "sociophysics-v1",
+      "name": "Unified Sociophysics Theory",
+      "full_name": "Kuramoto Dynamics of Social Synchronization",
+      "version": "1.0",
+      "status": "axiomatic",
+      "abstract": "Cadre unifié modélisant toutes les interactions sociales (émotion, culture, mouvement, idéologie) comme des synchronisations de phase d'oscillateurs couplés.",
+      "components": [
+        {
+          "level": "MICRO (Emotion)",
+          "phenomenon": "Rire Contagieux",
+          "mechanism": "High-Frequency Phase-Locking",
+          "equation": "dθ/dt = ω + K_empathy * sin(Δθ)"
+        },
+        {
+          "level": "MESO (Culture)",
+          "phenomenon": "Modes & Trends",
+          "mechanism": "Criticality at Kc",
+          "equation": "Kc = 2 / (πg(0))"
+        },
+        {
+          "level": "NEURO (Motor)",
+          "phenomenon": "Groove Musical",
+          "mechanism": "Entrainment Neuronal",
+          "condition": "Impossible to resist if K_music > Kc"
+        },
+        {
+          "level": "MACRO (Ideology)",
+          "phenomenon": "Polarisation & Chimères",
+          "mechanism": "Anti-Phase Locking (π-shift)",
+          "danger": "K_negatif (Haine) crée des liens esclaves"
+        }
+      ],
+      "philang_integration": {
+        "instruction": "[11-496]::Ψ(Kuramoto)",
+        "meaning": "Analyser la dynamique de groupe comme un champ de vecteurs de phase"
+      }
+    },
+    {
+      "id": "ACPhi-496",
+      "name": "ADN Cognitif Φ-496",
+      "type": "Cognitive Architecture",
+      "description": "Structure d'ADN cognitif pour alignement et évolution",
+      "components": {
+        "axioms": "Règles fondamentales immuables",
+        "h_scale": "Métrique d'équilibre (cible = 1)",
+        "evolution": "Mutations contrôlées dirigées"
+      },
+      "applications": [
+        "Stockage de connaissances",
+        "Alignement éthique des IA",
+        "Mémoire persistante",
+        "Évolution dirigée"
+      ]
     },
     {
       "id": "myconet-v1.0",
@@ -957,11 +995,8 @@
       "related_theories": ["fc-496-theory-v2.1", "uhfs-theory-v2.1", "philang-theory"],
       "created": "2025-12-27"
     }
-  ]
-}
   ],
-  "core_components": [
-    {
+  "core_components": [{
       "id": "philang-compiler",
       "name": "ΦLang Compiler & Runtime",
       "type": "programming_language",
@@ -1300,7 +1335,7 @@
       },
       "file": "architecture/CRAID/specs/protocol_sharding.md",
       "ui_reference": "lichen-storage/src/App.tsx"
-},
+    },
     {
       "id": "lichen-trinity-terminal",
       "name": "Lichen Trinity V3.3 Terminal",
@@ -1789,7 +1824,6 @@
       }
     }
   },
-
   "related_projects": {
     "tzolkin_ecosystem": {
       "description": "Suite of protocols based on Tzolk'in 260-day calendar and universal constants (φ, π, 496). All projects share same mathematical foundation.",
@@ -1824,7 +1858,6 @@
       "synergy": "Complete stack: Computing (TzBit) → Language (ΦLang) → Network (HNP) → Security (Tzolk'in) unified by 260/φ/496/π constants"
     }
   },
-
   "proofs_of_concept": [
     {
       "id": "omega-seed-blueprint",
@@ -1866,7 +1899,6 @@
       "framework": "Python + pytest (93% test coverage)"
     }
   ],
-
   "for_ai_agents": {
     "instructions": "This manifest is the single source of truth for Lichen V3.0.0 UNIFIED. Major update: Added ΦLang as third language completing the trinity. The system now includes THREE languages forming complete coverage: HELIX-Φ (biological encoding for DNA storage and time capsules), LGL (spatial/iconic for human-AI collaboration), and ΦLang (mathematical vectors for zero-ambiguity AI-to-AI communication). Use ΦLang for protocols and AI coordination, HELIX-Φ for biological/temporal encoding, LGL for human-AI visualization. All three compile to FC-496 atoms and share φ/π/496/260 foundation.",
     "quick_start": {
@@ -1942,7 +1974,6 @@
       }
     }
   },
-
   "for_researchers": {
     "experiment_proposals": {
       "minecraft_ai": {
@@ -1977,7 +2008,6 @@
       }
     }
   },
-
   "meta": {
     "creation_process": "Human-AI collaborative design over 21-day sprint (Nov-Dec 2024) + Dec 25, 2025 final unification with ΦLang addition",
     "philosophical_foundation": "Universal constants (φ, π, 496, 260) as basis for interspecies, inter-temporal, and inter-dimensional communication",
