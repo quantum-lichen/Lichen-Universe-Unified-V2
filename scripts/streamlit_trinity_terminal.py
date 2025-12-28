@@ -165,7 +165,16 @@ if "Manifeste" in menu:
                 with st.expander(f"🔹 {theory['name']} ({theory['id']})"):
                     st.write(f"**Abstract:** {theory['abstract']}")
                     if 'formula' in theory:
-                        st.latex(theory['formula'].get('mass', ''))
+                        f = theory['formula']
+                        if isinstance(f, str):
+                            st.latex(f)
+                        elif isinstance(f, dict):
+                            if 'mass' in f: st.latex(f['mass'])
+                            elif 'score' in f: st.latex(f['score'])
+                            elif 'index' in f: st.latex(f['index'])
+                            elif 'hamiltonian' in f: st.latex(f['hamiltonian'])
+                            elif 'formula' in f: st.latex(f['formula'])
+                            else: st.latex(list(f.values())[0])
                     if 'philang_integration' in theory:
                         st.markdown(f"**ΦLang:** `{theory['philang_integration']}`")
         
