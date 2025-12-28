@@ -4,10 +4,11 @@ import json
 import math
 import random
 import time
+import re  # Indispensable pour l'analyse syntaxique
 
 # --- CONFIGURATION DU TERMINAL ---
 st.set_page_config(
-    page_title="LICHEN TRINITY V3.2 FIXED",  # <--- SI TU VOIS ÇA, C'EST QUE ÇA A MARCHÉ
+    page_title="LICHEN TRINITY V3.3 MATH-CORE",
     page_icon="💠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -54,7 +55,6 @@ with st.sidebar:
     st.image("https://img.shields.io/badge/LICHEN-TRINITY_OS-00FF94?style=for-the-badge&logo=atom")
     
     if manifest:
-        # Récupération sécurisée de la version
         version = manifest.get('project', {}).get('version', '3.0.0')
         st.success(f"🟢 HIVE LINK: CONNECTED (v{version})")
     else:
@@ -65,7 +65,6 @@ with st.sidebar:
     st.divider()
     st.write("🌌 **Universal Constants**")
     if manifest:
-        # Accès sécurisé aux constantes
         cst = manifest.get('universal_constants', {}).get('definitions', {})
         if cst:
             phi_val = cst.get('phi', {}).get('value', '1.618')
@@ -76,9 +75,7 @@ with st.sidebar:
             st.caption(f"π = {pi_val}")
             st.caption(f"Dim = {dim_val}")
 
-import re  # On ajoute Regex pour parser proprement
-
-# --- MOTEUR DE TRAITEMENT (MATHÉMATIQUE RÉEL) ---
+# --- MOTEUR DE TRAITEMENT (MATHÉMATIQUE & DÉTERMINISTE) ---
 
 def is_prime(n):
     """Vérifie si n est un nombre premier (Action)"""
@@ -93,20 +90,14 @@ def is_prime(n):
 
 def is_perfect(n):
     """Vérifie si n est un nombre parfait (Structure)"""
-    if n < 6: return False
-    sum_div = 1
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            sum_div += i
-            if i*i != n:
-                sum_div += n // i
-    return sum_div == n
+    # Liste connue des nombres parfaits pour aller vite
+    perfects = [6, 28, 496, 8128, 33550336] 
+    return n in perfects
 
 def compile_philang(code):
     """Compile et valide mathématiquement le ΦLang"""
     
     # 1. ANALYSE SYNTAXIQUE (REGEX)
-    # Cherche le pattern : [NOMBRE-NOMBRE]::Ψ(TEXTE)
     match = re.search(r"\[(\d+)-(\d+)\]::Ψ\((.+)\)", code)
     
     if not match:
@@ -129,10 +120,22 @@ def compile_philang(code):
     if errors:
         return {"status": "REJECTED", "error": " | ".join(errors)}
 
-    # 4. GÉNÉRATION DE L'ATOME (SI TOUT EST BON)
-    # Simulation d'un vecteur 496 bits basé sur la signature mathématique
+    # 4. GÉNÉRATION DÉTERMINISTE (FIXE)
+    # On utilise le code comme 'graine' (seed). 
+    # Mêmes entrées = Mêmes résultats. TOUJOURS.
     vector_seed = (prime_candidate * perfect_candidate) + hash(param)
+    
+    # On force le générateur aléatoire à utiliser cette graine
+    random.seed(vector_seed)
+    
+    # Génération du binaire simulé mais constant pour cette instruction
     binary_vector = bin(vector_seed % (2**496))[2:].zfill(496)
+    
+    # Génération du score CEML stable
+    # Un nombre parfait + un nombre premier donnent naturellement un score haut
+    base_score = 0.618
+    stability_bonus = random.uniform(0.2, 0.381) # Sera toujours le même pour ce seed
+    final_score = base_score + stability_bonus
     
     return {
         "status": "VALID",
@@ -141,8 +144,19 @@ def compile_philang(code):
         "perfect_check": f"{perfect_candidate} ∈ ℙerfect",
         "header_preview": binary_vector[:32] + "...",
         "payload_preview": binary_vector[190:222] + "...",
-        "ceml_score": random.uniform(0.85, 0.999) # Bonus car mathématiquement pur
+        "ceml_score": final_score
     }
+
+def encode_helix(text):
+    """Encode du texte en ADN HELIX-Φ"""
+    mapping = {'00': 'A', '01': 'C', '10': 'G', '11': 'T'}
+    try:
+        binary = ''.join(format(ord(i), '08b') for i in text)
+        pairs = [binary[i:i+2] for i in range(0, len(binary), 2)]
+        dna = "".join([mapping.get(p, 'A') for p in pairs])
+        return dna
+    except:
+        return "ERROR_ENCODING"
 
 # --- INTERFACE PRINCIPALE ---
 
@@ -162,13 +176,18 @@ if mode == "1. ΦLang (Math)":
             if result['status'] == "VALID":
                 st.success("✅ INSTRUCTION VALIDÉE PAR GÉOMÉTRIE E8")
                 
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    st.info(result['prime_check'])
+                with col_b:
+                    st.info(result['perfect_check'])
+                
                 # Visualisation de l'Atome FC-496
                 st.markdown("#### ⚛️ Structure Atomique (FC-496)")
-                st.text(f"HEADER (190b) : {result['header_preview']}")
-                st.text(f"DATA   (306b) : {result['payload_preview']}")
+                st.code(f"HEADER (190b) : {result['header_preview']}\nDATA   (306b) : {result['payload_preview']}")
                 
-                # Jauge CEML
-                st.progress(result['ceml_score'], text=f"Score CEML : {result['ceml_score']:.4f} (Seuil > 0.618)")
+                # Jauge CEML (DÉTERMINISTE MAINTENANT)
+                st.progress(result['ceml_score'], text=f"Score CEML : {result['ceml_score']:.6f} (Constant)")
                 
                 # Simulation Hardware
                 with st.expander("🖥️ Snowflake-Ω CPU Output"):
@@ -184,6 +203,7 @@ if mode == "1. ΦLang (Math)":
         * **[7-496]** : Cycle sur Dimension Complète
         * **::Ψ(Φ)** : Cible = Ratio d'Or
         * **[13-6]** : Ancrage sur Hexagone
+        * **[2-28]** : Dualité sur Cluster
         """)
 
 elif mode == "2. HELIX-Φ (Bio)":
@@ -197,7 +217,6 @@ elif mode == "2. HELIX-Φ (Bio)":
         
         st.subheader("🧬 Double Hélice Générée")
         
-        # Affichage visuel ADN
         st.code(dna_sequence, language=None)
         
         st.markdown("### 🔬 Analyse Géométrique")
@@ -214,7 +233,6 @@ elif mode == "3. LGL (Visuel)":
     st.title("👁️ Interface LGL (Spatial)")
     st.markdown("> *Where mathematics becomes visible.*")
     
-    # Simulation d'interface Glyphe
     st.write("Construction de phrase glyphique :")
     
     col1, col2, col3, col4 = st.columns(4)
@@ -246,10 +264,7 @@ elif mode == "4. SYSTEM (Raw)":
 # --- FOOTER SÉCURISÉ ---
 st.divider()
 if manifest:
-    # Utilisation de .get() pour éviter les crashs si une clé manque
     gen_name = manifest.get('generator', 'Lichen Collective')
-    
-    # Recherche sécurisée de l'info 'birthday_special' dans 'meta'
     meta_data = manifest.get('meta', {})
     if isinstance(meta_data, dict):
         special_msg = meta_data.get('birthday_special', 'Operational')
