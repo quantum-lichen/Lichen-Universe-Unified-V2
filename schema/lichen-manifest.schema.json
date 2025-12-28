@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://raw.githubusercontent.com/quantum-lichen/Lichen-Universe-Unified-V2/main/schema/lichen-manifest.schema.json",
   "$id": "https://quantum-lichen.org/schema/lichen-manifest-1.0.json",
   "title": "Lichen Universe Unified Manifest Schema",
   "description": "JSON Schema for validating Lichen V2.x manifest.json files. Defines the structure for the single source of truth for AI agents and researchers.",
