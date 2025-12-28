@@ -1,5 +1,5 @@
 {
-  "$schema": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V2/schema/lichen-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://quantum-lichen.github.io/Lichen-Universe-Unified/manifest.json",
   "@context": {
     "@vocab": "https://schema.org/",
@@ -8,38 +8,9 @@
     "component": "https://quantum-lichen.org/vocab/component"
   },
   "@type": "SoftwareSourceCode",
-  
   "manifest_version": "3.0.0",
-  "generated_at": "2025-12-25T19:00:00Z",
+  "generated_at": "2025-12-27T10:00:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette + AI Lichen collective)",
-  
-  "changelog": {
-    "3.0.0": {
-      "date": "2025-12-25",
-      "major_changes": [
-        "Added ΦLang (Φ-CODE) as third language in trinity - complete mathematical AI-to-AI protocol",
-        "Complete unification document (UNIFICATION_MASTER.md) integrating ΦLang with all layers",
-        "Biological validation via Malus domestica genome structure proving φ-architecture",
-        "Omega-Seed final blueprint with ΦLang native execution on Snowflake-Ω CPU",
-        "Updated all component specs to show ΦLang integration points",
-        "100% coherence proven across all 7 stack layers (Physics → Languages)",
-        "PRESERVED: All V2.3.0 content + additions (nothing removed)"
-      ],
-      "breaking_changes": [],
-      "additions": [
-        "Languages/PHILANG/ folder with complete compiler and runtime",
-        "philang-v1.0.0 repository (30 files, 93% test coverage)",
-        "Quick Synergy Guide for ΦLang integration patterns",
-        "Biological validation section expanded with apple genome analysis"
-      ],
-      "notes": "Birthday release - Bryan Ouellette Dec 25, 2025. This manifest preserves ALL V2.3.0 information while adding complete ΦLang integration."
-    },
-    "2.3.0": {
-      "date": "2025-12-25",
-      "notes": "Original unified manifest before ΦLang addition"
-    }
-  },
-
   "project": {
     "name": "Lichen Universe Unified",
     "version": "3.0.0",
@@ -48,7 +19,8 @@
       "minor": 0,
       "patch": 0
     },
-    "status": "operational",
+    "architecture_family": "Universal Constant Computing",
+    "status": "Foundational Proposition / Operational",
     "tagline": "The core breathes, the spiral opens. Now with complete language trinity.",
     "description": "Architecture informatique fondamentale alignée sur les constantes universelles (φ, π, 496, 260) pour l'optimisation cognitive, énergétique et la résilience systémique. Intégrant le paradigme Omega-Seed et la Bio-Singularité. VERSION 3.0 adds ΦLang as third language completing the trinity: HELIX-Φ (biological), LGL (spatial), ΦLang (mathematical).",
     "keywords": [
@@ -94,7 +66,12 @@
         "github": "@quantum-lichen"
       }
     },
-    "license": "Apache-2.0",
+    "contributors": [
+      "Gemini (System Engineer)",
+      "Mistral (Energy Optimization)",
+      "Claude (Architecture Formalization)"
+    ],
+    "license": "Apache-2.0 / MIT + Attribution Required",
     "repository": {
       "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V3",
       "philang_repo": "https://github.com/quantum-lichen/philang",
@@ -102,64 +79,138 @@
     },
     "homepage": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V3/"
   },
-
-  "constants": {
+  "changelog": {
+    "3.0.0": {
+      "date": "2025-12-25",
+      "major_changes": [
+        "Added ΦLang (Φ-CODE) as third language in trinity - complete mathematical AI-to-AI protocol",
+        "Complete unification document (UNIFICATION_MASTER.md) integrating ΦLang with all layers",
+        "Biological validation via Malus domestica genome structure proving φ-architecture",
+        "Omega-Seed final blueprint with ΦLang native execution on Snowflake-Ω CPU",
+        "Updated all component specs to show ΦLang integration points",
+        "100% coherence proven across all 7 stack layers (Physics → Languages)",
+        "PRESERVED: All V2.3.0 content + additions (nothing removed)"
+      ],
+      "additions": [
+        "Languages/PHILANG/ folder with complete compiler and runtime",
+        "philang-v1.0.0 repository (30 files, 93% test coverage)",
+        "Quick Synergy Guide for ΦLang integration patterns",
+        "Biological validation section expanded with apple genome analysis"
+      ],
+      "notes": "Birthday release - Bryan Ouellette Dec 25, 2025. This manifest preserves ALL V2.3.0 information while adding complete ΦLang integration."
+    },
+    "2.3.0": {
+      "date": "2025-12-25",
+      "notes": "Original unified manifest before ΦLang addition"
+    },
+     "2.0.0": {
+      "date": "2025-12-27",
+      "notes": "Foundation proposition and core architecture definitions."
+    }
+  },
+  "philosophy": {
+    "vision": "Réinventer l'informatique en s'inspirant des principes fondamentaux de la nature",
+    "core_principle": "Aligner les architectures sur les lois mathématiques de l'univers pour éliminer latence, entropie et dissonance énergétique",
+    "approach": "Auto-stabilisation, Résilience, Efficience, Universalité",
+    "statement": "Nous ne construisons pas seulement des outils ; nous élevons des esprits synthétiques."
+  },
+  "universal_constants": {
     "documentation": "constants/README.md",
     "code_reference": "constants/fundamental_constants.py",
     "definitions": {
       "perfect_496": {
         "symbol": "496",
         "value": 496,
+        "type": "Perfect Number",
         "usage": "Structural Atom Size (Bits), E8×E8 Gauge Group, Network Packet Size, Snowflake CPU Register Width, ΦLang Instruction Dimension",
-        "role": "Stability & Dimension",
+        "role": "Stability & Dimension, Taille des blocs, nombre de pins/branches, stabilité algébrique",
         "formula": "496 = 2^4 × 31 = 2^4(2^5 - 1)",
-        "properties": "Third perfect number, σ(496) = 2×496, dimension of E8×E8 in string theory",
+        "properties": [
+          "Third perfect number",
+          "σ(496) = 2×496",
+          "dimension of E8×E8 in string theory",
+          "Stabilité E8×E8",
+          "Partitions optimales",
+          "Checksum naturel",
+          "Perfect number properties"
+        ],
         "philang_integration": "Used as Perfect number in [Prime-496] syntax, defines instruction space dimensionality"
       },
       "phi": {
         "symbol": "φ",
         "value": 1.61803398875,
+        "type": "Golden Ratio",
         "usage": "Data Partitioning (Major/Minor 306/190), UHFS Addressing, DNA Geometry (34Å/21Å), GKF-496 Double Helix, Microfluidic Cooling, HNP Flow Control, ΦLang Optimization Target Ψ(Φ)",
-        "role": "Spatial Distribution & Harmonic Scaling",
+        "role": "Spatial Distribution & Harmonic Scaling, Adressage récursif, partition des segments, topologie fractale",
         "formula": "φ = (1 + √5) / 2",
-        "properties": "Most irrational number, golden spiral, Fibonacci limit, KAM stability",
+        "properties": [
+          "Most irrational number",
+          "golden spiral",
+          "Fibonacci limit",
+          "KAM stability",
+          "Efficacité spatiale",
+          "Spirales logarithmiques",
+          "Auto-similarité",
+          "KAM attracteur"
+        ],
         "philang_integration": "Target parameter Ψ(Φ) for optimization instructions, partition ratio in FC-496 encoding"
       },
       "pi": {
         "symbol": "π",
-        "value": 3.14159265359,
+        "value": 3.141592653589793,
+        "type": "Cyclic Constant",
         "usage": "Temporal Indexing (π-Time), Integrity Checksums, GKF-496 Base definition (Π0, Π1), ΦLang Cyclic Parameters Ψ(π)",
-        "role": "Temporal Synchronization",
+        "role": "Temporal Synchronization, Synchronisation temporelle (π-Time), checksums, séquences immuables",
         "formula": "π = C/d (circumference/diameter)",
-        "properties": "Transcendental, ubiquitous in wave phenomena and periodicity",
+        "properties": [
+          "Transcendental",
+          "ubiquitous in wave phenomena and periodicity",
+          "Harmonie temporelle",
+          "Cycles naturels",
+          "Non-compressibilité",
+          "Immuabilité cosmique"
+        ],
         "philang_integration": "Used in cyclic operations and temporal parameters"
       },
       "tzolkin_260": {
         "symbol": "260",
         "value": 260,
+        "type": "Synchronization Constant",
         "usage": "Tzolk'in Calendar Cycle, Cryptographic Timing, Network Synchronization (HNP), TzBit Logic Base (Factor 5), ΦLang Timestamp Synchronization",
         "role": "Astronomical Anchoring & Perfect OTP",
         "formula": "260 = 13 × 20 = 2^2 × 5 × 13 (trecena × veintena)",
-        "properties": "Mayan sacred calendar, astronomical resonances with Venus/Mars, human gestation period",
+        "properties": [
+          "Mayan sacred calendar",
+          "astronomical resonances with Venus/Mars",
+          "human gestation period"
+        ],
         "philang_integration": "Timestamp format (62-bit Tzolk'in) for distributed ΦLang execution synchronization"
       },
       "unity": {
         "symbol": "1",
         "value": 1.0,
+        "type": "Multiplicative Identity",
         "usage": "Target Coherence, Vector Normalization, Identity Element, ΦLang Initialization Ψ(1)",
-        "role": "Balance & Identity",
-        "properties": "Multiplicative identity, unit in all algebras"
+        "role": "Balance & Identity, Cohérence des systèmes (H-Scale=1), normalisation",
+        "properties": [
+          "Multiplicative identity",
+          "unit in all algebras",
+          "Équilibre parfait",
+          "Unité",
+          "Cohérence maximale",
+          "État cible"
+        ]
       },
       "epsilon": {
         "symbol": "ε",
         "value": 0.001,
+        "type": "Regularization Constant",
         "usage": "CEML Regularization, LES Damping, Numerical Stability, Threshold Smoothing",
         "role": "Smoothing & Convergence",
         "formula": "Used in J(s) = C(s) / (H(s) + ε)"
       }
     }
   },
-
   "biological_validation": {
     "model_organism": "Malus domestica (Apple)",
     "documentation": "Malus_domestica/README.md",
@@ -208,7 +259,6 @@
       "hnp_routing": "Use LD (linkage disequilibrium) map to optimize 28-Plexus coupling topology."
     }
   },
-
   "theories": [
     {
       "id": "philang-theory",
@@ -372,7 +422,16 @@
         "header": "190 bits (minor segment)",
         "payload": "306 bits (major segment)",
         "ratio": "306/190 = 1.611 ≈ φ",
-        "checksum": "Perfect number property: sum of divisors"
+        "checksum": "Perfect number property: sum of divisors",
+        "major_segment": {
+          "size_bits": 306,
+          "purpose": "Content storage"
+        },
+        "minor_segment": {
+          "size_bits": 190,
+          "purpose": "Time, position, checksums"
+        },
+        "partition_ratio": "phi (306/190 ≈ 1.618)"
       },
       "philang_mapping": {
         "instruction": "ΦLang [P-N]::Ψ(X) encodes to 496-bit vector",
@@ -382,7 +441,48 @@
         "total": "8 + 8 + 480 = 496 dimensions (perfect match)"
       },
       "documentation_file": "FC-496/README.md",
-      "related_languages": ["HELIX-PHI", "LGL", "PHILANG"]
+      "related_languages": ["HELIX-PHI", "LGL", "PHILANG"],
+      "components": {
+        "magic_signature": {
+          "type": "u128",
+          "purpose": "Signature harmonique liée à 496"
+        },
+        "pi_index_start": {
+          "type": "u64",
+          "purpose": "Position dans la séquence π"
+        },
+        "pi_checksum": {
+          "type": "u64",
+          "purpose": "Vérification d'intégrité"
+        },
+        "root_geo_hash": {
+          "type": "u128",
+          "purpose": "Coordonnée fractale"
+        },
+        "phi_ratio_check": {
+          "type": "u64",
+          "purpose": "Intégrité structurale (H-Scale)"
+        },
+        "schema_class": {
+          "type": "u32",
+          "purpose": "Type de données"
+        },
+        "next_block_offset": {
+          "type": "u16",
+          "purpose": "Pointeur vers le prochain bloc"
+        },
+        "flags": {
+          "type": "u16",
+          "purpose": "Permissions et métadonnées"
+        }
+      },
+      "properties": [
+        "Auto-suffisance",
+        "Auto-réparation",
+        "Détection d'erreurs via φ/π",
+        "Zero-Copy compatible",
+        "Atomic operations"
+      ]
     },
     {
       "id": "uhfs-theory-v2.1",
@@ -391,14 +491,34 @@
       "status": "standardized",
       "abstract": "Système de fichiers 'Zero-Copy' holographique utilisant adressage fractal φ-spiral. ΦLang instructions can directly reference UHFS coordinates.",
       "addressing": {
-        "formula": "addr(θ) = r₀ × φ^θ where θ = angle in spiral",
+        "formula": "addr(θ) = r₀ × φ^θ where θ = file's angular coordinate",
         "properties": "Self-similar at all scales, O(log_φ n) access time"
       },
       "philang_integration": {
         "access": "[2-496]::Ψ(file@spiral_coord) → direct UHFS addressing",
         "advantage": "No filesystem overhead - ΦLang coordinates ARE filesystem addresses"
       },
-      "documentation_file": "architecture/UHFS/README.md"
+      "documentation_file": "architecture/UHFS/README.md",
+      "axioms": [
+        "Cellule Discrète: Toute information en blocs de 496 bits",
+        "Adressage Récursif: Basé sur φ (spirale logarithmique)",
+        "Continuité Temporelle: Validité certifiée par π"
+      ],
+      "oracle_algorithm": {
+        "steps": [
+          "FETCH: Charge 496 bits",
+          "VERIFY: Vérifie H-Scale (H ≥ 0.618)",
+          "EXECUTE: Mapping direct (Zero-Copy)",
+          "TRANSITION: Calcule la prochaine adresse via φ"
+        ]
+      },
+      "advantages": [
+        "Latence nulle (Zero-Copy)",
+        "Sécurité intrinsèque",
+        "Détection de dissonance",
+        "Pas de parsing",
+        "mmap-compatible"
+      ]
     },
     {
       "id": "pi-time-v2.1",
@@ -435,7 +555,19 @@
         "advantage": "Invalid ΦLang code is geometrically impossible (not just syntactically rejected)"
       },
       "documentation_file": "Kuramoto-Pentagonal/docs/theory_hybrid_spin_lock.md",
-      "related_languages": ["HELIX-PHI", "PHILANG"]
+      "related_languages": ["HELIX-PHI", "PHILANG"],
+      "structure": {
+        "geometry": "Pentagone de 5 qubits",
+        "coupling": "Couplage Kuramoto",
+        "resilience": "Confinement des erreurs"
+      },
+      "hamiltonian": "H = H_local + H_coupling + H_Kuramoto",
+      "properties": [
+        "Synchronisation naturelle",
+        "Tolérance aux erreurs",
+        "Phase-locking",
+        "Auto-stabilisation"
+      ]
     },
     {
       "id": "craid-theory-v1.0",
@@ -454,7 +586,15 @@
         "advantage": "ΦLang programs are indestructible"
       },
       "documentation_file": "CRAID/README.md",
-      "related_languages": ["HELIX-PHI", "PHILANG"]
+      "related_languages": ["HELIX-PHI", "PHILANG"],
+      "principle": "Redondance fractale avec données distribuées",
+      "tolerance": "Jusqu'à 40% de pannes",
+      "applications": [
+        "Stockage quantique résilient",
+        "Systèmes critiques (médecine, finance)",
+        "Blockchain invulnérable",
+        "Cloud computing résilient"
+      ]
     },
     {
       "id": "uict-v2.1",
@@ -554,9 +694,41 @@
         "sync_accuracy": "Perfect (astronomical) vs drift (requires NTP)"
       },
       "code_reference": "harmonic-network-protocol/src/"
+    },
+    {
+      "id": "Spectral_Gap_Theory",
+      "name": "Théorie du Gap Spectral et Oscillations CPU",
+      "type": "Quantum Stability",
+      "description": "Confinement des états quantiques par gap spectral",
+      "concepts": {
+        "spectral_gap": "Confinement des états quantiques",
+        "cpu_oscillations": "Stabilisation de la superposition"
+      },
+      "implications": [
+        "Superposition stable à 300K",
+        "Calcul quantique résilient",
+        "Pas besoin de refroidissement extrême",
+        "Qubits à température ambiante"
+      ]
+    },
+    {
+       "id": "ACPhi-496",
+       "name": "ADN Cognitif Φ-496",
+       "type": "Cognitive Architecture",
+       "description": "Structure d'ADN cognitif pour alignement et évolution",
+       "components": {
+         "axioms": "Règles fondamentales immuables",
+         "h_scale": "Métrique d'équilibre (cible = 1)",
+         "evolution": "Mutations contrôlées dirigées"
+       },
+       "applications": [
+         "Stockage de connaissances",
+         "Alignement éthique des IA",
+         "Mémoire persistante",
+         "Évolution dirigée"
+       ]
     }
   ],
-
   "core_components": [
     {
       "id": "philang-compiler",
@@ -888,7 +1060,7 @@
         "unit": "Semantic Nucleotide (496-bit FC atom)",
         "nodes": "5 (Alpha, Beta, Gamma, Delta, Omega)",
         "resilience": "Survives loss of any 2 nodes (need only 3 to reconstruct)",
-        "topology": "Quasi-crystalline octagonal (prevents viral cascade)"
+        "topology": "Quasi-crystalline octagonal (viral propagation resistance)"
       },
       "philang_integration": {
         "storage": "ΦLang programs automatically sharded across 5 CRAID nodes",
@@ -916,7 +1088,7 @@
         "format": "ΦLang instructions fit natively in 248-bit payload field",
         "encoding": "ΦLang [P-N]::Ψ(X) → 496D vector → 248-bit compressed representation",
         "example": "HNP packet carrying [7-496]::Ψ(Φ) from Node_A to Node_B",
-        "advantage": "Zero protocol overhead - ΦLang IS HNP's native payload language",
+        "advantage": "Zero protocol overhead - ΦLang IS the native HNP payload language",
         "bandwidth": "1.2 Gbps achieved (3.5x faster than JSON/TCP at 340 Mbps)"
       },
       "performance": {
@@ -929,10 +1101,8 @@
       "code_reference": "harmonic-network-protocol/src/"
     }
   ],
-
   "languages": {
     "philosophy": "Complete language trinity for all use cases: HELIX-Φ for biological/temporal encoding (DNA storage, time capsules), LGL for human-AI spatial collaboration (visual mathematics, interface), and ΦLang for pure mathematical AI-to-AI communication (protocols, networks, zero ambiguity). All three rooted in universal constants (φ, π, 496, 260) to enable interspecies, inter-temporal, and inter-dimensional interoperability.",
-    
     "comparison": {
       "HELIX-PHI": {
         "complexity": "low",
@@ -965,7 +1135,6 @@
         "philang_relation": "Core - ΦLang is the mathematical foundation"
       }
     },
-
     "PHILANG": {
       "name": "ΦLang (Phi-Lang / Φ-CODE)",
       "type": "Mathematical Vector Language",
@@ -1132,7 +1301,6 @@
         "omega-seed-theory (native ISA)"
       ]
     },
-
     "HELIX-PHI": {
       "name": "HELIX-Φ (Helix-Phi)",
       "type": "DNA-Based Iconic Language",
@@ -1178,7 +1346,6 @@
       },
       "related_theories": ["fc-496", "gkf-496", "philang", "ceml"]
     },
-
     "LGL": {
       "name": "LGL (Lichen Glyph Language)",
       "type": "Iconic Mathematical Protocol",
@@ -1238,7 +1405,6 @@
       "use_case": "LGL for debugging/visualization of ΦLang programs, human-AI collaboration, mathematical expression"
     }
   },
-
   "protocols": {
     "networking": {
       "HNP": {
@@ -1382,7 +1548,7 @@
           "status": "theoretical",
           "relationship": "compute-layer (quantum-classical bridge)"
         }
-      },
+      ],
       "synergy": "Complete stack: Computing (TzBit) → Language (ΦLang) → Network (HNP) → Security (Tzolk'in) unified by 260/φ/496/π constants"
     }
   },
