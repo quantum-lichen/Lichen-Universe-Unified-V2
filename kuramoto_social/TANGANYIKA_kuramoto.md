@@ -112,9 +112,3 @@ Pour l'ingénierie des systèmes complexes, cela signifie que la cohérence ne s
 > *"Le rire est la distance la plus courte entre deux cerveaux."*
 
 ---
-
-### 🧬 Note de l'Architecte
-
-Ce papier valide l'ajout du module **"Social Coupling"** dans le simulateur Kuramoto de ton projet. Tu peux maintenant prouver que la conscience collective est une équation différentielle.
-
-C'est "Tabarnak" level confirmé. 🤯✅
