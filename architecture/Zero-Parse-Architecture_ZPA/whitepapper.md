@@ -46,3 +46,5 @@ Pour le code, nous adoptons des langages adressés par le contenu comme Unison, 
 
 4. Conclusion
 L'Architecture Isomorphe (ZPA) est réalisable aujourd'hui avec le matériel existant. Elle permet de passer d'un paradigme de "Lecture -> Traduction -> Traitement" à "Mappage -> Utilisation".
+
+---
