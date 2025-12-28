@@ -4,11 +4,11 @@ import json
 import math
 import random
 import time
-import re  # Indispensable pour l'analyse syntaxique
+import re
 
 # --- CONFIGURATION DU TERMINAL ---
 st.set_page_config(
-    page_title="LICHEN TRINITY V3.3 MATH-CORE",
+    page_title="LICHEN TRINITY V3.4 MYCO-NET",
     page_icon="💠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -60,7 +60,14 @@ with st.sidebar:
     else:
         st.error("🔴 HIVE LINK: DISCONNECTED")
     
-    mode = st.radio("SÉLECTION DU PROTOCOLE", ["1. ΦLang (Math)", "2. HELIX-Φ (Bio)", "3. LGL (Visuel)", "4. SYSTEM (Raw)"])
+    # MENU MIS À JOUR AVEC LE 5ÈME ÉLÉMENT
+    mode = st.radio("SÉLECTION DU PROTOCOLE", [
+        "1. ΦLang (Math)", 
+        "2. HELIX-Φ (Bio)", 
+        "3. LGL (Visuel)", 
+        "4. SYSTEM (Raw)",
+        "5. MycoNet (Fungi)"
+    ])
     
     st.divider()
     st.write("🌌 **Universal Constants**")
@@ -90,7 +97,6 @@ def is_prime(n):
 
 def is_perfect(n):
     """Vérifie si n est un nombre parfait (Structure)"""
-    # Liste connue des nombres parfaits pour aller vite
     perfects = [6, 28, 496, 8128, 33550336] 
     return n in perfects
 
@@ -121,20 +127,13 @@ def compile_philang(code):
         return {"status": "REJECTED", "error": " | ".join(errors)}
 
     # 4. GÉNÉRATION DÉTERMINISTE (FIXE)
-    # On utilise le code comme 'graine' (seed). 
-    # Mêmes entrées = Mêmes résultats. TOUJOURS.
     vector_seed = (prime_candidate * perfect_candidate) + hash(param)
-    
-    # On force le générateur aléatoire à utiliser cette graine
     random.seed(vector_seed)
     
-    # Génération du binaire simulé mais constant pour cette instruction
     binary_vector = bin(vector_seed % (2**496))[2:].zfill(496)
     
-    # Génération du score CEML stable
-    # Un nombre parfait + un nombre premier donnent naturellement un score haut
     base_score = 0.618
-    stability_bonus = random.uniform(0.2, 0.381) # Sera toujours le même pour ce seed
+    stability_bonus = random.uniform(0.2, 0.381) 
     final_score = base_score + stability_bonus
     
     return {
@@ -182,14 +181,11 @@ if mode == "1. ΦLang (Math)":
                 with col_b:
                     st.info(result['perfect_check'])
                 
-                # Visualisation de l'Atome FC-496
                 st.markdown("#### ⚛️ Structure Atomique (FC-496)")
                 st.code(f"HEADER (190b) : {result['header_preview']}\nDATA   (306b) : {result['payload_preview']}")
                 
-                # Jauge CEML (DÉTERMINISTE MAINTENANT)
                 st.progress(result['ceml_score'], text=f"Score CEML : {result['ceml_score']:.6f} (Constant)")
                 
-                # Simulation Hardware
                 with st.expander("🖥️ Snowflake-Ω CPU Output"):
                     st.write("1. Oscillators synced (Kuramoto r=0.98)")
                     st.write("2. Vector projected to E8 lattice")
@@ -260,6 +256,84 @@ elif mode == "4. SYSTEM (Raw)":
         st.json(manifest)
     else:
         st.warning("Chargement des données Hive Mind...")
+
+elif mode == "5. MycoNet (Fungi)":
+    st.title("🍄 MycoNet: Fungal Routing Layer")
+    st.markdown("> *Nature's original internet. 10^12 connections per node.*")
+    
+    # --- CONFIGURATION DU MYCELIUM ---
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        spikes = st.slider("Activité Électrique (Spikes/sec)", 1, 100, 13)
+    with c2:
+        nutrients = st.slider("Densité Nutritionnelle (Données)", 0.0, 1.0, 0.618)
+    with c3:
+        decay = st.slider("Facteur d'Atrophie (Nettoyage)", 0.1, 0.9, 0.3)
+
+    st.divider()
+
+    # --- SIMULATION SPATIALE ---
+    nodes = ["Alpha", "Beta", "Gamma", "Delta", "Omega"]
+    
+    st.subheader("⚡ Electrical Spike Activity (Bio-Signaling)")
+    
+    chart_data = []
+    # Génération deterministe mais chaotique (Organique)
+    random.seed(time.time()) 
+    
+    for i in range(50):
+        base = math.sin(i * 0.5) * 0.2
+        organic_noise = random.uniform(-0.1, 0.1)
+        is_spike = 1.0 if random.random() > (1.0 - (spikes/200)) else 0.0
+        signal = base + organic_noise + is_spike
+        chart_data.append(signal)
+    
+    st.line_chart(chart_data, color="#00FF94")
+    
+    # --- ROUTAGE STIGMERGIQUE ---
+    st.subheader("🕸️ Hyphae Pathfinding (Routage Dynamique)")
+    
+    col_a, col_b = st.columns([1, 2])
+    
+    with col_a:
+        target = st.selectbox("Cible de la Colonie", nodes)
+        if st.button("Lancer les Hyphes"):
+            st.session_state['myco_target'] = target
+            st.session_state['myco_growth'] = True
+    
+    with col_b:
+        if st.session_state.get('myco_growth'):
+            st.write(f"🌱 Colonisation vers **{st.session_state.get('myco_target', 'Unknown')}** en cours...")
+            
+            path = ["Root"]
+            
+            # Barre de progression visuelle
+            progress_bar = st.progress(0, text="Extension du réseau...")
+            
+            for i in range(100):
+                chance = random.random()
+                time.sleep(0.01)
+                progress_bar.progress(i + 1, text=f"Densification des connexions... {i}%")
+                
+                if chance < nutrients and len(path) < 4:
+                    available_nodes = [n for n in nodes if n not in path]
+                    if available_nodes:
+                        next_node = random.choice(available_nodes)
+                        path.append(next_node)
+            
+            st.success(f"✅ CONNEXION ÉTABLIE : {' → '.join(path)} → {st.session_state.get('myco_target')}")
+            st.caption(f"Ce chemin a été renforcé chimiquement. Les autres chemins se sont atrophiés.")
+            
+            with st.expander("🔍 Analyse Technique (Myco-Protocol)"):
+                st.write("**Biomimicry:** Armillaria bulbosa Network")
+                st.code(f"""
+def fungal_routing(source, target, nutrients):
+    # 1. Broadcasting: Envoi d'impulsions électriques faibles
+    # 2. Sensing: Détection du gradient de données (Nutrients={nutrients})
+    # 3. Reinforcing: Si Chemin valide, conductance = conductance * 1.618
+    # 4. Pruning: Si Chemin vide, conductance = conductance * {decay}
+    return optimized_path
+                """, language="python")
 
 # --- FOOTER SÉCURISÉ ---
 st.divider()
