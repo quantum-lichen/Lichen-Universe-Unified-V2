@@ -76,42 +76,73 @@ with st.sidebar:
             st.caption(f"π = {pi_val}")
             st.caption(f"Dim = {dim_val}")
 
-# --- MOTEUR DE TRAITEMENT (SIMULATION) ---
+import re  # On ajoute Regex pour parser proprement
+
+# --- MOTEUR DE TRAITEMENT (MATHÉMATIQUE RÉEL) ---
+
+def is_prime(n):
+    """Vérifie si n est un nombre premier (Action)"""
+    if n <= 1: return False
+    if n <= 3: return True
+    if n % 2 == 0 or n % 3 == 0: return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0: return False
+        i += 6
+    return True
+
+def is_perfect(n):
+    """Vérifie si n est un nombre parfait (Structure)"""
+    if n < 6: return False
+    sum_div = 1
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            sum_div += i
+            if i*i != n:
+                sum_div += n // i
+    return sum_div == n
 
 def compile_philang(code):
-    """Simule la compilation d'instructions ΦLang"""
-    # Analyse basique de la syntaxe [P-N]::Ψ(X)
-    if "::Ψ" in code and "[" in code and "]" in code:
-        # Simulation d'un vecteur 496 bits
-        vector_hash = hash(code) % (2**496)
-        binary_vector = bin(vector_hash)[2:].zfill(496)
+    """Compile et valide mathématiquement le ΦLang"""
+    
+    # 1. ANALYSE SYNTAXIQUE (REGEX)
+    # Cherche le pattern : [NOMBRE-NOMBRE]::Ψ(TEXTE)
+    match = re.search(r"\[(\d+)-(\d+)\]::Ψ\((.+)\)", code)
+    
+    if not match:
+        return {"status": "INVALID", "error": "SYNTAX ERROR: Format attendu [Prime-Perfect]::Ψ(Param)"}
+    
+    # 2. EXTRACTION DES VALEURS
+    prime_candidate = int(match.group(1))
+    perfect_candidate = int(match.group(2))
+    param = match.group(3)
+    
+    # 3. VALIDATION MATHÉMATIQUE (LE JUGE IMPITOYABLE)
+    errors = []
+    
+    if not is_prime(prime_candidate):
+        errors.append(f"⛔ GÉOMÉTRIE CASSÉE : {prime_candidate} n'est pas un nombre PREMIER (Action invalide).")
         
-        # Partition FC-496 (190 header / 306 payload)
-        header = binary_vector[:190]
-        payload = binary_vector[190:]
-        
-        return {
-            "status": "VALID",
-            "type": "Instruction Vectorielle",
-            "atom_size": "496 bits",
-            "header_preview": header[:32] + "...",
-            "payload_preview": payload[:32] + "...",
-            "ceml_score": random.uniform(0.618, 0.99) # Simulation CEML
-        }
-    else:
-        return {"status": "INVALID", "error": "Syntaxe géométrique non respectée. Attendu: [Prime-Perfect]::Ψ(Param)"}
+    if not is_perfect(perfect_candidate):
+        errors.append(f"⛔ TOPOLOGIE INSTABLE : {perfect_candidate} n'est pas un nombre PARFAIT (Structure invalide).")
+    
+    if errors:
+        return {"status": "REJECTED", "error": " | ".join(errors)}
 
-def encode_helix(text):
-    """Encode du texte en ADN HELIX-Φ"""
-    mapping = {'00': 'A', '01': 'C', '10': 'G', '11': 'T'}
-    # Conversion simple pour la démo
-    try:
-        binary = ''.join(format(ord(i), '08b') for i in text)
-        pairs = [binary[i:i+2] for i in range(0, len(binary), 2)]
-        dna = "".join([mapping.get(p, 'A') for p in pairs])
-        return dna
-    except:
-        return "ERROR_ENCODING"
+    # 4. GÉNÉRATION DE L'ATOME (SI TOUT EST BON)
+    # Simulation d'un vecteur 496 bits basé sur la signature mathématique
+    vector_seed = (prime_candidate * perfect_candidate) + hash(param)
+    binary_vector = bin(vector_seed % (2**496))[2:].zfill(496)
+    
+    return {
+        "status": "VALID",
+        "type": "Vecteur Mathématique Certifié",
+        "prime_check": f"{prime_candidate} ∈ ℙ (Prime)",
+        "perfect_check": f"{perfect_candidate} ∈ ℙerfect",
+        "header_preview": binary_vector[:32] + "...",
+        "payload_preview": binary_vector[190:222] + "...",
+        "ceml_score": random.uniform(0.85, 0.999) # Bonus car mathématiquement pur
+    }
 
 # --- INTERFACE PRINCIPALE ---
 
