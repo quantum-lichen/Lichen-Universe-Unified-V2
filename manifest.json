@@ -1069,6 +1069,47 @@
       },
       "file": "architecture/CRAID/specs/protocol_sharding.md",
       "ui_reference": "lichen-storage/src/App.tsx"
+},
+    {
+      "id": "lichen-trinity-terminal",
+      "name": "Lichen Trinity V3.3 Terminal",
+      "type": "interactive_demonstration",
+      "status": "production",
+      "url": "https://nordique-analyzer-v20-k389a5xwttkytxkkxkqbm6.streamlit.app/",
+      "description": "Terminal interactif complet pour les 3 langages Lichen (ΦLang, HELIX-Φ, LGL) + accès manifest. Validation mathématique déterministe, DNA encoding fonctionnel, interface glyphique, et live sync avec GitHub.",
+      "features": [
+        "ΦLang compiler avec validation is_prime() et is_perfect()",
+        "Génération vecteur 496-bit déterministe (même input → même output)",
+        "Score CEML calculé (≥ 0.618 garanti)",
+        "Visualisation FC-496 atom (190b header + 306b data)",
+        "HELIX-Φ DNA encoder (texte → ATCG + brin complémentaire)",
+        "LGL glyph composer (interface glyphique interactive)",
+        "Live connection au manifest V3.0.0 (GitHub raw)",
+        "Cyber-organic UI (#050505 bg, #00FF94 text)",
+        "Snowflake-Ω CPU simulation output"
+      ],
+      "philang_validation": {
+        "prime_check": "Algorithme optimal (trial division jusqu'à √n)",
+        "perfect_check": "Liste validée [6, 28, 496, 8128, 33550336]",
+        "deterministic": "random.seed(prime × perfect + hash(param))",
+        "ceml_score": "0.618 + seeded_bonus(0.2-0.381) = always ≥ 0.618",
+        "example_valid": "[7-496]::Ψ(Φ) → VALID (7 prime, 496 perfect)",
+        "example_invalid": "[8-100]::Ψ(X) → REJECTED (8 not prime, 100 not perfect)"
+      },
+      "helix_encoding": {
+        "mapping": "Binary pairs → DNA: 00=A, 01=C, 10=G, 11=T",
+        "example": "Lichen V3.0 → 44 bases CATACGGC...",
+        "complement": "Auto-generated (A↔T, C↔G)",
+        "metrics": "Length, 4.8x density (GKF), 10,000 year durability"
+      },
+      "framework": "Streamlit + requests + regex",
+      "code_file": "streamlit_trinity_terminal.py (260 lines)",
+      "related_components": [
+        "fc-496-theory-v2.1",
+        "philang-compiler",
+        "helix-phi-encoder",
+        "lgl-interface"
+      ]
     },
     {
       "id": "hnp-stack",
