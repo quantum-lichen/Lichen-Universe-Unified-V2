@@ -1,0 +1,238 @@
+﻿Rapport Cryptolinguistique Avancé sur le Manuscrit de Voynich : Structures, Fonctions et Faisabilité Computationnelle
+
+
+
+
+I. Cadre Historique et Codicologique du Manuscrit (VMS)
+
+
+Le Manuscrit de Voynich (VMS), codex conservé à la Bibliothèque Beinecke de Yale, représente l'une des énigmes cryptographiques les plus persistantes de l'histoire. L'établissement de son cadre temporel et matériel est fondamental pour écarter les hypothèses erronées et concentrer la cryptanalyse sur la bonne période historique.
+
+
+1.1. L'Ancrage Temporel et Matériel
+
+
+L'élément le plus factuel et irréfutable concernant l'ancienneté du VMS est la datation par le carbone 14. Les analyses effectuées sur le vélin (le support d'écriture) ont permis de déterminer que celui-ci a été fabriqué entre 1404 et 1438.1 Cette période ancre le manuscrit fermement dans le début du XVe siècle. Cette donnée réfute catégoriquement les théories de canulars élaborés par des figures de la Renaissance tardive comme John Dee ou Edward Kelley, ou des fraudes du XXe siècle attribuées à l'antiquaire Wilfrid M. Voynich lui-même.1 Le support matériel est, sans aucun doute, médiéval.
+La traçabilité du VMS est partielle mais essentielle pour comprendre son contexte. Bien qu'il soit d'origine inconnue 4, la chronologie des possesseurs permet de situer l'époque où il est devenu un objet de curiosité académique. L'inscription visible seulement aux rayons ultraviolets sur le folio 1r, mentionnant "Jacobi de Tepenecz" 5, suggère un contact avec Jakub de Tepenec (aussi connu sous le nom de Jacobus Sinapius) au début du XVIIe siècle.3 Ce dernier aurait pu être lié à Rudolf II, Empereur du Saint-Empire, mentionné comme un possesseur antérieur.4
+En 1666, le recteur de l'Université Charles de Prague, Johannes Marcus Marci, présenta le codex à l'influent savant jésuite Athanasius Kircher, soulignant le caractère indéchiffrable du texte même à cette époque.5 Le manuscrit est ensuite réapparu lorsque Wilfrid M. Voynich l'acheta en 1912 au Collège jésuite de Frascati, près de Rome, lui donnant ainsi son nom contemporain.5
+
+
+1.2. La Disjonction Potentielle entre Texte et Image
+
+
+Une observation codicologique cruciale émerge lorsque la datation du vélin est comparée à l'analyse de l'encre. Le vélin et le texte principal sont du XVe siècle, ce qui valide l'ancienneté du message encodé. Cependant, l'analyse des illuminations révèle des incohérences. Il est noté que l'encre de couleur utilisée pour peindre les figures est qualifiée de "quelque peu grossière" et qu'elle a été "probablement ajoutée plus tard que le moment de la création du texte et des contours eux-mêmes".4
+Cette observation pose une question fondamentale pour la cryptanalyse : la thématique illustrée correspond-elle fidèlement à l'intention originale de l'auteur du texte du XVe siècle? Si les illustrations ont été complétées ou ajoutées par un propriétaire ultérieur (peut-être aux XVIe ou XVIIe siècles, comme Rudolf II ou Jakub de Tepenec), l'objectif initial du texte pourrait avoir été délibérément masqué ou réinterprété pour s'adapter aux intérêts de l'époque, tels que l'alchimie, la magie ou l'astrologie.6
+Par conséquent, si le texte est un chiffre diplomatique, un code militaire, ou même un journal personnel datant de 1404-1438, un possesseur ultérieur aurait pu le déguiser en herbier ou en traité médical pour lui donner une valeur marchande ou pour en dissimuler la nature secrète. L'analyse ne doit donc pas présupposer une correspondance parfaite entre les images (l'ancre sémantique apparente) et le contenu réel du texte chiffré.
+Table 1 : Chronologie Factuelle et Attribuée des Possesseurs du Manuscrit de Voynich
+
+
+Période
+	Statut ou Possesseur
+	Preuve / Caractéristique
+	c. 1404–1438
+	Création du support (Vélin)
+	Datation au Carbone 14 1
+	c. 1600
+	Propriétaire attesté
+	Rudolf II, Empereur du Saint-Empire 4
+	Début XVIIe siècle
+	Signataire possible
+	Jakub de Tepenec (Inscription UV) 5
+	1666
+	Transmission
+	Johannes Marcus Marci (Offert à Athanasius Kircher) 5
+	1912
+	Redécouverte et Nomination
+	Wilfrid M. Voynich (Achat en Italie) 5
+	
+
+II. Anatomie Structurelle et Déduction de l'Utilité Fonctionnelle
+
+
+L'utilité fonctionnelle d'un codex non déchiffré est déduite de son organisation interne, appelée codicologie, et de la nature de ses illustrations. Le VMS est structuré de manière thématique, ce qui permet de formuler des hypothèses robustes sur son domaine de connaissance.
+
+
+2.1. Cartographie des Sections Thématiques
+
+
+Le manuscrit est conventionnellement divisé en six sections distinctes, basées sur la nature des dessins qui accompagnent le texte 4:
+1. Section Botanique (Herbal): La plus volumineuse, suivant le format typique des herbiers européens du XVe siècle.4 Elle présente une ou deux plantes par page, accompagnées de paragraphes de texte.4 Le défi majeur est que sur les nombreuses illustrations, 113 espèces végétales restent non identifiées, n'ayant aucun parallèle connu dans l'art botanique ou les herbiers répertoriés.5
+2. Section Astronomique et Astrologique: Caractérisée par des diagrammes circulaires, des soleils, des lunes 7, et des symboles zodiacaux facilement identifiables, comme le Taureau (Taurus), les Poissons (Pisces) et le Sagittaire.5
+3. Section Balnéologique (ou Biologique/Gynécologique): Une des sections les plus énigmatiques. Elle se compose d'un texte continu dense et de dessins montrant une "myriade" de femmes nues miniatures, la plupart présentant des abdomens gonflés.5 Ces figures sont souvent représentées en train de prendre des bains ou de se mouvoir dans des bassins ou des citernes reliés par un réseau élaboré de tuyauterie.3
+4. Sections Cosmologique et Pharmaceutique: La section cosmologique contient des diagrammes circulaires de nature obscure 4, tandis que la section pharmaceutique présente des dessins de racines et de bocaux, suggérant la préparation de recettes et de remèdes.4
+
+
+2.2. Inférence de l'Utilité: Un Compendium Médico-Astrologique
+
+
+L'analyse de la convergence thématique des sections offre une forte inférence sur l'utilité du manuscrit. La combinaison de l'herboristerie, de la pharmacie, des illustrations corporelles et de l'astrologie pointe vers un ouvrage spécialisé en médecine et en pharmacopée médiévales, probablement orienté vers la santé féminine.
+Au Moyen Âge, l'astrologie médicale n'était pas séparée de la médecine. La position des planètes et des signes du zodiaque était considérée comme fondamentale pour déterminer le meilleur moment pour administrer des traitements ou récolter des ingrédients.8 L'inclusion de cartes astrales et de symboles zodiacaux suggère que le VMS fonctionnait, au moins en partie, comme un calendrier ou un guide pour ces pratiques.
+De plus, la prépondérance des illustrations de femmes, en particulier dans la section balnéologique (souvent associée aux traités sur la santé reproductive et les rituels de purification), soutient la théorie selon laquelle le manuscrit est un manuel médical généraliste pour et sur les femmes.8
+Une hypothèse formulée dans la recherche moderne est que le texte pourrait être constitué de mots abrégés, une pratique courante dans les manuscrits médicaux de l'époque.8 Cette sténographie pourrait expliquer une partie de la difficulté de décryptage. Les défenseurs de cette idée avancent que l'incapacité à traduire résulte de l'absence d'un index, qui aurait normalement été placé à la fin du manuscrit pour corréler les abréviations avec leurs significations, et que cet index se trouvait peut-être dans les cahiers manquants du codex.8
+Table 2 : Synthèse des Sections Codicologiques et Inférences sur l'Utilité
+
+
+Section (Conventionnelle)
+	Contenu Dominant
+	Inférence de l'Utilité
+	Implication Thématique
+	Botanique (Herbal)
+	113 plantes non identifiées 5
+	Pharmacopée, connaissance botanique secrète ou locale
+	Maîtrise d'une flore non européenne ou cryptée
+	Astronomique/Cosmologique
+	Diagrammes, symboles zodiacaux 5
+	Astrologie médicale
+	Outil de diagnostic et de planification des traitements 8
+	Balnéologique/Biologique
+	Femmes nues dans des systèmes hydrauliques 4
+	Gynécologie, hygiène ou rituels de santé
+	Focus sur la médecine féminine 8
+	
+
+III. Caractéristiques Cryptolinguistiques et Statistiques (Le Cœur du Mystère)
+
+
+L'énigme du VMS réside moins dans son alphabet inconnu que dans les propriétés statistiques hautement anormales de son texte. L'étude de ces propriétés est le domaine de la cryptolinguistique et fournit des indices cruciaux sur le mécanisme de chiffrement ou de création linguistique.
+
+
+3.1. Le Corpus et les Systèmes de Translittération
+
+
+Étant donné que le manuscrit utilise un alphabet unique 1, toute analyse computationnelle doit commencer par la translittération, c'est-à-dire l'assignation de caractères standards (ASCII ou autres) aux glyphes du VMS. Le système le plus couramment utilisé est l'Alphabet de Voynich Étendu (EVA), bien que d'autres schémas comme Currier, Bennett ou FSG existent.9 Ces systèmes permettent de transformer les glyphes illisibles en un corpus lisible par machine, indispensable à l'analyse de fréquence et à la modélisation morphologique.
+Cependant, l'existence de systèmes multiples de translittération met en lumière une source d'incertitude dans l'analyse textuelle. Le fait que différents schémas assignent des caractères distincts à certains glyphes ambigus (par exemple, 'D' par rapport à '4' ou 'O' par rapport à '8' entre Bennett et FSG/Currier) 9 introduit un bruit potentiel. Si un système de chiffrement repose sur des distinctions graphiques subtiles, la variabilité des données de translittération peut fausser les analyses statistiques précises, telles que les fréquences de digrammes et de trigrammes.
+
+
+3.2. L'Anomalie Statistique: La Déviation Non-Zipfienne
+
+
+La loi de Zipf, pierre angulaire de la linguistique statistique, stipule que dans toute langue naturelle, la fréquence d'un mot est inversement proportionnelle à son rang dans le classement des fréquences. En d'autres termes, si l'on multiplie le rang par la fréquence, on obtient une constante (K).
+L'analyse de la distribution des mots du VMS par rapport à cette loi révèle une anomalie majeure. Contrairement aux langues naturelles (comme l'anglais ou le grec, où la valeur K reste relativement stable) 10, le texte du VMS affiche un produit rang-fréquence très instable.10 Cela signifie que la structure distributionnelle des mots est fondamentalement différente de celle d'une communication linguistique humaine normale.
+Les caractéristiques du VMS sont les suivantes:
+* Faible diversité lexicale: Le manuscrit semble construit autour d'un nombre restreint de racines ou de mots courts, répétés avec une fréquence exceptionnellement élevée.
+* Morphologie rigide: Les mots sont souvent formés par des combinaisons très prévisibles de préfixes, de noyaux (corps de mot) et de suffixes (phénomènes de type 'Abla-Abla').
+Cette déviation par rapport à la loi de Zipf est la signature d'une contrainte artificielle rigide, qu'elle soit cryptographique ou linguistique.
+Table 3 : Comparaison des Distributions de Fréquence des Mots (Loi de Zipf)
+
+
+Corpus
+	Caractéristiques Principales
+	Conformité à la Loi de Zipf
+	Implication Cryptographique
+	Langues Naturelles (Ex: Anglais, Grec)
+	Fréquence élevée des mots fonctionnels (articles, prépositions).
+	Conforme (Valeur K constante) 10
+	Analyse linguistique standard applicable.
+	Voynich Manuscript
+	Forte répétition de racines courtes; K instable.10
+	Non-Zipfien caractéristique 10
+	Indique une construction artificielle (chiffre sophistiqué ou langue construite).
+	
+
+3.3. Le Paradoxe de la Faible Entropie et de la Contrainte Artificielle
+
+
+L'analyse cryptolinguistique montre que le texte du VMS possède une très faible entropie (un faible degré de désordre ou de variation), ce qui le rend à la fois extrêmement difficile à briser et statistiquement distinct du bruit aléatoire. Le paradoxe est le suivant : le texte est trop régulier pour être une langue naturelle, mais trop structuré pour être un charabia simple.
+Cette forte structuration artificielle permet d'écarter l'hypothèse d'un simple charabia aléatoire et suggère trois possibilités principales :
+1. Un Chiffre par Substitution Sophistiqué : Si le VMS est le résultat du chiffrement d'une langue naturelle existante, le système utilisé doit être complexe, potentiellement un chiffre par homophones (où chaque lettre peut être représentée par plusieurs glyphes) combiné à des contraintes de construction de mots forcées par le cryptage. L'objectif aurait été de masquer la véritable distribution de fréquence des lettres de la langue source tout en créant un texte chiffré visuellement homogène.
+2. Une Langue Construite (Artificielle) : Il est possible que l'auteur ait créé intentionnellement une langue entièrement nouvelle et artificielle.11 Dans ce cas, il n'y aurait aucune langue source à déchiffrer, mais un ensemble de principes syntaxiques et sémantiques inventés par l'auteur. Le langage pourrait même être non prononçable, consistant uniquement en une séquence de symboles conceptuels.11
+3. Un Schéma Stéganographique : Le texte du VMS pourrait n'être qu'un texte porteur (ou un masque). Les règles morphologiques rigides seraient elles-mêmes une partie de la clé du chiffrement, le véritable message étant caché par des moyens subtils, tels que l'utilisation de variations de glyphes ou la sélection cryptographique de certains mots ou segments.
+Comprendre cette contrainte artificielle est la clé : le défi cryptographique consiste à identifier la règle qui génère la structure textuelle observée.
+
+
+IV. Évaluation des Tentatives de Traduction et de Déchiffrement
+
+
+Malgré plus d'un siècle de tentatives, aucune solution n'a été universellement acceptée par la communauté cryptolinguistique. L'analyse critique des échecs récurrents est essentielle pour définir les critères de validation d'une future traduction.
+
+
+4.1. Revue Critique des Hypothèses Linguistiques Non Validées
+
+
+Le mystère du VMS attire inévitablement de nombreuses tentatives de déchiffrement, dont beaucoup manquent de rigueur scientifique. Ces hypothèses couvrent un large éventail de langues et de méthodes de chiffrement :
+* Hypothèses sémitiques : Des recherches ont affirmé que le script était basé sur des alphagrammes (anagrammes alphabétiquement ordonnés) codés à partir de l'hébreu.12 Cependant, l'affirmation selon laquelle Google Translate aurait pu convertir le texte en anglais "passable" après des corrections orthographiques a été accueillie avec scepticisme et moquerie par les experts, soulignant le manque de méthodologie rigoureuse.12
+* Hypothèses romanes et linguistiques anciennes : D'autres chercheurs ont suggéré que le manuscrit était écrit en proto-roman, ou en latin abrégé.12 L'idée de mots abrégés (sténographie) est plausible dans un contexte médical 8, mais en l'absence de clé ou d'index, ces tentatives restent spéculatives. Une autre théorie a prétendu que le texte était en irlandais ancien et qu'il traitait d'agriculture, mais, comme beaucoup d'autres, le résultat final est souvent perçu comme une incohérence sémantique, une "salade de mots psychotique".14
+Le problème principal de ces tentatives est la tendance à adapter ou à modifier les données brutes du manuscrit pour les faire correspondre à l'hypothèse linguistique choisie.12 Une solution valide ne doit nécessiter aucune modification ad hoc du corpus original.
+
+
+4.2. Le Critère de Validation Manquant: Cohérence Interne et Ancrage Sémantique
+
+
+Le déchiffrement du VMS sera considéré comme réussi uniquement s'il satisfait à deux conditions critiques et interdépendantes. L'échec des tentatives précédentes réside dans leur incapacité à répondre simultanément à ces exigences :
+1. Cohérence Linguistique Interne : Le système de déchiffrement (que ce soit une clé, un chiffrement polyalphabétique, ou une grammaire de langue artificielle) doit s'appliquer de manière uniforme et sans exception à l'intégralité du codex. Le résultat doit produire un texte sémantiquement continu et cohérent, et non des phrases isolées ou une succession de mots déconnectés.14
+2. Corrélation Externe (Ancrage Sémantique) : La traduction doit être étayée par les preuves contextuelles fournies par le manuscrit. Dans le cas du VMS, cela signifie que la traduction du texte doit identifier de manière non ambiguë les éléments uniques illustrés. Par exemple, le texte de la section botanique doit nommer les 113 plantes qui sont actuellement non identifiées.5 Si le texte décodé identifie une de ces plantes par son nom médiéval ou latin et que ce nom est cohérent avec le contexte historique et botanique, cela fournirait l'ancre sémantique nécessaire pour valider la méthode de déchiffrement dans son ensemble.
+Jusqu'à présent, aucune des solutions proposées n'a pu garantir à la fois une cohérence linguistique à l'échelle du codex et un ancrage sémantique vérifiable avec les images.
+
+
+V. Cryptanalyse Computationnelle et Faisabilité de Traduction (L'Approche Alan Turing Quantique)
+
+
+Face à l'échec des méthodes cryptographiques traditionnelles, l'intégration de l'Intelligence Artificielle (IA) et de l'apprentissage automatique (Machine Learning, ML) représente la voie la plus prometteuse, bien qu'elle soit confrontée à des défis computationnels majeurs.
+
+
+5.1. Le Rôle Prometteur de l'Intelligence Artificielle
+
+
+L'IA a le potentiel d'analyser des ensembles de données massifs et d'identifier des motifs complexes et des patterns que l'œil humain ou l'analyse fréquentielle simple ne peuvent détecter.15 Son rôle dans la cryptanalyse du VMS est double :
+* Modélisation Morphologique Déductive : Des algorithmes avancés, tels que les modèles de Markov ou les réseaux neuronaux, peuvent être entraînés sur le corpus Voynich translittéré (EVA). Leur objectif est de modéliser les règles de construction des mots (préfixes, suffixes, position des glyphes).10 Si le texte est une langue artificielle ou un chiffre polyalphabétique avec des contraintes de structure, l'IA pourrait déduire ces règles sous-jacentes mieux que les méthodes manuelles.
+* Comparaison de Corpus Distants : L'IA peut comparer la structure statistique et morphologique du VMS avec des milliers de bases de données linguistiques, y compris des langues mortes, des dialectes régionaux peu documentés, ou des hypothèses de proto-langues (comme le Proto-Roman 13). L'objectif est d'identifier la langue existante ou le modèle linguistique qui produit la plus petite distance statistique par rapport au texte Voynich, réduisant ainsi l'espace de recherche des clés.
+
+
+5.2. Les Obstacles Computationnels Inhérents: Le Problème du Corpus Zéro
+
+
+Malgré le potentiel de l'IA, le VMS présente un défi insurmontable pour les outils de traitement du langage naturel (NLP) modernes : le problème de la ressource nulle (Zero-Resource Problem).
+Les algorithmes de traduction automatique et de NLP excellent lorsqu'ils disposent de vastes corpus parallèles (des paires de textes original/traduction connus) pour l'apprentissage supervisé. Pour le VMS, aucun exemple de texte clair n'est disponible. L'IA doit opérer dans un vide sémantique complet.
+De plus, si le VMS est réellement une langue inventée ou construite selon des principes uniques non basés sur les phonèmes humains 11, l'IA ne peut pas déduire la sémantique et la syntaxe par simple analogie avec les langues naturelles. Les outils dits d’"Allan Turing quantique" peuvent identifier comment le texte est structuré, mais sans dictionnaire ou grammaire, ils ne peuvent déterminer ce que le texte signifie.
+
+
+5.3. Le Verdict Cryptolinguistique sur la Faisabilité
+
+
+La traduction complète du Manuscrit de Voynich n'est pas réalisable dans l'état actuel des connaissances et des technologies, car la condition de l'ancre sémantique n'a pas été remplie.
+La voie la plus viable pour la recherche future n'est pas une tentative de traduction de masse, mais une approche ciblée et computationnellement assistée :
+1. Modéliser la Contrainte Artificielle : Utiliser l'IA pour déterminer la nature exacte du système générant la faible entropie et la non-Zipfianité du texte (Section III). Est-ce un chiffre? Si oui, lequel? Est-ce une langue construite? Si oui, quelles sont ses règles grammaticales?
+2. Recherche de l'Ancre Sémantique : Concentrer l'IA sur des sections spécifiques, comme l'Herbal ou le Zodiaque, pour tenter d'aligner des patrons de mots VMS sur des concepts visuels spécifiques, en utilisant des dictionnaires de botanique et d'astrologie médiévales.
+Le succès dépendra de la capacité à identifier une transformation mathématiquement rigoureuse qui, appliquée au texte VMS, génère un segment de texte clair qui corréle de manière unique et irréfutable avec une des illustrations.
+Table 4 : Défis Sémantiques et Structurels de la Traduction par IA/ML
+
+
+Défis Majeurs
+	Nature du Problème
+	Conséquences pour la Traduction IA
+	Non-Zipfianité
+	Distribution de fréquence aberrante.
+	L'IA ne peut pas utiliser la distribution naturelle des mots pour amorcer la traduction statistique.
+	Vocabulaire Inconnu
+	113 plantes non identifiées, contenu ésotérique.
+	Absence d'une ancre sémantique vérifiable pour l'apprentissage supervisé.
+	Corpus Zéro
+	Absence de paires texte clair/texte chiffré.
+	Rends l'apprentissage supervisé impossible et contraint l'IA à l'apprentissage non supervisé.
+	Langue Artificielle
+	Principes de la langue créés par l'auteur (code perdu).
+	L'IA ne peut déduire une grammaire et un lexique inventés sans le manuel d'utilisation.11
+	
+
+VI. Conclusion Générale
+
+
+Le Manuscrit de Voynich est un codex du XVe siècle (1404-1438) dont l'authenticité matérielle n'est plus contestée. Son contenu iconographique indique qu'il s'agissait très probablement d'un compendium de connaissances médicales, de pharmacopée et d'astrologie.
+L'analyse cryptolinguistique révèle que le texte n'est pas une langue naturelle simple chiffrée, mais un artefact construit sous une contrainte statistique sévère, ce qui se manifeste par sa non-conformité à la loi de Zipf. Ce paradoxe de la faible entropie constitue la barrière fondamentale au déchiffrement.
+Jusqu'à ce qu'un chercheur, humain ou artificiel, puisse déterminer la nature de cette contrainte (chiffre sophistiqué, langue artificielle, ou schéma stéganographique) et établir un ancrage sémantique vérifiable reliant le texte aux illustrations, le VMS conservera son statut d'énigme la plus complexe de la paléographie. Les futures avancées reposeront sur l'exploitation des outils computationnels pour modéliser la structure interne du texte et explorer de manière exhaustive l'espace des solutions, en utilisant les contraintes codicologiques comme filtres d'hypothèses.
+Sources des citations
+1. Manuscrit de Voynich - Wikipédia, consulté le novembre 21, 2025, https://fr.wikipedia.org/wiki/Manuscrit_de_Voynich
+2. Wilfrid Michael Voynich et son manuscrit - oeuvre ou canular - Geneafinder, consulté le novembre 21, 2025, https://geneafinder.com/blog/fr/13-68/wilfrid-michael-voynich-et-son-manuscrit-oeuvre-ou-canular
+3. Le livre le plus MYSTÉRIEUX de l'Histoire : Le Manuscrit de Voynich - YouTube, consulté le novembre 21, 2025, https://www.youtube.com/watch?v=fVpGv5F0rEI
+4. Voynich manuscript - Wikipedia, consulté le novembre 21, 2025, https://en.wikipedia.org/wiki/Voynich_manuscript
+5. Voynich Manuscript - Beinecke Rare Book & Manuscript Library - Yale University, consulté le novembre 21, 2025, https://beinecke.library.yale.edu/collections/highlights/voynich-manuscript
+6. Le mystère du Manuscrit de Voynich (… suite) - Le blog du papa chercheur, consulté le novembre 21, 2025, https://papachercheur.hypotheses.org/809
+7. The illustrations in the manuscript - Voynich.nu, consulté le novembre 21, 2025, https://www.voynich.nu/illustr.html
+8. Le manuscrit de Voynich décodé - Nicolas Besson - Medium, consulté le novembre 21, 2025, https://medium.com/nibess/le-voynich-d%C3%A9cod%C3%A9-8515f2e11411
+9. Voynich MS - Text Analysis - Transliteration of the Text, consulté le novembre 21, 2025, https://www.voynich.nu/transcr.html
+10. Analyzing Voynich Manuscript, consulté le novembre 21, 2025, https://www.d.umn.edu/~tpederse/Courses/CS5761-SPR04/Projects/rajk0007.pdf
+11. Solving The Voynich Manuscript With Ai | Greg Kondrak - YouTube, consulté le novembre 21, 2025, https://www.youtube.com/watch?v=FFW14zSYiFY
+12. Le manuscrit de Voynich aurait peut-être été déchiffré : r/linguistics - Reddit, consulté le novembre 21, 2025, https://www.reddit.com/r/linguistics/comments/7u127z/voynich_manuscript_may_have_been_cracked/?tl=fr
+13. Le manuscrit de Voynich - Hist-Math, consulté le novembre 21, 2025, https://www.hist-math.fr/pdf/voynich.pdf
+14. Un traducteur amateur prétend avoir résolu le mystère du Manuscrit de Voynich - Reddit, consulté le novembre 21, 2025, https://www.reddit.com/r/voynich/comments/1o1u3c5/amateur_translator_claims_to_have_solved_the/?tl=fr
+15. Can artificial intelligence decipher the Voynich Manuscript? - Siloe Arte y Bibliofilia, consulté le novembre 21, 2025, https://siloe.es/en/can-artificial-intelligence-decipher-the-voynich-manuscript/
