@@ -1,0 +1,257 @@
+﻿Analyse Mathématique et Théorique Avancée de la Génomique du Pépin de Malus domestica : Modélisation Stochastique, Cinétique de Recombinaison et Architecture Allélique Complexe
+Résumé Analytique
+Ce rapport de recherche se propose d'explorer de manière exhaustive les fondements mathématiques et les modèles théoriques régissant la génomique du pépin de pomme (Malus domestica Borkh.). En rupture avec les approches horticoles traditionnelles centrées sur le phénotype macroscopique et la propagation clonale, cette analyse se concentre exclusivement sur le pépin en tant qu'entité biologique issue de processus méiotiques stochastiques. Le pépin représente l'unité fondamentale de la recombinaison génétique, encapsulant une complexité probabiliste que seule une modélisation rigoureuse peut décrypter.
+L'analyse s'articule autour de plusieurs axes théoriques majeurs : la cinétique de décroissance du déséquilibre de liaison (LD) modélisée par les équations de Hill-Weir ; la comparaison critique des fonctions de cartographie de Haldane et Kosambi dans un contexte de taux de recombinaison hétérogènes ; la quantification de la diversité allélique via l'entropie de Shannon appliquée au système d'auto-incompatibilité (S-Locus) ; et l'estimation de la taille effective de population ($N_e$) à travers des méthodes de coalescence. Les données empiriques, issues de séquençages à haut débit et de puces SNP haute densité, sont intégrées pour calibrer ces modèles, révélant un génome caractérisé par une hétérozygotie élevée ($H_e \approx 0.84$), une structure haplotypique en mosaïque, et une histoire évolutive marquée par des goulots d'étranglement et des introgressions interspécifiques.
+________________
+1. Fondements Probabilistes de la Recombinaison Méiotique et Cartographie Génétique
+Le génome du pépin de pomme est le produit direct de la méiose, un processus stochastique où la recombinaison homologue redistribue les allèles parentaux. La modélisation de ces événements est la première étape nécessaire pour comprendre l'architecture génétique transmise à la descendance.
+1.1 Fonctions de Cartographie : Haldane vs Kosambi
+La conversion des fréquences de recombinaison observées ($r$) en distances génétiques additives ($d$, exprimées en Morgan ou centiMorgan) nécessite l'application de fonctions de cartographie spécifiques. Le choix de la fonction dépend des hypothèses biologiques concernant l'interférence des crossovers (CO).
+1.1.1 La Fonction de Haldane : Indépendance Stochastique
+La fonction de Haldane repose sur l'hypothèse nulle d'absence d'interférence : la survenue d'un crossover en un point du chromosome n'affecte pas la probabilité d'un autre crossover à proximité. Sous cette hypothèse, la distribution des crossovers suit une loi de Poisson.
+L'équation reliant la distance génétique $d$ à la fréquence de recombinaison $r$ est :
+
+
+$$r = \frac{1}{2} (1 - e^{-2d})$$
+Et son inverse :
+
+
+$$d = -\frac{1}{2} \ln(1 - 2r)$$
+Dans le contexte du génome de Malus domestica, cette fonction est souvent utilisée pour des distances très courtes (locus adjacents) où l'interférence est négligeable.1 Cependant, pour des distances plus importantes, elle tend à surestimer la distance génétique réelle car elle ne tient pas compte de la suppression biologique des doubles crossovers rapprochés.
+1.1.2 La Fonction de Kosambi : Modélisation de l'Interférence
+Contrairement à Haldane, la fonction de Kosambi intègre un paramètre d'interférence $C$ (coefficient de coïncidence) qui varie en fonction de la distance ($C=2r$). Cette fonction est biologiquement plus réaliste pour le pommier, un organisme eucaryote complexe (2n=34) où l'interférence chiasmatique est documentée.
+L'équation de Kosambi est formulée comme suit :
+
+
+$$d = \frac{1}{4} \ln \left( \frac{1 + 2r}{1 - 2r} \right)$$
+Et la fréquence de recombinaison correspondante :
+
+
+$$r = \frac{1}{2} \tanh(2d)$$
+L'analyse comparative des cartes génétiques du pommier montre que l'utilisation de Kosambi permet une meilleure linéarisation des marqueurs sur les groupes de liaison longs.2 Pour des valeurs de $r < 0.1$ (10%), les deux fonctions convergent ($d \approx r$), mais au-delà, la divergence s'accentue. La dérivée de la fonction de Kosambi montre que l'accumulation de distance génétique par unité de recombinaison est plus faible que chez Haldane, reflétant la rareté des doubles événements.
+1.2 Taux de Recombinaison ($\rho$) et Paysage Génomique
+Le taux de recombinaison n'est pas une constante universelle mais une variable locale dépendant de la structure chromosomique.
+1.2.1 Estimation Globale et Locale
+Le taux moyen de recombinaison pour le génome de Malus domestica est estimé à environ 1.52 cM/Mb.4 Cette valeur place le pommier dans une fourchette intermédiaire-basse par rapport à d'autres espèces modèles (ex: Arabidopsis > 4 cM/Mb), ce qui est cohérent avec la corrélation négative observée entre la taille physique du génome (~742 Mb) et le taux de recombinaison par mégabase.
+Cependant, ce taux moyen masque une hétérogénéité spatiale considérable. Les équations de régression appliquées aux cartes Marey (comparaison des positions génétiques vs physiques) révèlent :
+1. Suppression Centromérique : Dans les régions péricentromériques, la pente de la courbe $d = f(x)$ (où $x$ est la position physique) tend vers zéro, indiquant un taux de recombinaison quasi nul. Cela préserve de larges blocs haplotypiques ancestraux qui sont transmis en bloc au pépin.
+2. Expansion Télomérique : Les régions distales montrent des taux pouvant dépasser 3 à 5 cM/Mb, favorisant le brassage génétique des gènes de réponse au stress souvent localisés aux extrémités chromosomiques.5
+1.2.2 Le Paramètre de Recombinaison de Population ($\rho$)
+Pour modéliser la diversité dans une population de pépins, on utilise le paramètre composite $\rho$ :
+
+
+$$\rho = 4 N_e c$$
+Où $N_e$ est la taille effective de la population et $c$ le taux de recombinaison par génération par site. L'estimation de $\rho$ se fait via des méthodes de vraisemblance composite approximée (ex: LDhat, LDJump) qui analysent les configurations de SNP. Des études récentes montrent que la distribution de $\rho$ le long du génome de Malus est ponctuée de "hotspots" intenses (1-2 kb) séparés par des régions froides, créant une structure de déséquilibre de liaison en blocs.7
+________________
+2. Cinétique et Décroissance du Déséquilibre de Liaison (LD)
+Le déséquilibre de liaison (LD) mesure l'association non aléatoire d'allèles à différents loci. Pour le pépin, le LD détermine la résolution avec laquelle on peut associer un marqueur génétique à un trait phénotypique (GWAS) et la précision de la prédiction génomique.
+2.1 Métriques Statistiques : $r^2$ vs $D'$
+La quantification du LD repose sur deux statistiques principales, dont les nuances mathématiques sont cruciales.
+Le coefficient $D'$ (D prime) :
+Normalisé par la fréquence allélique, $D'$ mesure principalement l'histoire de la recombinaison.
+
+
+
+
+$$|D'| = \frac{|D|}{\min(p_A p_b, p_a p_B)}$$
+
+
+Si $|D'| = 1$, cela indique qu'au moins un des quatre haplotypes possibles est manquant, suggérant une absence de recombinaison historique ou un événement mutationnel récent.
+Le coefficient de corrélation carré ($r^2$) :
+
+
+
+
+$$r^2 = \frac{D^2}{p_A p_a p_B p_b}$$
+
+
+Contrairement à $D'$, $r^2$ est dépendant des fréquences alléliques. C'est la métrique privilégiée pour la génomique du pépin car elle est directement proportionnelle à la puissance statistique des tests d'association ($N \cdot r^2 \approx \chi^2$).9
+Une analyse théorique montre que $r^2 \le |D'|^2$, et que la relation entre les deux dépend de la similarité des fréquences alléliques. Dans le génome du pommier, riche en allèles rares (MAF < 0.05), $r^2$ peut être faible même si $D'$ est fort, ce qui complique la détection des QTLs rares.11
+2.2 Modélisation de la Décroissance : L'Équation de Hill-Weir
+La décroissance du LD en fonction de la distance physique est modélisée par l'équation non linéaire dérivée par Hill et Weir (1988), qui prend en compte la dérive génétique et la recombinaison dans une population finie à l'équilibre.
+
+
+$$E(r^2) = \left( \frac{10 + \rho}{22 + 13\rho + \rho^2} \right) \left( 1 + \frac{(3+\rho)(12+12\rho+\rho^2)}{n(2+\rho)(11+\rho)} \right)$$
+Avec $\rho = 4 N_e c \cdot d_{pb}$ (où $d_{pb}$ est la distance en paires de bases).
+Cette équation permet d'ajuster les courbes de décroissance observées empiriquement. Chez Malus domestica, la décroissance est rapide :
+* Le LD chute à la moitié de sa valeur initiale ($LD_{1/2}$) généralement entre 0.6 et 3.8 Mb selon les populations (plus lent dans les collections anciennes, plus rapide dans les cultivars modernes).12
+* Cependant, pour atteindre le seuil de "bruit de fond" ($r^2 \approx 0.2$), la distance critique est beaucoup plus courte. Des études à haute résolution montrent une chute en dessous de 0.2 dès 100 bp à quelques kb dans les régions de forte recombinaison, bien que des valeurs résiduelles significatives ($r^2 \approx 0.33$) puissent persister jusqu'à 100 kb.14
+2.3 Structure Bimodale et Implications
+L'analyse fine des données de séquençage révèle une distribution bimodale des valeurs de $r^2$ à très courte distance (< 500 pb) : une majorité de paires de SNP montrent soit un LD total ($r^2 > 0.8$), soit une indépendance quasi-totale ($r^2 < 0.2$).16 Cette observation suggère que le génome du pépin est constitué de blocs haplotypiques rigides (hérités sans recombinaison interne) séparés par des points de cassure (hotspots) très localisés.
+Distance Inter-Marqueurs
+	Moyenne r2 Estimée
+	Interprétation Génomique
+	< 100 pb
+	> 0.60 (Bimodal)
+	Intégrité du gène / Bloc LD
+	10 - 100 kb
+	0.33
+	Liaison modérée, zone critique pour GWAS
+	1 Mb
+	~0.19
+	Seuil d'indépendance atteint
+	> 3 Mb
+	< 0.10
+	Équilibre de liaison (sauf structure pop.)
+	Tableau 1 : Paramètres de décroissance du LD basés sur les données agrégées.12
+________________
+3. Taille Effective de Population ($N_e$) et Diversité Génétique
+La taille effective de la population ($N_e$) est un paramètre abstrait mais fondamental qui quantifie la force de la dérive génétique. Pour le pépin de pomme, $N_e$ diffère radicalement de la taille de recensement ($N_c$) des vergers.
+3.1 Estimation de $N_e$ par le LD ($N_{eLD}$)
+L'estimation de $N_e$ à un temps $t$ donné dans le passé peut être dérivée de l'amplitude du LD à une distance génétique $c$. L'approximation standard est :
+
+
+$$N_{e(t)} \approx \frac{1}{4c} \left( \frac{1}{E(r^2) - 1/n} \right)$$
+Où $n$ est la taille de l'échantillon chromosomique. En inversant cette relation pour différentes distances $c$, on peut reconstruire l'histoire démographique.
+Pour Malus domestica, les estimations indiquent un $N_e$ historique relativement faible (de l'ordre de quelques milliers) malgré la large distribution géographique, ce qui témoigne de goulots d'étranglement sévères lors de la domestication et de la sélection moderne.17 Le ratio $N_e / N_c$ est extrêmement bas, typique des espèces à forte variance de succès reproducteur (quelques cultivars élites produisent la majorité des descendants).
+3.2 Diversité Nucléotidique et Hétérozygotie
+Le génome du pommier est obligatoirement allogame, ce qui maintient une diversité élevée.
+Hétérozygotie Attendue ($H_e$) :
+Calculée selon Hardy-Weinberg : $H_e = 1 - \sum p_i^2$. Les études sur les collections de germplasme (ex: collection allemande GFG) montrent des valeurs moyennes de $H_e \approx 0.84$.20 Cette valeur élevée est une signature mathématique de l'auto-incompatibilité qui purge les homozygotes.
+Diversité Nucléotidique ($\pi$) :
+Estimée autour de 0.0117 pour le cultivar de référence 'Golden Delicious'.21 Cela signifie qu'en moyenne, deux haplotypes aléatoires diffèrent de plus de 1% de leurs nucléotides, un taux de polymorphisme élevé comparé à de nombreuses cultures annuelles.
+Mutations Somatiques et Taux de Mutation ($\mu$) :
+Le pépin hérite également de la charge mutationnelle accumulée somatiquement par les parents. L'analyse de mutants "sport" (ex: 'RubyMac') révèle des taux de mutation somatique et de conversion génique (perte d'hétérozygotie, LOH) significatifs. Bien que le taux de mutation germinal standard ($\mu$) soit estimé autour de $10^{-8}$ à $10^{-9}$ par site par génération, la propagation clonale accumule des mutations somatiques qui peuvent être transmises au pépin si elles surviennent dans les couches méristématiques L2 donnant naissance aux gamètes.22
+________________
+4. Modélisation Stochastique du Système S-Locus
+Le système d'auto-incompatibilité (SI) du pommier est un déterminant majeur de la structure génétique des pépins. Il impose une sélection fréquence-dépendante négative stricte.
+4.1 Modèle de Compatibilité Gamétophytique
+Le locus S contient deux gènes liés : S-RNase (pistil) et SFBB (pollen). La probabilité de fécondation $P(F)$ est binaire :
+
+
+$$P(F) = \begin{cases} 0 & \text{si } S_{pollen} \in \{S_{pistil_1}, S_{pistil_2}\} \\ 1 & \text{si } S_{pollen} \notin \{S_{pistil_1}, S_{pistil_2}\} \end{cases}$$
+Ce mécanisme a des implications probabilistes directes sur les croisements.
+* Croisement Incompatible ($S_1S_2 \times S_1S_2$) : $P(F) = 0$. Aucun pépin produit.
+* Croisement Semi-Compatible ($S_1S_2 \times S_1S_3$) : Le pollen $S_1$ est rejeté, le pollen $S_3$ est accepté. La moitié du pollen est fonctionnelle. Les pépins produits seront $S_1S_3$ et $S_2S_3$.
+* Croisement Totalement Compatible ($S_1S_2 \times S_3S_4$) : 100% du pollen est fonctionnel. Quatre génotypes zygotiques sont possibles ($S_1S_3, S_1S_4, S_2S_3, S_2S_4$).23
+4.2 Entropie de Shannon et Diversité Allélique S
+La diversité des allèles S peut être quantifiée par l'indice d'entropie de Shannon ($H'$):
+
+
+$$H' = -\sum_{i=1}^{k} p_i \ln(p_i)$$
+Où $p_i$ est la fréquence de l'allèle $i$. Plus de 50 allèles S ont été identifiés dans le genre Malus. Cependant, dans les vergers commerciaux, l'entropie $H'$ est réduite par la surreprésentation de quelques allèles (S2, S3, S9, S7, S24).
+Fréquences Alléliques Observées (Nagoya Dataset & Études Européennes) :
+Les études de génotypage massif 25 permettent de dresser un tableau des fréquences.
+Allèle S
+	Fréquence Approx. (Cultivars Modernes)
+	Cultivars Porteurs (Exemples)
+	Fragment PCR (bp)
+	S3
+	~28% (Dominant)
+	Golden Delicious, Gala, Jonagold
+	214 (SSR), var (PCR)
+	S2
+	~20-25%
+	Fuji, Gala, Golden Delicious
+	54 (HRM), 233 (SSR)
+	S9
+	~15-20%
+	Fuji, Braeburn, Red Delicious
+	61 (HRM), 247 (SSR)
+	S1
+	~10-15%
+	Fuji (parent), McIntosh
+	38 (HRM), 202 (SSR)
+	S7
+	Variable
+	Jonathan, Idared
+	170 (SSR)
+	S24
+	Fréquent
+	Braeburn, Granny Smith
+	176 (SSR)
+	Tableau 2 : Allèles S majeurs et fréquences estimées dans le germplasme occidental.27 Les tailles de fragments PCR servent de signatures moléculaires pour l'identification.
+L'entropie $H'$ est significativement plus élevée chez l'ancêtre sauvage M. sieversii (14 allèles identifiés dans une seule étude restreinte, >30 estimés) que dans les cultivars modernes, indiquant une perte de diversité fonctionnelle.29
+4.3 Divergence Moléculaire et Sélection
+Les séquences des allèles S-RNase montrent une divergence extrême. Les matrices de distance génétique calculées (méthode Nei-Gojobori) révèlent un ratio $d_N/d_S > 1$ dans les régions déterminant la spécificité (Régions Hypervariables), preuve mathématique d'une sélection diversifiante positive maintenue sur des millions d'années (trans-spécifique).29
+________________
+5. Prédiction Génomique (GS) : Modèles Matriciels et Algorithmes
+La prédiction de la performance d'un pépin avant sa germination repose sur des modèles statistiques avancés qui corrèlent le génotype dense à la valeur génétique estimée (GEBV).
+5.1 Le Modèle GBLUP (Genomic Best Linear Unbiased Prediction)
+L'approche standard remplace la matrice de parenté basée sur le pedigree ($A$) par une matrice de parenté génomique ($G$) calculée à partir des marqueurs SNP.
+Construction de la Matrice G (Méthode VanRaden) :
+
+
+
+
+$$\mathbf{G} = \frac{(\mathbf{M} - \mathbf{P})(\mathbf{M} - \mathbf{P})'}{2 \sum_{j=1}^m p_j (1 - p_j)}$$
+* $\mathbf{M}$ : Matrice $(n \times m)$ des génotypes centrés (0, 1, 2).
+* $\mathbf{P}$ : Matrice des fréquences alléliques attendues ($2p_j$).
+* Le dénominateur normalise la variance par l'hétérozygotie attendue.30
+L'équation du modèle mixte (MME) à résoudre est :
+
+
+
+
+$$\mathbf{y} = \mathbf{X}\mathbf{b} + \mathbf{Z}\mathbf{u} + \mathbf{e}$$
+
+
+Où la variance des effets génétiques aléatoires est $\text{Var}(\mathbf{u}) = \mathbf{G} \sigma_g^2$.
+5.2 Précision Prédictive et Paramètres Critiques
+Les études empiriques sur le pommier 32 valident ces modèles avec des précisions ($r_{GEBV, Phenotype}$) variant selon les traits :
+* Fermeté du fruit / Date de récolte : Précision élevée ($r \approx 0.83 - 0.89$), indiquant une architecture génétique capturable par GBLUP (polygénique + gènes majeurs comme MdNAC18.1).
+* Acidité / Sucre (SSC) : Précisions modérées ($r \approx 0.5 - 0.7$), suggérant une influence environnementale plus forte ($h^2$ plus faible) et une architecture génétique complexe.
+Comparaison Bayes vs GBLUP :
+Les modèles Bayésiens (BayesA, BayesB, BayesC$\pi$) assument que les effets des SNP ne suivent pas une distribution normale uniforme (certains ont un effet nul, d'autres un effet fort). Pour des traits oligogéniques comme la couleur de la peau (locus MdMYB1) ou le port de l'arbre (Co), les modèles Bayésiens surpassent souvent GBLUP en donnant plus de poids aux marqueurs en fort LD avec les QTLs causaux.34
+5.3 Densité de Marqueurs Requise
+En raison de la décroissance rapide du LD ($r^2 < 0.2$ à quelques kb), la densité de marqueurs est le facteur limitant. Les simulations montrent qu'il faut entre 10 000 et 30 000 SNPs informatifs pour maximiser la précision de la sélection génomique dans des populations diversifiées de pommiers, justifiant le développement de puces SNP haute densité (20K, 480K).32
+________________
+6. Structure Génomique et Pangenome
+Le génome du pépin de pomme ne se limite pas à une séquence linéaire statique ; il est le résultat d'une dynamique de présence/absence de gènes (PAV) et de variations structurelles.
+6.1 Le Pangenome de Malus
+L'analyse de multiples génomes de Malus a conduit à la définition d'un pangenome composé de :
+* Gènes Cœur (Core) : Présents chez tous les individus (~81-87% des gènes), essentiels aux fonctions biologiques de base.
+* Gènes Dispensables (Shell/Cloud) : Présents chez certains individus seulement, souvent impliqués dans la résistance aux maladies et l'adaptation locale.37
+Le taux d'hétérozygotie structurelle est élevé. Par exemple, le cultivar 'Golden Delicious' présente environ 1.17% d'hétérozygotie au niveau nucléotidique 21, mais cette valeur augmente significativement si l'on considère les insertions/délétions (InDels).
+6.2 Introgression et Mélange Génétique ($F_{ST}$)
+Le génome du pommier domestique est une mosaïque. Les analyses de structure de population (Bayesiennes ou PCA) et les statistiques $F_{ST}$ montrent une divergence génétique modérée mais significative entre M. domestica et ses ancêtres.
+* M. sieversii (Ancêtre principal) : Faible $F_{ST}$ avec M. domestica, indiquant une divergence récente et un flux de gènes continu.
+* M. sylvestris (Pommier sauvage européen) : Introgression secondaire massive. Les cultivars à cidre montrent souvent une proportion d'ancestralité M. sylvestris plus élevée (>20%) que les pommes de table, détectable par des marqueurs spécifiques.38
+Les InDels (Insertions/Délétions) se sont révélés être des marqueurs robustes pour tracer ces flux de gènes, avec plus de 25 000 InDels identifiés permettant de distinguer 75% des accessions avec une signature unique.39
+________________
+Conclusion
+L'analyse mathématique de la génomique du pépin de Malus domestica révèle un système biologique d'une complexité fascinante, régi par des lois probabilistes strictes.
+1. L'Unicité Recombinatoire : L'application de la fonction de Kosambi et l'étude des taux de recombinaison ($\rho$) confirment que chaque pépin est un événement génétique unique, un brassage inédit d'haplotypes parentaux sculpté par des hotspots de recombinaison.
+2. La Tyrannie du S-Locus : Les équations de fréquence allélique et d'entropie démontrent comment le système d'auto-incompatibilité force l'hétérozygotie et maintient une diversité allélique élevée, tout en imposant des contraintes sévères sur la fécondation ($P(F)$ binaire).
+3. La Prédictibilité Mathématique : Malgré cette stochastique, les modèles de prédiction génomique (MME, GBLUP) parviennent à extraire le signal du bruit, permettant de prédire la valeur agronomique future du pépin avec une précision remarquable ($r > 0.8$ pour certains traits), à condition de respecter les contraintes de densité de marqueurs imposées par la décroissance rapide du LD.
+Ainsi, le pépin de pomme n'est pas seulement une semence ; c'est une solution biologique à un système complexe d'équations multivariées optimisant la diversité et la survie dans un environnement changeant.
+Sources des citations
+1. Mathematical function for predicting recombination from map distance | bioRxiv, consulté le décembre 25, 2025, https://www.biorxiv.org/content/10.1101/2020.12.14.422614v2.full
+2. Comparison of Haldane's and Kosambi's mapping functions. Below a... - ResearchGate, consulté le décembre 25, 2025, https://www.researchgate.net/figure/Comparison-of-Haldanes-and-Kosambis-mapping-functions-Below-a-recombination-frequency_fig7_228909274
+3. Genetic map function - Wikipedia, consulté le décembre 25, 2025, https://en.wikipedia.org/wiki/Genetic_map_function
+4. The relationship of recombination rate, genome structure, and patterns of molecular evolution across angiosperms - PMC - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC4574184/
+5. A high-density genetic map reveals variation in recombination rate across the genome of Daphnia magna - PubMed Central, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC5064971/
+6. High-quality de novo assembly of the apple genome and methylome dynamics of early fruit development - ResearchGate, consulté le décembre 25, 2025, https://www.researchgate.net/publication/317357205_High-quality_de_novo_assembly_of_the_apple_genome_and_methylome_dynamics_of_early_fruit_development
+7. On the estimation of genome-average recombination rates - PMC - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC11232287/
+8. LDJump: Estimating variable recombination rates from population genetic data - PMC, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC6519033/
+9. STRUCTURE OF LINKAGE DISEQUILIBRIUM IN PLANTS ∗ Sherry A. Flint-Garcia Jeffry M. Thornsberry and Edward S. Buckler IV - USDA ARS, consulté le décembre 25, 2025, https://www.ars.usda.gov/ARSUserFiles/50701500/DiverseMaizeResearch/LDinPlants.pdf
+10. Linkage Disequilibrium in Humans: Models and Data - PMC - PubMed Central, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC1226024/
+11. Mathematical properties of the r2 measure of linkage disequilibrium - PMC - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC2580747/
+12. Evaluation of linkage disequilibrium, population structure, and genetic diversity in the U.S. peanut mini core collection - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC6558826/
+13. Evaluation of LD decay and various LD-decay estimators in simulated and SNP-array data of tetraploid potato - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC5214954/
+14. Linkage Disequilibrium Decay in Selected Cattle Breeds - MDPI, consulté le décembre 25, 2025, https://www.mdpi.com/2076-2615/14/22/3317
+15. Genomic Selection for Fruit Quality Traits in Apple (Malus×domestica Borkh.) | PLOS One, consulté le décembre 25, 2025, https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0036674
+16. Linkage disequilibrium (LD) decay curve in apple. (A) LD decay using... - ResearchGate, consulté le décembre 25, 2025, https://www.researchgate.net/figure/Linkage-disequilibrium-LD-decay-curve-in-apple-A-LD-decay-using-comparisons-of_fig5_303598368
+17. Recent human effective population size estimated from linkage disequilibrium - PMC - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC1832099/
+18. Effective population size in relation to genetic modification of Anopheles gambiae sensu stricto - USDA ARS, consulté le décembre 25, 2025, https://www.ars.usda.gov/ARSUserFiles/20400505/10_taylor.pdf
+19. Estimation of contemporary effective population size in plant populations: limitations of genomic datasets | bioRxiv, consulté le décembre 25, 2025, https://www.biorxiv.org/content/10.1101/2023.07.18.549323v1.full-text
+20. Pomological and Molecular Characterization of Apple Cultivars in the German Fruit Genebank - MDPI, consulté le décembre 25, 2025, https://www.mdpi.com/2223-7747/13/19/2699
+21. Pan-genome analysis reveals the evolution and diversity of Malus - PMC - PubMed Central, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC12081284/
+22. The identification and analysis of meristematic mutations within the apple tree that developed the RubyMac sport mutation - PMC - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC11443920/
+23. Cross-compatibility of apple cultivars and pollinizers - WSU Tree Fruit, consulté le décembre 25, 2025, https://treefruit.wsu.edu/article/cross-compatibility-of-apple-cultivars-and-pollinizers/
+24. Rapid identification of apple (Malus×domestica Borkh.) S alleles using sequencing-based DNA marker APPLid - PubMed Central, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC6543762/
+25. Evaluation of the S-locus in Prunus domestica, characterization, phylogeny and 3D modelling | PLOS One - Research journals, consulté le décembre 25, 2025, https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0251305
+26. Determination of S‐Allele Combination in an Italian Apple (Malus × domestica Borkh.) Germplasm Core Collection - Unibo, consulté le décembre 25, 2025, https://cris.unibo.it/bitstream/11585/999178/1/Plant%20Breeding%20-%202024%20-%20Alessandri%20-%20Determination%20of%20S%E2%80%90Allele%20Combination%20in%20an%20Italian%20Apple%20%20Malus%20%20%20domestica%20Borkh%20%20.pdf
+27. A high-throughput method for genotyping S-RNase alleles in apple - PMC - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC4760992/
+28. A high-throughput S-RNase genotyping method for apple - Maximum Academic Press, consulté le décembre 25, 2025, https://www.maxapress.com/article/doi/10.48130/FruRes-2021-0010
+29. Identification, genealogical structure and population genetics of S-alleles in Malus sieversii, the wild ancestor of domesticated apple - PMC - PubMed Central, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC5564378/
+30. Efficient Calculation of the Genomic Relationship Matrix - bioRxiv, consulté le décembre 25, 2025, https://www.biorxiv.org/content/10.1101/2020.01.12.903146v1.full.pdf
+31. Creation and handling of genomic relationship matrices with preGSf90 - UGA, consulté le décembre 25, 2025, https://nce.ads.uga.edu/wiki/lib/exe/fetch.php?media=uga_pregs.pdf
+32. Genomic Selection for Fruit Quality Traits in Apple (Malus×domestica Borkh.) - PMC - NIH, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC3344927/
+33. Genome to Phenome Mapping in Apple Using Historical Data - PubMed, consulté le décembre 25, 2025, https://pubmed.ncbi.nlm.nih.gov/27898813/
+34. Genomewide selection for fruit quality traits in apple: breeding insights gained from prediction and postdiction | Horticulture Research | Oxford Academic, consulté le décembre 25, 2025, https://academic.oup.com/hr/article/10/6/uhad088/7148517
+35. Genetic architecture and genomic predictive ability of apple quantitative traits across environments | Horticulture Research | Oxford Academic, consulté le décembre 25, 2025, https://academic.oup.com/hr/article/doi/10.1093/hr/uhac028/6532221
+36. A pan-generic marker panel for apples to enable genetic research and breeding across Malus species - bioRxiv, consulté le décembre 25, 2025, https://www.biorxiv.org/content/10.1101/2025.06.05.657940v1.full.pdf
+37. Advancing apple genetics research: Malus coronaria and Malus ioensis genomes and a gene family-based pangenome of native North American apples | DNA Research | Oxford Academic, consulté le décembre 25, 2025, https://academic.oup.com/dnaresearch/article/31/5/dsae026/7741556
+38. Genomic consequences of apple improvement | Horticulture Research - Oxford Academic, consulté le décembre 25, 2025, https://academic.oup.com/hr/article/doi/10.1038/s41438-020-00441-7/6446607
+39. Application of genome-wide insertion/deletion markers on genetic structure analysis and identity signature of Malus accessions - PubMed Central, consulté le décembre 25, 2025, https://pmc.ncbi.nlm.nih.gov/articles/PMC7708918/
