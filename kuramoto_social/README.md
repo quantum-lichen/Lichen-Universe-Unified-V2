@@ -4,7 +4,7 @@
 
 ## 👁️ Vision du Projet
 
-Ce module de recherche se concentre sur la **synchronisation de phase** () comme mécanisme fondamental de l'ordre et du chaos dans les systèmes complexes. En utilisant le modèle de Kuramoto, nous analysons comment des oscillateurs indépendants (humains, neurones, tendances) finissent par agir comme une entité unique, et comment la dissonance cognitive accumulée mène à la rupture du système.
+Ce module de recherche se concentre sur la **synchronisation de phase** comme mécanisme fondamental de l'ordre et du chaos dans les systèmes complexes. En utilisant le modèle de Kuramoto, nous analysons comment des oscillateurs indépendants (humains, neurones, tendances) finissent par agir comme une entité unique, et comment la dissonance cognitive accumulée mène à la rupture du système.
 
 ---
 
