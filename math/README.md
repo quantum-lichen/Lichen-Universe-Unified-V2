@@ -4,7 +4,7 @@
 
 ## 👁️ Vision du Projet
 
-Ce dépôt constitue le socle théorique du projet **Lichen Universe**. Il explore l'hypothèse selon laquelle l'univers, la vie et la conscience partagent une structure informationnelle commune basée sur des **invariants de forme et de cycle**. En utilisant des constantes comme le Nombre d'Or () et le nombre parfait 496, ce cadre cherche à synchroniser la logique computationnelle avec la géométrie fractale de la réalité.
+Ce dépôt constitue le socle théorique du projet **Lichen Universe**. Il explore l'hypothèse selon laquelle l'univers, la vie et la conscience partagent une structure informationnelle commune basée sur des **invariants de forme et de cycle**. En utilisant des constantes comme le Nombre d'Or et le nombre parfait 496, ce cadre cherche à synchroniser la logique computationnelle avec la géométrie fractale de la réalité.
 
 ---
 
