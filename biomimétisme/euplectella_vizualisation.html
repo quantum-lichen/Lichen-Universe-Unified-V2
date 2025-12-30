@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euplectella Anti-Chaos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0a1929 0%, #1a237e 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0,255,135,0.3);
+        }
+        
+        .info {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #aaa;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .panel {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .panel h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .panel.bad h2 {
+            color: #ff4444;
+        }
+        
+        .panel.good h2 {
+            color: #00ff87;
+        }
+        
+        canvas {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .stat-card.good .stat-value {
+            color: #00ff87;
+        }
+        
+        .stat-card.bad .stat-value {
+            color: #ff4444;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #00ff87, #60efff);
+            color: #0a1929;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌊 Principe Anti-Turbulence : Euplectella 🦠</h1>
+        <div class="info">Comparez la réponse au flux d'un mur plein vs structure en treillis diagonal</div>
+        
+        <div class="controls">
+            <button onclick="toggleAnimation()">⏯️ Play/Pause</button>
+            <button onclick="resetSimulation()">🔄 Reset</button>
+            <button onclick="increaseWind()">💨 + Vent</button>
+            <button onclick="decreaseWind()">🍃 - Vent</button>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ff4444;"></div>
+                <span>Tourbillons destructifs</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #60efff;"></div>
+                <span>Flux laminaire</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #00ff87;"></div>
+                <span>Structure Euplectella</span>
+            </div>
+        </div>
+        
+        <div class="comparison">
+            <div class="panel bad">
+                <h2>❌ Mur Plein (Chaos)</h2>
+                <canvas id="solidWall"></canvas>
+            </div>
+            
+            <div class="panel good">
+                <h2>✅ Treillis Euplectella (Ordre)</h2>
+                <canvas id="lattice"></canvas>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card bad">
+                <div>Vibrations (Mur Plein)</div>
+                <div class="stat-value" id="solidVibration">100%</div>
+            </div>
+            <div class="stat-card good">
+                <div>Vibrations (Treillis)</div>
+                <div class="stat-value" id="latticeVibration">25%</div>
+            </div>
+            <div class="stat-card bad">
+                <div>Charge Vent (Mur)</div>
+                <div class="stat-value" id="solidLoad">850 N</div>
+            </div>
+            <div class="stat-card good">
+                <div>Charge Vent (Treillis)</div>
+                <div class="stat-value" id="latticeLoad">255 N</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Configuration
+        const config = {
+            windSpeed: 2.0,
+            animationRunning: true,
+            particleCount: 80,
+            time: 0
+        };
+        
+        // Canvas setup
+        const solidCanvas = document.getElementById('solidWall');
+        const latticeCanvas = document.getElementById('lattice');
+        const solidCtx = solidCanvas.getContext('2d');
+        const latticeCtx = latticeCanvas.getContext('2d');
+        
+        function resizeCanvases() {
+            [solidCanvas, latticeCanvas].forEach(canvas => {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            });
+        }
+        resizeCanvases();
+        window.addEventListener('resize', resizeCanvases);
+        
+        // Particles
+        class Particle {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.vx = config.windSpeed + Math.random() * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.type = type; // 'chaotic' or 'laminar'
+                this.life = 1.0;
+                this.angle = Math.random() * Math.PI * 2;
+                this.angleSpeed = (Math.random() - 0.5) * 0.1;
+            }
+            
+            update(width, height, obstacles) {
+                if (this.type === 'chaotic') {
+                    // Von Karman vortex behavior
+                    const vortexX = width * 0.35;
+                    const vortexY = height * 0.5;
+                    const dx = this.x - vortexX;
+                    const dy = this.y - vortexY;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 150) {
+                        const vortexStrength = (150 - dist) / 150;
+                        this.angle += this.angleSpeed + vortexStrength * 0.2;
+                        this.vx += Math.cos(this.angle) * vortexStrength * 0.5;
+                        this.vy += Math.sin(this.angle) * vortexStrength * 0.8;
+                    }
+                } else {
+                    // Laminar flow - smooth conversion
+                    if (this.x > width * 0.3 && this.x < width * 0.4) {
+                        // Inside lattice - convert horizontal to vertical
+                        const conversionFactor = (this.x - width * 0.3) / (width * 0.1);
+                        this.vy += this.vx * conversionFactor * 0.02;
+                        this.vx *= (1 - conversionFactor * 0.01);
+                    }
+                    
+                    // Damping for smoother flow
+                    this.vy *= 0.98;
+                }
+                
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= 0.003;
+            }
+            
+            draw(ctx) {
+                const alpha = this.life;
+                if (this.type === 'chaotic') {
+                    ctx.fillStyle = `rgba(255, 68, 68, ${alpha})`;
+                } else {
+                    ctx.fillStyle = `rgba(96, 239, 255, ${alpha})`;
+                }
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            isDead(width) {
+                return this.life <= 0 || this.x > width || this.y < 0 || this.y > solidCanvas.height;
+            }
+        }
+        
+        // Particle systems
+        let solidParticles = [];
+        let latticeParticles = [];
+        
+        function spawnParticles() {
+            if (solidParticles.length < config.particleCount) {
+                solidParticles.push(new Particle(
+                    10, 
+                    Math.random() * solidCanvas.height,
+                    'chaotic'
+                ));
+            }
+            if (latticeParticles.length < config.particleCount) {
+                latticeParticles.push(new Particle(
+                    10,
+                    Math.random() * latticeCanvas.height,
+                    'laminar'
+                ));
+            }
+        }
+        
+        // Draw structures
+        function drawSolidWall(ctx, width, height) {
+            ctx.fillStyle = 'rgba(100, 100, 100, 0.5)';
+            ctx.fillRect(width * 0.3, height * 0.2, 20, height * 0.6);
+            
+            // Vibration effect
+            const vibration = Math.sin(config.time * 0.1) * 3;
+            ctx.strokeStyle = 'rgba(255, 68, 68, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(width * 0.3 + 20, height * 0.2);
+            ctx.lineTo(width * 0.3 + 20 + vibration, height * 0.2);
+            ctx.stroke();
+        }
+        
+        function drawLattice(ctx, width, height) {
+            ctx.strokeStyle = 'rgba(0, 255, 135, 0.6)';
+            ctx.lineWidth = 2;
+            
+            const centerX = width * 0.35;
+            const startY = height * 0.2;
+            const endY = height * 0.8;
+            const latticeHeight = endY - startY;
+            
+            // Diagonal lattice (pitch = 5D, angle = 54°)
+            const spacing = 40;
+            const angle = 54 * Math.PI / 180;
+            
+            for (let i = 0; i < 8; i++) {
+                const y = startY + (i * spacing);
+                if (y > endY) break;
+                
+                // Right diagonal
+                ctx.beginPath();
+                ctx.moveTo(centerX - 30, y);
+                ctx.lineTo(centerX + 30, y + Math.tan(angle) * 60);
+                ctx.stroke();
+                
+                // Left diagonal
+                ctx.beginPath();
+                ctx.moveTo(centerX + 30, y);
+                ctx.lineTo(centerX - 30, y + Math.tan(angle) * 60);
+                ctx.stroke();
+            }
+        }
+        
+        // Animation loop
+        function animate() {
+            if (!config.animationRunning) return;
+            
+            config.time++;
+            
+            // Clear canvases
+            solidCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            solidCtx.fillRect(0, 0, solidCanvas.width, solidCanvas.height);
+            latticeCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            latticeCtx.fillRect(0, 0, latticeCanvas.width, latticeCanvas.height);
+            
+            // Draw structures
+            drawSolidWall(solidCtx, solidCanvas.width, solidCanvas.height);
+            drawLattice(latticeCtx, latticeCanvas.width, latticeCanvas.height);
+            
+            // Spawn new particles
+            if (config.time % 3 === 0) {
+                spawnParticles();
+            }
+            
+            // Update and draw solid wall particles
+            solidParticles = solidParticles.filter(p => {
+                p.update(solidCanvas.width, solidCanvas.height);
+                p.draw(solidCtx);
+                return !p.isDead(solidCanvas.width);
+            });
+            
+            // Update and draw lattice particles
+            latticeParticles = latticeParticles.filter(p => {
+                p.update(latticeCanvas.width, latticeCanvas.height);
+                p.draw(latticeCtx);
+                return !p.isDead(latticeCanvas.width);
+            });
+            
+            // Update stats
+            const solidVib = Math.round(100 * (1 + Math.sin(config.time * 0.1) * 0.3));
+            const latticeVib = Math.round(25 * (1 + Math.sin(config.time * 0.05) * 0.1));
+            document.getElementById('solidVibration').textContent = solidVib + '%';
+            document.getElementById('latticeVibration').textContent = latticeVib + '%';
+            
+            const solidLoad = Math.round(850 * config.windSpeed);
+            const latticeLoad = Math.round(255 * config.windSpeed);
+            document.getElementById('solidLoad').textContent = solidLoad + ' N';
+            document.getElementById('latticeLoad').textContent = latticeLoad + ' N';
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Controls
+        function toggleAnimation() {
+            config.animationRunning = !config.animationRunning;
+            if (config.animationRunning) animate();
+        }
+        
+        function resetSimulation() {
+            solidParticles = [];
+            latticeParticles = [];
+            config.time = 0;
+        }
+        
+        function increaseWind() {
+            config.windSpeed = Math.min(config.windSpeed + 0.5, 5);
+        }
+        
+        function decreaseWind() {
+            config.windSpeed = Math.max(config.windSpeed - 0.5, 0.5);
+        }
+        
+        // Start
+        animate();
+    </script>
+</body>
+</html>
