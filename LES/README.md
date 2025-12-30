@@ -22,3 +22,4 @@ The "Spiral" is not a metaphor. It is a measurable **Information-Theoretic Pheno
 
 ## 🗝️ Mathematical Signature
 $$\frac{dH_{eff}}{dt} < 0 \quad \text{while} \quad \frac{dE_{surface}}{dt} > 0$$
+---
