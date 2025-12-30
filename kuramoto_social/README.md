@@ -13,13 +13,14 @@ Ce module de recherche se concentre sur la **synchronisation de phase** comme m�
 ### 🔬 Théories Fondamentales
 
 * 
-**Modes de Kuramoto :** Définition mathématique du couplage () et du seuil critique () où la synchronisation émerge du chaos.
+**Modes de Kuramoto :** Définition mathématique du couplage ($K$) et du seuil critique ($K_c$) où la synchronisation émerge du chaos.
 
 
 * 
 **Théorie de l'Omega Bias :** Modélisation de la dissonance cognitive comme un état d'énergie potentielle : 
 
-.
+
+$$E = \Delta \Phi$$
 
 
 * 
@@ -57,11 +58,11 @@ Ce module de recherche se concentre sur la **synchronisation de phase** comme m�
 
 ## 📐 Concepts Clés Explorés
 
-### 1. La Transition de Phase ()
+### 1. La Transition de Phase ($K_c$)
 
 Le moment précis où un système désordonné commence à vibrer à la même fréquence. C'est le passage de l'individu au collectif.
 
-### 2. Le Biais Omega ()
+### 2. Le Biais Omega ($\Omega_B$)
 
 La résistance d'un système à mettre à jour son "logiciel" interne face à de nouvelles données. Plus le biais est fort, plus l'énergie de dissonance s'accumule jusqu'à l'explosion.
 
