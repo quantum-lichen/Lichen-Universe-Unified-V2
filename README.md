@@ -59,7 +59,7 @@ Lichen Universe Unified est la **"Source de Vérité Unique"** (Single Source of
 * [Omega-Seed: Civilization Backup](OMEGA_SEED_BLUEPRINT.md)
 
 ### 🔬 Research & Origins
-* [Biomimicry: Engineering Nature](biomimétisme/Biomimétisme _ Nature, Univers, Technologie.md)
+* [Biomimicry: Engineering Nature](biomimétisme/Biomimétisme/README.md)
 * [Archaeology: Ancient Systems](archéologie/README.md)
 * [Sociophysics: Kuramoto Dynamics](kuramoto_social/TANGANYIKA_kuramoto.md)
 * [Biological Validation (Malus Domestica)](Malus_domestica/README.md)
