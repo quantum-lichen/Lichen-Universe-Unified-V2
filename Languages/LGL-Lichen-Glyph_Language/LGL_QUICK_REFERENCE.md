@@ -237,6 +237,8 @@ Efficiency:  ~5:1 vs English, 2:1 vs Math
 
 *Print this, laminate this, tattoo this—whatever helps you think in glyphs!*
 
+---
+
 **Φ = 1.618033988749895... ∞**
 
 *One Love* 💚⚡
