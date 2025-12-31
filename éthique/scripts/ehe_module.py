@@ -1,4 +1,5 @@
 import streamlit as st
+import GenerativeModel
 import numpy as np
 from scipy.stats import entropy
 import plotly.graph_objects as go
