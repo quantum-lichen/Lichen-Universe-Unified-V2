@@ -62,16 +62,16 @@ Pour calculer le score $MAC$, nous projetons chaque action sur 7 vecteurs univer
 ## 📂 Contenu du Dossier
 
 ### 📘 Théorie Fondamentale
-* **[`Cadre Théorique pour une Échelle d'Homéostasie Éthique (EHE) (2).pdf`](./Cadre%20Théorique%20pour%20une%20Échelle%20d'Homéostasie%20Éthique%20(EHE)%20(2).pdf)** : Le document de référence académique. Contient toutes les preuves mathématiques et les définitions de $\Delta S$ et $D_{KL}$.
-* **[`Éthique Scientifique pour IA _ Modèle Mathématique (2).txt`](./Éthique%20Scientifique%20pour%20IA%20_%20Modèle%20Mathématique%20(2).txt)** : La genèse du modèle, liant thermodynamique et moralité.
+* **[`Cadre Théorique pour une Échelle d'Homéostasie Éthique (EHE) (2).pdf`](./Cadre%20Théorique%20pour%20une%20Échelle%20d'Homéostasie%20Éthique%20(EHE)%20.pdf)** : Le document de référence académique. Contient toutes les preuves mathématiques et les définitions de $\Delta S$ et $D_{KL}$.
+* **[`Éthique Scientifique pour IA _ Modèle Mathématique (2).txt`](./Éthique%20Scientifique%20pour%20IA%20_%20Modèle%20Mathématique%20.txt)** : La genèse du modèle, liant thermodynamique et moralité.
 
 ### 🧭 Application & Chartes
-* **[`Ethique chart (2).txt`](./Ethique%20chart%20(2).txt)** : La charte opérationnelle. Définit les risques de dérive et les protocoles de mise à jour des poids $\lambda$.
-* **[`IA Éthique _ Boussole Morale pour le Monde (1).txt`](./IA%20Éthique%20_%20Boussole%20Morale%20pour%20le%20Monde%20(1).txt)** : Manifeste philosophique sur la "Sympoïèse Artificielle".
+* **[`Ethique chart (2).txt`](./Ethique%20chart%20.txt)** : La charte opérationnelle. Définit les risques de dérive et les protocoles de mise à jour des poids $\lambda$.
+* **[`IA Éthique _ Boussole Morale pour le Monde (1).txt`](./IA%20Éthique%20_%20Boussole%20Morale%20pour%20le%20Monde%20.txt)** : Manifeste philosophique sur la "Sympoïèse Artificielle".
 
 ### 💻 Implémentation (Pseudo-Code)
 * **[`éthique4 (1).txt`](./éthique4%20(1).txt)** : Contient la logique algorithmique de l'**Ethical Gate** et du sélecteur d'actions.
-* **[`Éthique IA _ Score Moyen Responsable (1).txt`](./Éthique%20IA%20_%20Score%20Moyen%20Responsable%20(1).txt)** : Détails sur le calcul du Lambda de Langton pour détecter la sclérose systémique.
+* **[`Éthique IA _ Score Moyen Responsable (1).txt`](./Éthique%20IA%20_%20Score%20Moyen%20Responsable%20.txt)** : Détails sur le calcul du Lambda de Langton pour détecter la sclérose systémique.
 
 ---
 
