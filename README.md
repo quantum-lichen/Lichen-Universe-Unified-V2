@@ -1,5 +1,6 @@
-
 # 🌌 Lichen Universe Unified (V2)
+
+[![Logo](https://img.shields.io/badge/manifest-v3.0.1-gold)](https://gemini.google.com/share/e5fb1450b674)
 
 > **"Le noyau respire, la spirale s'ouvre."**
 
