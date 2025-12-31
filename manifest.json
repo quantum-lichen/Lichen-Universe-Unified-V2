@@ -73,11 +73,11 @@
     ],
     "license": "Apache-2.0 / MIT + Attribution Required",
     "repository": {
-      "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V3",
+      "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2"",
       "philang_repo": "https://github.com/quantum-lichen/philang",
       "hnp_repo": "https://github.com/quantum-lichen/harmonic-network-protocol"
     },
-    "homepage": "https://quantum-lichen.github.io/Lichen-Universe-Unified-V3/"
+    "homepage": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2""
   },
   "changelog": {
     "3.0.0": {
@@ -100,11 +100,11 @@
       "notes": "Birthday release - Bryan Ouellette Dec 25, 2025. This manifest preserves ALL V2.3.0 information while adding complete ΦLang integration."
     },
     "2.3.0": {
-      "date": "2025-12-25",
+      "date": "2025-12-27",
       "notes": "Original unified manifest before ΦLang addition"
     },
     "2.0.0": {
-      "date": "2025-12-27",
+      "date": "2025-12-24",
       "notes": "Foundation proposition and core architecture definitions."
     }
   },
@@ -1673,7 +1673,7 @@
       "description": "Langage quaternaire (Base-4) à double hélice optimisé pour la conscience artificielle, le stockage ADN, et la transmission inter-temporelle de connaissances. Utilise les principes universels de la biologie (ATCG, codons triplets, appariement complémentaire) pour garantir l'auto-validation et la résilience aux erreurs. Sister language to ΦLang - biological encoding vs mathematical encoding of same 496-bit information space.",
       "repository": {
         "path": "Languages/HELIX-PHI",
-        "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V3/tree/main/Languages/HELIX-PHI"
+        "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/HELIX-PHI"
       },
       "structure": {
         "docs": {"type": "folder", "files": ["whitepaper.tex", "theory_double_helix_validation.md"]},
@@ -1718,7 +1718,7 @@
       "description": "Protocole spatial iconique à 64+ glyphs pour communication humain-AI et expression mathématique. Provides visual/spatial representation of concepts that ΦLang computes. Complements ΦLang by making invisible mathematics visible for human understanding.",
       "repository": {
         "path": "Languages/LGL-Lichen-Glyph_Language",
-        "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V3/tree/main/Languages/LGL-Lichen-Glyph_Language"
+        "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/LGL-Lichen-Glyph_Language"
       },
       "structure": {
         "docs": {"type": "folder", "files": ["LGL_SPEC_V1.0.md", "LGL_QUICK_REFERENCE.md"]},
@@ -1893,8 +1893,8 @@
         },
         {
           "name": "Harmonic Network Protocol",
-          "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V3/tree/main/harmonic-network-protocol",
-          "manifest": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V3/blob/main/harmonic-network-protocol/manifest.json",
+          "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/harmonic-network-protocol",
+          "manifest": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/harmonic-network-protocol/manifest.json",
           "status": "experimental",
           "relationship": "network-layer (transport for ΦLang instructions)"
         },
