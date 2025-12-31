@@ -242,3 +242,5 @@ pas à prouver une loi universelle du réel.
 
 Utilisés comme heuristiques structurées, ils guident la sélection cognitive et éthique
 sans prétendre détenir la vérité ultime.
+
+<img width="1024" height="1536" alt="Lichen universe" src="https://github.com/user-attachments/assets/cd8a690c-a78a-4839-b426-a70e08071cf5" />
