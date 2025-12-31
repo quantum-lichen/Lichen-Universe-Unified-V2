@@ -21,8 +21,6 @@ Le **FC-496 Holo-Core** est une unité de traitement fractal hybride (HFPU) con�
 * **`specs/datasheet_v1.md`** : La fiche technique officielle (Specs 2030).
 * **`docs/whitepaper_qfp.md`** : Le papier scientifique validant la théorie.
 * **`poc/thermal_sim.py`** : Simulation Python de la dissipation thermique.
-
-<img width="2400" height="1792" alt="Gemini_Generated_Image_pm2efgpm2efgpm2e" src="https://github.com/user-attachments/assets/57d45d45-b3f8-4b06-90a4-a49376c5f027" />
   
 <img width="2816" height="1536" alt="Gemini_Generated_Image_zfi2wuzfi2wuzfi2" src="https://github.com/user-attachments/assets/c158e3e6-a9d0-4916-bf1a-dbcbab5b7968" />
 
