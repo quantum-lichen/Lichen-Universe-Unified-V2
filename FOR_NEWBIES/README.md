@@ -39,7 +39,7 @@ Lichen est organisé en **7 couches**, comme un oignon fractal. Voici les 3 couc
 
 | Couche          | Rôle                          | Où Commencer ?                          |
 |-----------------|-------------------------------|-----------------------------------------|
-| **Langages**    | Communication et interface    | [`/Languages/README.md`](Languages/README.md) |
+| **Langages**    | Communication et interface    | [`/Languages/README.md`](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages) |
 | **Stockage**    | Données immuables (ADN, FC-496)| [`/FC-496/README.md`](FC-496/README.md) |
 | **Réseau**      | Protocoles harmoniques (HNP)   | [`/harmonic-network-protocol/README.md`](harmonic-network-protocol/README.md) |
 
