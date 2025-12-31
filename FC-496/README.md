@@ -1,6 +1,9 @@
 # FC-496 : The Fractal Cell Atom
 ## L'Unité Fondamentale de l'Univers Lichen
 
+<img width="2816" height="1536" alt="Gemini_Generated_Image_51pbwj51pbwj51pb" src="https://github.com/user-attachments/assets/35fd98c2-ec38-47b1-a949-de81ef41b280" />
+
+
 [![Standard](https://img.shields.io/badge/standard-Universal-purple)](specs/bit_structure.md)
 [![Size](https://img.shields.io/badge/size-496_bits-blue)](FORMULAS.md)
 [![Partition](https://img.shields.io/badge/partition-%CF%86_Split-gold)](FORMULAS.md)
