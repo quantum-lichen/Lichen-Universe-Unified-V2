@@ -9,7 +9,7 @@
 
 **Manifest** | **Status** | **License**
 :---: | :---: | :---:
-[V2.3.0](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/manifest.json) | Research Active | Apache-2.0
+[V3.0](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/manifest.json) | Research Active | Apache-2.0
 
 Lichen Universe Unified est la **"Source de Vérité Unique"** (Single Source of Truth) de l'écosystème Lichen. Ce dépôt centralise, standardise et unifie toutes les architectures (UICT, CEML, CRAID, SynapseΩ) sous une seule ontologie rigoureuse.
 
