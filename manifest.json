@@ -8,16 +8,16 @@
     "component": "https://quantum-lichen.org/vocab/component"
   },
   "@type": "SoftwareSourceCode",
-  "manifest_version": "3.0.1",
+  "manifest_version": "3.0.0",
   "generated_at": "2025-12-31T00:31:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette + AI Lichen collective)",
   "project": {
     "name": "Lichen Universe Unified",
-    "version": "3.0.1",
+    "version": "3.0.0",
     "semantic_version": {
       "major": 3,
       "minor": 0,
-      "patch": 1
+      "patch": 0
     },
     "architecture_family": "Universal Constant Computing",
     "status": "Foundational Proposition / Operational",
@@ -73,15 +73,15 @@
     ],
     "license": "Apache-2.0 / MIT + Attribution Required",
     "repository": {
-      "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2"",
+      "url": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2",
       "philang_repo": "https://github.com/quantum-lichen/philang",
       "hnp_repo": "https://github.com/quantum-lichen/harmonic-network-protocol"
     },
-    "homepage": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2""
+    "homepage": "https://github.com/quantum-lichen/Lichen-Universe-Unified-V2"
   },
   "changelog": {
     "3.0.0": {
-      "date": "2025-12-30",
+      "date": "2025-12-25",
       "major_changes": [
         "Added ΦLang (Φ-CODE) as third language in trinity - complete mathematical AI-to-AI protocol",
         "Complete unification document (UNIFICATION_MASTER.md) integrating ΦLang with all layers",
@@ -1106,27 +1106,6 @@
       },
       "documentation": "Languages/PHILANG/README.md",
       "code_reference": "Languages/PHILANG/src/compiler/compiler.py"
-    },{
-      "id": "ethical-gate-system",
-      "name": "EHE Selector & Gate",
-      "type": "safety_middleware",
-      "version": "1.0-PROTO",
-      "description": "Module d'implémentation du EHE. Intercepte les actions candidates, les projette sur les 7 axes MAC, simule leur impact entropique (ΔS) et filtre les résultats dangereux ou sclérosés.",
-      "specs": {
-        "input": "List[ActionCandidates] + Context",
-        "process": "Vector Projection -> Entropy Simulation -> Tanh Normalization",
-        "output": "Selected Action (Optimal Homeostasis)",
-        "components": {
-            "EthicalGate": "Filtre binaire (Pass/Fail) basé sur seuil critique",
-            "EthicalSelector": "Sélecteur optimal cherchant le compromis Diversité/Sécurité"
-        }
-      },
-      "code_reference": "éthique/éthique4.txt",
-      "chart_reference": "éthique/Ethique chart.txt",
-      "integration": {
-        "synapse_os": "Middleware running before any IPC execution",
-        "philang": "Validates semantic intent before vector compilation"
-      }
     },
     {
       "id": "snowflake-omega-cpu",
