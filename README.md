@@ -2,6 +2,9 @@
 
 [![Logo](https://img.shields.io/badge/manifest-v3.0.1-gold)](https://gemini.google.com/share/e5fb1450b674)
 
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/b623bbf1-0560-48d9-9aa6-edf8659568d5" />
+
+
 > **"Le noyau respire, la spirale s'ouvre."**
 
 [![Manifest](https://img.shields.io/badge/manifest-v3.0.1-green)](manifest.json)
