@@ -194,18 +194,10 @@ Le Lichen a été validée par comparaison avec le génome de **Malus domestica*
 
 [![Malus Domestica](https://img.shields.io/badge/🍎_MALUS_DOMESTICA-VOIR_L'ÉTUDE_COMPLÈTE-D00000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Malus_domestica)
 
----
-
-🧪 Preuve de Concept (Live Proof)
-Voir l'Auto-Guérison Géométrique en Temps Réel :
-
-Démonstration de l'effet "Time Crystal" et du verrouillage de phase (Spin-Lock) qui rend l'erreur mathématiquement impossible. : 
-
-[![Live Simulation](https://img.shields.io/badge/Simulation-Quantum_Crystal_Live-00ff00?style=for-the-badge&logo=streamlit)](https://lichen-universe-unified-v2-m98dnd996ujujewhwharot.streamlit.app/)
 
 ---
 
-### 🟢 Live Demos & Simulations
+### 🟢 Live Demos, PoC & Simulations
 
 [![Phi-Compiler Live](https://img.shields.io/badge/Phi_Compiler-Live-00ff00?style=for-the-badge&logo=streamlit)](https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/)
 <br>
