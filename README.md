@@ -4,7 +4,7 @@
 > **"Le noyau respire, la spirale s'ouvre."**
 
 [![Manifest](https://img.shields.io/badge/manifest-v3.0.1-blue)](manifest.json)
-[![Status](https://img.shields.io/badge/status-operational-green)](CHANGELOG.md)
+[![Status](https://img.shields.io/badge/status-development-yellow)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-Apache--2.0-yellow)](LICENSE)
 
 **Manifest** | **Status** | **License**
