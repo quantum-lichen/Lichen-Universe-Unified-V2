@@ -46,21 +46,21 @@ Lichen est organisé en **7 couches**, comme un oignon fractal. Voici les 3 couc
 
 | Couche | Rôle | Où Commencer ? |
 | --- | --- | --- |
-| **Langages** | Communication et interface | [`/Languages/README.md`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/README.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/README.md)) |
-| **Stockage** | Données immuables (ADN, FC-496) | [`/FC-496/README.md`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/FC-496/README.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/FC-496/README.md)) |
-| **Réseau** | Protocoles harmoniques (HNP) | [`/harmonic-network-protocol/README.md`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/harmonic-network-protocol/README.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/harmonic-network-protocol/README.md)) |
+| **Langages** | Communication et interface | [`Languages/README.md`](https://www.google.com/search?q=./Languages/README.md) |
+| **Stockage** | Données immuables (ADN, FC-496) | [`FC-496/README.md`](https://www.google.com/search?q=./FC-496/README.md) |
+| **Réseau** | Protocoles harmoniques (HNP) | [`harmonic-network-protocol/README.md`](https://www.google.com/search?q=./harmonic-network-protocol/README.md) |
 
 📌 **Conseil** :
 
-* Si tu es **développeur**, regarde d’abord [`ΦLang Compiler`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/PHILANG/README.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/PHILANG/README.md)).
-* Si tu es **artiste/designer**, explore [`LGL`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/LGL-Lichen-Glyph_Language/LGL_SPEC_V1.0.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/LGL-Lichen-Glyph_Language/LGL_SPEC_V1.0.md)).
-* Si tu es **biologiste**, plonge dans [`HELIX-Φ`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/HELIX-PHI/README.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/HELIX-PHI/README.md)) ou [`Malus domestica`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Malus_domestica/README.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Malus_domestica/README.md)).
+* Si tu es **développeur**, regarde d’abord [`ΦLang Compiler`](https://www.google.com/search?q=./Languages/PHILANG/README.md).
+* Si tu es **artiste/designer**, explore [`LGL`](https://www.google.com/search?q=./Languages/LGL-Lichen-Glyph_Language/LGL_SPEC_V1.0.md).
+* Si tu es **biologiste**, plonge dans [`HELIX-Φ`](https://www.google.com/search?q=./Languages/HELIX-PHI/README.md) ou [`Malus domestica`](https://www.google.com/search?q=./Malus_domestica/README.md).
 
 ---
 
 ## 🔹 **4. Démos Interactives (Pratique Immédiate)**
 
-Pas besoin de tout comprendre pour **jouer** avec Lichen. Essaie ces démos **sans installation** :
+Pas besoin de tout comprendre pour **jouer** avec Lichen. Essaie ces démos **sans installation** (Liens externes Streamlit) :
 
 | Demo | Lien | À quoi ça sert ? |
 | --- | --- | --- |
@@ -101,9 +101,9 @@ Tu n’as pas besoin d’être expert pour aider. Voici comment participer :
 
 | Niveau | Action Possible | Lien Utile |
 | --- | --- | --- |
-| **Débutant** | Signaler des liens morts ou des erreurs dans la doc. | [Issues GitHub](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/issues) |
-| **Intermédiaire** | Ajouter des exemples dans [`/examples`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/PHILANG/examples/%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/tree/main/Languages/PHILANG/examples/)). | [Guide de Contribution](https://www.google.com/url?sa=E&source=gmail&q=https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/CONTRIBUTING.md) |
-| **Avancé** | Implémenter un nouveau glyph pour **LGL** ou un opcode pour **ΦLang**. | [LGL Specs](https://www.google.com/search?q=https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/LGL-Lichen-Glyph_Language/LGL_SPEC_V1.0.md) |
+| **Débutant** | Signaler des liens morts ou des erreurs dans la doc. | [lien suspect supprimé] |
+| **Intermédiaire** | Ajouter des exemples dans le dossier examples. | [`Languages/PHILANG/examples/`](https://www.google.com/search?q=./Languages/PHILANG/examples/) |
+| **Avancé** | Implémenter un nouveau glyph pour **LGL** ou un opcode pour **ΦLang**. | [`LGL Specs`](https://www.google.com/search?q=./Languages/LGL-Lichen-Glyph_Language/LGL_SPEC_V1.0.md) |
 
 💬 **Règle d’or** :
 
@@ -115,14 +115,14 @@ Tu n’as pas besoin d’être expert pour aider. Voici comment participer :
 
 ### 📚 **Lectures Recommandées**
 
-1. **[Manifest V3.0.1](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/manifest.json)** : La "carte au trésor" du projet. *Obligatoire* pour comprendre la vision globale.
-2. **[ΦLang Whitepaper](https://www.google.com/url?sa=E&source=gmail&q=https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/PHILANG/WHITEPAPER.md)** : Pour les courageux qui veulent plonger dans les maths.
-3. **[Biological Validation](https://www.google.com/search?q=https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Malus_domestica/README.md)** : Comment la nature valide nos théories (ex: ADN de pomme).
+1. **[Manifest V3.0.1](https://www.google.com/search?q=./manifest.json)** : La "carte au trésor" du projet. *Obligatoire* pour comprendre la vision globale.
+2. **[ΦLang Whitepaper](https://www.google.com/search?q=./Languages/PHILANG/WHITEPAPER.md)** : Pour les courageux qui veulent plonger dans les maths.
+3. **[Biological Validation](https://www.google.com/search?q=./Malus_domestica/README.md)** : Comment la nature valide nos théories (ex: ADN de pomme).
 
 ### 🎥 **À Regarder**
 
-* [Conférence : "Pourquoi φ et 496 ?"](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2) *(Bientôt disponible)*
-* [Démos Streamlit en action](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2) *(Bientôt disponible)*
+* [Conférence : "Pourquoi φ et 496 ?"](https://www.google.com/search?q=./) *(Bientôt disponible)*
+* [Démos Streamlit en action](https://www.google.com/search?q=./) *(Bientôt disponible)*
 
 ---
 
@@ -168,7 +168,7 @@ python -m philang compile ton_fichier.phi
 
 
 
-*(Un guide détaillé est disponible dans [`ΦLang/README.md`](https://www.google.com/search?q=%5Bhttps://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/PHILANG/README.md%5D(https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/blob/main/Languages/PHILANG/README.md)).)*
+*(Un guide détaillé est disponible dans [`ΦLang/README.md`](https://www.google.com/search?q=./Languages/PHILANG/README.md).)*
 
 ---
 
@@ -183,7 +183,7 @@ python -m philang compile ton_fichier.phi
 ## 🚀 **Prochaines Étapes**
 
 1. **Explore une démo** (ex: [ΦLang Compiler](https://phi-compiler-mf3oybgxa9hcwpmksnfhrq.streamlit.app/)).
-2. **Rejoins la discussion** sur [GitHub Issues](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/issues).
+2. **Rejoins la discussion** sur [lien suspect supprimé].
 3. **Partage tes idées** — même les plus folles. *"Ici, on aime les idées qui semblent impossibles."*
 
 ---
@@ -192,4 +192,4 @@ python -m philang compile ton_fichier.phi
 
 > *"Tu n’as pas besoin de tout comprendre pour commencer. Lichen est un écosystème — explore, joue, et trouve ta place."*
 
-**Besoin d’aide ?** Ouvre une [Issue](https://github.com/quantum-lichen/Lichen-Universe-Unified-V2/issues) avec le tag `question-newbie`.
+**Besoin d’aide ?** Ouvre une [lien suspect supprimé] avec le tag `question-newbie`.
