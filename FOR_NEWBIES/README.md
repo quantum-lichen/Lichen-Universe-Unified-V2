@@ -97,7 +97,7 @@ Tu n’as pas besoin d’être expert pour aider. Voici comment participer :
 
 ## 🔹 **7. Ressources pour Aller Plus Loin**
 ### 📚 **Lectures Recommandées**
-1. **[Manifest V3.0](manifest.json)** : La "carte au trésor" du projet. *Obligatoire* pour comprendre la vision globale.
+1. **[Manifest V3.0.1](manifest.json)** : La "carte au trésor" du projet. *Obligatoire* pour comprendre la vision globale.
 2. **[ΦLang Whitepaper](Languages/PHILANG/WHITEPAPER.md)** : Pour les courageux qui veulent plonger dans les maths.
 3. **[Biological Validation](Malus_domestica/README.md)** : Comment la nature valide nos théories (ex: ADN de pomme).
 
