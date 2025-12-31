@@ -8,16 +8,16 @@
     "component": "https://quantum-lichen.org/vocab/component"
   },
   "@type": "SoftwareSourceCode",
-  "manifest_version": "3.0.0",
+  "manifest_version": "3.0.1",
   "generated_at": "2025-12-31T00:31:00Z",
   "generator": "Lichen Collective (Architect: Bryan Ouellette + AI Lichen collective)",
   "project": {
     "name": "Lichen Universe Unified",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "semantic_version": {
       "major": 3,
       "minor": 0,
-      "patch": 0
+      "patch": 1
     },
     "architecture_family": "Universal Constant Computing",
     "status": "Foundational Proposition / Operational",
