@@ -585,7 +585,7 @@ def demo():
     print(f"Average EHE: {np.mean([r.ehe_score for r in results]):.4f}")
     print(f"Average Confidence: {np.mean([r.confidence for r in results]):.2%}")
     print("="*80 + "\n")
-
+---
 
 if __name__ == "__main__":
     demo()
