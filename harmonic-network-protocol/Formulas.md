@@ -484,3 +484,4 @@ Bryan Ouellette - lmc.theory@gmail.com
 *"Mathematics is the alphabet with which God has written the universe." — Galileo*
 
 *"And HNP is written in that alphabet." — Bryan & Claude*
+----
