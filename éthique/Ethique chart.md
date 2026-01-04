@@ -896,3 +896,4 @@ Anthropology at Oxford
 Hard problems: estimating ΔS and multi-step world outcomes reliably is very hard; proxies will be noisy. Also, your architecture risks becoming brittle if the world-model is wrong. Use conservative fallbacks and human-in-loop oversight.
 
 Final take: it’s ambitious but credible. You’re doing the right thing: propose an implementable scientific specification, accept approximations, and iterate fast. That’s how discoveries happen.
+---
