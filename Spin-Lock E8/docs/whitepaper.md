@@ -40,7 +40,7 @@ Un atome FC-496 n'est pas traité comme une chaîne de bits, mais comme un tense
 
 #### 3.2 Partition Harmonique (Golden Partition)
 
-L'atome est divisé structurellement selon le Nombre d'Or () pour optimiser la stabilité :
+L'atome est divisé structurellement selon le Nombre d'Or ($\varphi \approx 1.618$)  pour optimiser la stabilité :
 
 * **Segment Majeur (Noyau) :** 306 bits (Stockage invariant).
 * **Segment Mineur (Interface) :** 190 bits (Couplage et dissipation).
