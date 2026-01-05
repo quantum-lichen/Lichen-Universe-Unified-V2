@@ -59,10 +59,12 @@ Cela signifie qu'il existe des "trous" optimaux entre les états valides.
 
 #### 4.2 Algorithme de Correction Passive
 
-Lorsqu'un vecteur  est corrompu par du bruit  (devenant ), il "flotte" hors du réseau. Le Spin-Lock consiste à projeter  sur la racine E8 la plus proche.
+Lorsqu'un vecteur  est corrompu par du bruit  (devenant $v'$ ), il "flotte" hors du réseau. Le Spin-Lock consiste à projeter  sur la racine E8 la plus proche.
+
+$$\mathcal{S}_{E8}(v') = \underset{\lambda \in \Lambda_{E8}}{\arg\min} \| v' - \lambda \|$$
 
 **Implémentation Rapide (KD-Tree) :**
-Au lieu d'une recherche exhaustive coûteuse (), nous utilisons un partitionnement spatial KD-Tree pour trouver la correction en temps logarithmique (). Cela rend la correction possible en temps réel à chaque cycle d'horloge.
+Au lieu d'une recherche exhaustive coûteuse ($O(N)$), nous utilisons un partitionnement spatial KD-Tree pour trouver la correction en temps logarithmique ($O(\log N)$). Cela rend la correction possible en temps réel à chaque cycle d'horloge.
 
 ---
 
@@ -72,12 +74,13 @@ Si E8 protège l'intégrité de l'atome, la topologie pentagonale protège l'int
 
 #### 5.1 Synchronisation de Kuramoto
 
-Les nœuds (processeurs ou agents) sont connectés en anneaux pentagonaux (). La dynamique est régie par l'équation de Kuramoto adaptée :
+Les nœuds (processeurs ou agents) sont connectés en anneaux pentagonaux ($C_5$). La dynamique est régie par l'équation de Kuramoto adaptée :
 
+$$\frac{d\theta_i}{dt} = \omega_i + K \sum_{j \in \mathcal{N}_i} \sin(\theta_j - \theta_i)$$
 
 #### 5.2 Pourquoi le Pentagone ?
 
-La symétrie pentagonale (liée à 5 et ) crée une frustration topologique qui empêche le système de se figer dans un état d'erreur global. Le "Spectral Gap" du pentagone () garantit une convergence rapide vers la synchronisation dès que le couplage .
+La symétrie pentagonale (liée à 5 et $\varphi$ ) crée une frustration topologique qui empêche le système de se figer dans un état d'erreur global. Le "Spectral Gap" du pentagone  ($\lambda_1 = 2 - \varphi \approx 0.382$) garantit une convergence rapide vers la synchronisation dès que le couplage $K > K_c$.
 
 ---
 
@@ -87,14 +90,14 @@ Le protocole a été testé sur le simulateur *Hybrid E8-Pentagon*.
 
 **Paramètres de Test :**
 
-* Bruit Gaussien injecté :  (Environnement très bruité).
+* Bruit Gaussien injecté : $\sigma = 0.3$ (Environnement très bruité).
 * Topologie : Pentagone (5 Nœuds).
 * Structure : Atomes FC-496 complets.
 
 **Performances Mesurées :**
 
-1. **Taux de Correction E8 :**  des vecteurs corrompus sont restaurés instantanément à leur état d'origine.
-2. **Stabilité de Phase (Sync) :** Le paramètre d'ordre  atteint  (synchronisation parfaite) en moins de 50 cycles, même sous contrainte de bruit.
+1. **Taux de Correction E8 :** $> 98.8\%$ des vecteurs corrompus sont restaurés instantanément à leur état d'origine.
+2. **Stabilité de Phase (Sync) :** Le paramètre d'ordre  atteint $1.0$ (synchronisation parfaite) en moins de 50 cycles, même sous contrainte de bruit.
 3. **Latence :** Négligeable grâce à l'optimisation KD-Tree.
 
 ---
@@ -111,7 +114,7 @@ Cette architecture est universelle et agnostique au support :
 
 ### 8. CONCLUSION
 
-Le protocole **Spin-Lock E8** démontre que la fiabilité n'exige pas plus d'énergie, mais une meilleure géométrie. En alignant l'architecture de l'information sur les symétries fondamentales de la nature (E8 et ), nous obtenons un système qui ne combat pas le chaos, mais l'utilise pour se stabiliser.
+Le protocole **Spin-Lock E8** démontre que la fiabilité n'exige pas plus d'énergie, mais une meilleure géométrie. En alignant l'architecture de l'information sur les symétries fondamentales de la nature (E8 et $\varphi$ ), nous obtenons un système qui ne combat pas le chaos, mais l'utilise pour se stabiliser.
 
 **Lichen Universe propose ici le premier standard de "Computing Géométrique".**
 
